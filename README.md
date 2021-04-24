@@ -2,6 +2,6 @@
 Final project: Hotels/Airbnb
 
 
-afher clonging 
+after cloning
   - front end  ==> npm install
   - back end   ==> bundle install ==> bundle update
