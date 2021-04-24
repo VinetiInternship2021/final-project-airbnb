@@ -1,0 +1,40 @@
+.homePageImg {
+    background-image: url('https://a0.muscache.com/pictures/fe0b0101-a996-4bec-a2ad-67aa50c948a9.jpg');
+    background-size: cover;
+    height: 600px;
+    color: rgb(255, 255, 255);
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.homePageImg > h1 {
+    font-size: 75px;
+}
+.getStart {
+    width: 200px;
+    height: 50px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign_up_form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: ;
+}
+.sign_up_form > input {
+    margin-bottom: 10px;
+}
+.sign_up_container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.radio_btn {
+    display: flex;
+    justify-content: space-evenly;
+}
