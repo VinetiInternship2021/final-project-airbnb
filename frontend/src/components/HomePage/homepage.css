@@ -8,6 +8,7 @@
 .home {
     background-image: url('https://a0.muscache.com/im/pictures/ddc7f01f-3fb3-483c-87e6-701dad52c930.jpg');
     background-size: cover;
+    background-position: center;
 }
 .homeWelcome {
     font-weight: 700;

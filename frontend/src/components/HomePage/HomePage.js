@@ -7,7 +7,7 @@ export default function HaomePage() {
             <div class="home">
                 <div className="container homePageImg">
                     <div>
-                        <h1 className="homeWelcome">
+                        <h1 className="homeWelcome h1">
                             The <br />
                             Greatest
                             <br /> Outdoors
@@ -23,6 +23,7 @@ export default function HaomePage() {
                 </div>
             </div>
             <Nearby />
+            
         </div>
     )
 }

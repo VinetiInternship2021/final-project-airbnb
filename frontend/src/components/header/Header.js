@@ -1,11 +1,12 @@
 import React from 'react'
 import './header.css'
+import logo from './img/airbnbnbnb.png'
 
 export default function Header() {
     return (
         <nav className="navbar navbar-dark bg-dark justify-content-between header">
             <a className="navbar-brand" href="/">
-                Airbnbnbnb
+                <img style={{ width: '200px' }} src={logo} />
             </a>
             <form className="form-inline">
                 <a
