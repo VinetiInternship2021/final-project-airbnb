@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 toast.configure()
+
 const getEmoji = () => {
     const emoji = ['😀', '😁', '😁', '🤣', '😃', '😎', '😋', '😊', '😉', '🤨']
     return emoji[Math.floor(Math.random() * 10)]

@@ -1,0 +1,19 @@
+.sign_up_form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+.sign_up_form > input {
+    margin-bottom: 10px;
+}
+.sign_up_container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.radio_btn {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

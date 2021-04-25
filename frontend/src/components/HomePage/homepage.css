@@ -1,40 +1,28 @@
 .homePageImg {
-    background-image: url('https://a0.muscache.com/pictures/fe0b0101-a996-4bec-a2ad-67aa50c948a9.jpg');
-    background-size: cover;
-    height: 600px;
-    color: rgb(255, 255, 255);
+    height: 470px;
     display: flex;
-
-    justify-content: center;
+    flex-direction: ;
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: row; */
 }
-.homePageImg > h1 {
-    font-size: 75px;
+.home {
+    background-image: url('https://a0.muscache.com/im/pictures/ddc7f01f-3fb3-483c-87e6-701dad52c930.jpg');
+    background-size: cover;
+}
+.homeWelcome {
+    font-weight: 700;
+    font-size: 60px;
+    color: #222222;
+    letter-spacing: -0.02em;
+}
+.homePageImg > div > span {
+    font-weight: 400;
+    font-size: 20px;
 }
 .getStart {
-    width: 200px;
-    height: 50px;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.sign_up_form {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: ;
-}
-.sign_up_form > input {
-    margin-bottom: 10px;
-}
-.sign_up_container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
-.radio_btn {
-    display: flex;
-    justify-content: space-evenly;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    background-color: #222222;
 }
