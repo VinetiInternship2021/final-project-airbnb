@@ -1,18 +1,18 @@
 .listingForm {
-  width: 40vw;
-
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+    width: 50vw;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .listingContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 .listingForm > input,
 select {
-  width: 100%;
-  margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }

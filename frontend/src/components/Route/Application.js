@@ -4,6 +4,7 @@ import SignIn from '../form/signIn/SignIn'
 import SignUp from '../form/signUp/SignUp'
 import HomePage from '../HomePage/HomePage'
 import Header from '../header/Header'
+import NewListing from './../hostPage/NewListing'
 export default function Application() {
     return (
         <>
@@ -18,6 +19,9 @@ export default function Application() {
                 </Route>
                 <Route exact path="/sign_in">
                     <SignIn />
+                </Route>
+                <Route exact path="/add_new">
+                    <NewListing />
                 </Route>
             </div>
         </>
