@@ -13,7 +13,7 @@ export default class DatePicker extends Component {
             endDate: null,
         }
     }
-    componentDidUpdate() {
+    componentDidMount() {
         const { datePicker } = this.props
         const startDate = this.state.startDate?._d
         const endDate = this.state.endDate?._d
