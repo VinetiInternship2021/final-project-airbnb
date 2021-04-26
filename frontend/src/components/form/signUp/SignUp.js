@@ -18,10 +18,10 @@ export default function SignUp() {
     function creatUser(e) {
         e.preventDefault()
         if (form.password === form.rePassword) {
-            return error('Password should not be empty')
+            return error("Password don't match")
         }
         if (form.password.length < 1) {
-            return error("Password don't match")
+            return error('Password should not be empty')
         }
     }
 
@@ -113,8 +113,7 @@ export default function SignUp() {
                             />
                             <label for="floatingInput">Repeat Password</label>
                         </div>
-
-                        <button className="btn btn-danger">Sign up </button>
+                        <button className="btn btn-danger">Sign up</button>
                     </div>
                 </div>
             </form>
