@@ -40,7 +40,6 @@ export default class DatePicker extends Component {
                         this.setState({ focusedInput })
                     } // PropTypes.func.isRequired,
                 />
-                <button onClick={this.log}>click me</button>
             </div>
         )
     }
