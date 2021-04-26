@@ -7,6 +7,7 @@ import HomePage from '../HomePage/HomePage'
 import Header from '../header/Header'
 import NewListing from './../hostPage/NewListing'
 import Cards from './../card/Card'
+import Find from './../find/Find'
 
 export default function Application() {
     return (
@@ -27,6 +28,7 @@ export default function Application() {
                     <NewListing />
                 </Route>
                 <Route exact path="/results">
+                    <Find />
                     <Cards />
                 </Route>
             </div>
