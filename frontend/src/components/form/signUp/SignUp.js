@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 // import { sha256 } from 'js-sha256'
+import './signup.css'
 export default function SignUp() {
     const [form, setForm] = useState({})
 
@@ -10,25 +11,22 @@ export default function SignUp() {
                     <div className="sign_up_form">
                         <br />
                         <div className="radio_btn">
-                            <div>
-                                <label htmlFor="hostel">Hostel</label>
-                                <input
-                                    id="hostel"
-                                    className="radio-light"
-                                    type="radio"
-                                    name="type"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="reg_user">Reg User</label>
+                            <label htmlFor="hostel">Hostel</label>
+                            <input
+                                id="hostel"
+                                className="radio-light"
+                                type="radio"
+                                name="type"
+                            />
 
-                                <input
-                                    id="reg_user"
-                                    className="radio-light"
-                                    type="radio"
-                                    name="type"
-                                />
-                            </div>
+                            <label htmlFor="reg_user">Reg User</label>
+
+                            <input
+                                id="reg_user"
+                                className="radio-light"
+                                type="radio"
+                                name="type"
+                            />
                         </div>
                         <br />
                         <input className="input-group " placeholder="Name" />
