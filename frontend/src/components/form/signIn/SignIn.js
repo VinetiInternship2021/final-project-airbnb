@@ -12,18 +12,27 @@ export default function SignIn() {
                         <input type="radio" name="type" id="host" />
                     </div>
 
-                    <input
-                        className="input-group"
-                        type="mail"
-                        placeholder="Mail"
-                    />
+                    <div class="form-floating mb-3 mt-2">
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="floatingInput"
+                            placeholder="Name"
+                        />
+                        <label for="floatingInput">email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            minLength="6"
+                            maxLength="21"
+                            type="password"
+                            className="form-control"
+                            id="floatingInput"
+                            placeholder="Password"
+                        />
+                        <label for="floatingInput">password</label>
+                    </div>
 
-                    <input
-                        className="input-group "
-                        type="password"
-                        placeholder="password"
-                    />
-                    <br />
                     <button className="btn btn-danger w-100">Sign in </button>
                     <br />
                 </form>
