@@ -18,3 +18,26 @@
     border: solid 4px #dc3545;
     border-radius: 0px 20px 17px 0px;
 }
+.increment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.incButtons {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px 0px 5px;
+    align-items: center;
+}
+.incButtons > span {
+    /* padding: 0px 20px 0px 20px; */
+    margin: 0px 20px 0px 20px;
+}
+.inc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
