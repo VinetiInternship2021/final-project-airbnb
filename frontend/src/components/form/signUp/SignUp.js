@@ -1,27 +1,40 @@
 import React, { useState } from 'react'
-import { error } from './../../../notification/notiication'
-// import { sha256 } from 'js-sha256'
+import { error, success } from './../../../notification/notiication'
+import { reqCreate, reqRed } from './../../../api/api'
+import { sha256 } from 'js-sha256'
 import './signup.css'
 export default function SignUp() {
     const [form, setForm] = useState({
         password: '',
         rePassword: '',
+        firstName: '',
+        lastName: '',
+        email: '',
     })
 
-    function validatePassword(e) {
+    function getForm(e) {
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }))
     }
 
-    function creatUser(e) {
+    async function creatUser(e) {
         e.preventDefault()
         if (form.password.length < 1) {
             return error('Password should not be empty')
         }
         if (form.password !== form.rePassword) {
             return error("Password don't match")
+        }
+        const data = JSON.parse(JSON.stringify(form))
+        data.password = sha256(data.password)
+        try {
+            await reqCreate('hosts', data)
+            return success('Success')
+        } catch (e) {
+            console.log('Messages')
+            return error(e)
         }
     }
 
@@ -62,28 +75,34 @@ export default function SignUp() {
                         <br />
                         <div class="form-floating mb-3">
                             <input
+                                value={form.firstName}
+                                name="firstName"
                                 type="text"
                                 className="form-control"
-                                id="floatingInput"
                                 placeholder="Name"
+                                onChange={getForm}
                             />
                             <label for="floatingInput">Name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input
+                                value={form.lastName}
+                                name="lastName"
                                 type="text"
                                 className="form-control"
-                                id="floatingInput"
                                 placeholder="Sur Name"
+                                onChange={getForm}
                             />
                             <label for="floatingInput">SurName</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input
+                                value={form.email}
+                                name="email"
                                 type="email"
                                 className="form-control"
-                                id="floatingInput"
                                 placeholder="email"
+                                onChange={getForm}
                             />
                             <label for="floatingInput">Email</label>
                         </div>
@@ -91,10 +110,9 @@ export default function SignUp() {
                             <input
                                 type="password"
                                 className="form-control"
-                                id="floatingInput"
                                 name="password"
                                 value={form.password}
-                                onChange={validatePassword}
+                                onChange={getForm}
                                 maxLength="21"
                                 minLength="6"
                             />
@@ -108,8 +126,7 @@ export default function SignUp() {
                                 name="rePassword"
                                 type="password"
                                 className="form-control"
-                                id="floatingInput"
-                                onChange={validatePassword}
+                                onChange={getForm}
                             />
                             <label for="floatingInput">Repeat Password</label>
                         </div>
