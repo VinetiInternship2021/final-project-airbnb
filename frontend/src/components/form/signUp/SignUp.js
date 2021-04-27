@@ -17,11 +17,11 @@ export default function SignUp() {
 
     function creatUser(e) {
         e.preventDefault()
-        if (form.password === form.rePassword) {
-            return error("Password don't match")
-        }
         if (form.password.length < 1) {
             return error('Password should not be empty')
+        }
+        if (form.password !== form.rePassword) {
+            return error("Password don't match")
         }
     }
 

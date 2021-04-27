@@ -33,9 +33,7 @@ export default function SignIn() {
                         <label for="floatingInput">password</label>
                     </div>
 
-                    <button className="btn btn-danger w-100 findBtn">
-                        Sign in{' '}
-                    </button>
+                    <button className="btn btn-danger w-100">Sign in </button>
                     <br />
                 </form>
             </div>
