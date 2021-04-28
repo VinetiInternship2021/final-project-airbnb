@@ -18,7 +18,8 @@ class HostsController < ApplicationController
     @host = Host.new(host_params)
 
     if @host.save
-      render json: @host, status: :created, location: @host
+      
+      render json: @host , status: :created, location: @host 
     else
       render json: @host.errors, status: :unprocessable_entity
     end
