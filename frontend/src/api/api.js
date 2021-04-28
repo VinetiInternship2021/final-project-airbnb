@@ -1,14 +1,15 @@
-const request = 'localhost:3000/'
+import { axios } from 'axios'
+const request = 'http://localhost:3000/'
 
 //CRUD requests
 
 //request | read get data
-async function reqRed(path) {
-    return await fetch(request + path).then((response) => response.json())
+ function reqRed(path) {
+    return  fetch(request + path).then((response) => response.json())
 }
 
 //request | create new data
-async function reqCreat(path, data) {
+async function reqCreate(path, data) {
     return await fetch(request + path, {
         method: 'POST', // or 'PUT'
         headers: {
@@ -39,4 +40,4 @@ async function reqDelete(path, id) {
     })
 }
 
-export { reqRed, reqDelete, reqUpdate, reqCreat, request }
+export { reqRed, reqDelete, reqUpdate, reqCreate, request }
