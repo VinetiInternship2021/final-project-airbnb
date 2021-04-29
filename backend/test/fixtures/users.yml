@@ -4,10 +4,14 @@ one:
   firstName: MyString
   lastName: MyString
   email: MyString
-  password: MyString
+  isActive: false
+  role: MyString
+  password_digest: MyString
 
 two:
   firstName: MyString
   lastName: MyString
   email: MyString
-  password: MyString
+  isActive: false
+  role: MyString
+  password_digest: MyString

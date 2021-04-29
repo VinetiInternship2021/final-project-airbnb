@@ -1,2 +1,0 @@
-class RegUser < ApplicationRecord
-end
