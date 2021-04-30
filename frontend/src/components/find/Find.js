@@ -75,7 +75,7 @@ function Count(props) {
     return (
         <div className="increment">
             <span>{props.name}</span>
-            <div class="incButtons">
+            <div className="incButtons">
                 <button
                     onClick={decrement}
                     className="btn btn-outline-danger rounded-circle inc"

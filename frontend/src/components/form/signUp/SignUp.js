@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { error, success } from './../../../notification/notiication'
 import { reqCreate, reqRed } from './../../../api/api'
+
 import { sha256 } from 'js-sha256'
 import './signup.css'
-export default function SignUp() {
+function SignUp() {
     const [form, setForm] = useState({
         password: '',
         rePassword: '',
@@ -73,7 +75,7 @@ export default function SignUp() {
                             />
                         </div>
                         <br />
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
                                 value={form.firstName}
                                 name="firstName"
@@ -82,9 +84,9 @@ export default function SignUp() {
                                 placeholder="Name"
                                 onChange={getForm}
                             />
-                            <label for="floatingInput">Name</label>
+                            <label htmlFor="floatingInput">Name</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
                                 value={form.lastName}
                                 name="lastName"
@@ -93,9 +95,9 @@ export default function SignUp() {
                                 placeholder="Sur Name"
                                 onChange={getForm}
                             />
-                            <label for="floatingInput">SurName</label>
+                            <label htmlFor="floatingInput">SurName</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
                                 value={form.email}
                                 name="email"
@@ -104,9 +106,9 @@ export default function SignUp() {
                                 placeholder="email"
                                 onChange={getForm}
                             />
-                            <label for="floatingInput">Email</label>
+                            <label htmlFor="floatingInput">Email</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
                                 type="password"
                                 className="form-control"
@@ -116,9 +118,9 @@ export default function SignUp() {
                                 maxLength="21"
                                 minLength="6"
                             />
-                            <label for="floatingInput"> Password</label>
+                            <label htmlFor="floatingInput"> Password</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
                                 maxLength="21"
                                 minLength="6"
@@ -128,7 +130,9 @@ export default function SignUp() {
                                 className="form-control"
                                 onChange={getForm}
                             />
-                            <label for="floatingInput">Repeat Password</label>
+                            <label htmlFor="floatingInput">
+                                Repeat Password
+                            </label>
                         </div>
                         <button className="btn btn-danger">Sign up</button>
                     </div>
@@ -137,3 +141,10 @@ export default function SignUp() {
         </div>
     )
 }
+
+const mapStateToPros = (state) => {
+    console.log(state)
+    return state
+}
+
+export default connect(mapStateToPros, null)(SignUp)
