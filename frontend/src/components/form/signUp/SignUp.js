@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { error, success } from './../../../notification/notiication'
 import { reqCreate, reqRed } from './../../../api/api'
 
 import { sha256 } from 'js-sha256'
 import './signup.css'
-function SignUp() {
+import { createUser } from '../../redux/actions'
+function SignUp({ userState }) {
     const [form, setForm] = useState({
         password: '',
         rePassword: '',
@@ -20,6 +21,10 @@ function SignUp() {
             [e.target.name]: e.target.value,
         }))
     }
+
+    useEffect(() => {
+        console.log(userState, 'papya ')
+    }, [])
 
     async function creatUser(e) {
         e.preventDefault()
@@ -142,9 +147,17 @@ function SignUp() {
     )
 }
 
+//get state
 const mapStateToPros = (state) => {
     console.log(state)
-    return state
+    return {
+        userState: state.currentUser,
+    }
 }
+
+//add our action
+// const mapDispatchToProps = {
+//     createUser,
+// }
 
 export default connect(mapStateToPros, null)(SignUp)

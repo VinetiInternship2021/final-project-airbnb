@@ -16,14 +16,13 @@ export default function HaomePage() {
                         <br />
 
                         <br />
-                        <a className="btn btn-success getStart" href="/sign_up">
+                        <a className="btn btn-success getStart" href="/find">
                             Get Start
                         </a>
                     </div>
                 </div>
             </div>
             <Nearby />
-            
         </div>
     )
 }
