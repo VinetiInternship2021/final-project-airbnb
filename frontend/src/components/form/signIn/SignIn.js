@@ -2,7 +2,7 @@ import React from 'react'
 import './signin.css'
 export default function SignIn() {
     return (
-        <div class="signIncontainer">
+        <div className="signIncontainer">
             <div className="siginForm">
                 <form>
                     <div className="radio_btn">
@@ -12,16 +12,16 @@ export default function SignIn() {
                         <input type="radio" name="type" id="host" />
                     </div>
 
-                    <div class="form-floating mb-3 mt-2">
+                    <div className="form-floating mb-3 mt-2">
                         <input
                             type="email"
                             className="form-control"
                             id="floatingInput"
                             placeholder="Name"
                         />
-                        <label for="floatingInput">email</label>
+                        <label htmlFor="floatingInput">email</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div className="form-floating mb-3">
                         <input
                             minLength="6"
                             maxLength="21"
@@ -30,7 +30,7 @@ export default function SignIn() {
                             id="floatingInput"
                             placeholder="Password"
                         />
-                        <label for="floatingInput">password</label>
+                        <label htmlFor="floatingInput">password</label>
                     </div>
 
                     <button className="btn btn-danger w-100">Sign in </button>

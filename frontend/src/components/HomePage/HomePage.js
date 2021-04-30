@@ -4,7 +4,7 @@ import Nearby from './nearby/Nearby'
 export default function HaomePage() {
     return (
         <div>
-            <div class="home">
+            <div className="home">
                 <div className="container homePageImg">
                     <div>
                         <h1 className="homeWelcome h1">

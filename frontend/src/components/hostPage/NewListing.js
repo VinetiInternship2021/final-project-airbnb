@@ -5,14 +5,14 @@ export default function NewListing() {
             <form>
                 <div className="listingForm shadow-sm">
                     <h1>Add a New Listing </h1>
-                    <div class="form-floating mb-1 w-100">
+                    <div className="form-floating mb-1 w-100">
                         <input
                             type="text"
                             className="form-control "
                             id="floatingInput"
                             placeholder="Listing name"
                         />
-                        <label for="floatingInput">Listing name</label>
+                        <label htmlFor="floatingInput">Listing name</label>
                     </div>
 
                     <select
@@ -23,16 +23,16 @@ export default function NewListing() {
                         <option>House</option>
                         <option>Hostel</option>
                     </select>
-                    <div class="form-floating mb-1 mt-2 w-100">
+                    <div className="form-floating mb-1 mt-2 w-100">
                         <input
                             type="text"
                             className="form-control "
                             id="floatingInput"
                             placeholder="Listing name"
                         />
-                        <label for="floatingInput">Address</label>
+                        <label htmlFor="floatingInput">Address</label>
                     </div>
-                    <div class="form-floating mb-1  w-100">
+                    <div className="form-floating mb-1  w-100">
                         <input
                             min="1"
                             type="number"
@@ -40,9 +40,9 @@ export default function NewListing() {
                             id="floatingInput"
                             placeholder="Price /USD"
                         />
-                        <label for="floatingInput">Price /USD</label>
+                        <label htmlFor="floatingInput">Price /USD</label>
                     </div>
-                    <div class="form-floating mb-1  w-100">
+                    <div className="form-floating mb-1  w-100">
                         <input
                             min="1"
                             max="10"
@@ -51,9 +51,9 @@ export default function NewListing() {
                             id="floatingInput"
                             placeholder="Beds"
                         />
-                        <label for="floatingInput">Beds</label>
+                        <label htmlFor="floatingInput">Beds</label>
                     </div>
-                    <div class="form-floating mb-1  w-100">
+                    <div className="form-floating mb-1  w-100">
                         <input
                             min="1"
                             max="10"
@@ -64,9 +64,9 @@ export default function NewListing() {
                             id="floatingInput"
                             placeholder="Rooms"
                         />
-                        <label for="floatingInput">Rooms</label>
+                        <label htmlFor="floatingInput">Rooms</label>
                     </div>
-                    <div class="form-floating mb-1  w-100">
+                    <div className="form-floating mb-1  w-100">
                         <input
                             min="1"
                             max="10"
@@ -77,10 +77,10 @@ export default function NewListing() {
                             id="floatingInput"
                             placeholder="Guests"
                         />
-                        <label for="floatingInput">Guests</label>
+                        <label htmlFor="floatingInput">Guests</label>
                     </div>
                     <div className="mb-3">
-                        <label for="formFileSm" class="form-label">
+                        <label htmlFor="formFileSm" className="form-label">
                             Small file input example
                         </label>
                         <input
