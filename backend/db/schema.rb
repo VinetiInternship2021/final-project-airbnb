@@ -10,24 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_131109) do
+ActiveRecord::Schema.define(version: 2021_04_29_140818) do
 
-  create_table "hosts", force: :cascade do |t|
+  create_table "apartments", force: :cascade do |t|
+    t.string "name"
+    t.string "apartmentType"
+    t.string "address"
+    t.string "price"
+    t.string "beds"
+    t.string "rooms"
+    t.string "guests"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_apartments_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
     t.string "email"
-    t.string "password"
+    t.boolean "isActive"
+    t.string "role"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reg_users", force: :cascade do |t|
-    t.string "firstName"
-    t.string "lastName"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "apartments", "users"
 end

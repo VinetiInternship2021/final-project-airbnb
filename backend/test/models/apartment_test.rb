@@ -1,6 +1,6 @@
 require "test_helper"
 
-class HostTest < ActiveSupport::TestCase
+class ApartmentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
