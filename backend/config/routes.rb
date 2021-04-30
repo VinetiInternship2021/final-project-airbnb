@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :apartments
+  resources :properties
   # resource :users, only: [:create,:index]
   resource :users, only: [:index]
   post "/login", to: "users#login"
