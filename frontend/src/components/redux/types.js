@@ -1,0 +1,3 @@
+const CREATE_USER = 'USER/CREATE'
+
+export { CREATE_USER }
