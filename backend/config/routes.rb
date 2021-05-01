@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :properties
   # resource :users, only: [:create,:index]
   resource :users, only: [:index]
