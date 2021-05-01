@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_01_181653) do
+ActiveRecord::Schema.define(version: 2021_05_01_215628) do
 
   create_table "apartments", force: :cascade do |t|
     t.string "name"
@@ -60,16 +60,8 @@ ActiveRecord::Schema.define(version: 2021_05_01_181653) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "firstName"
-    t.string "lastName"
-    t.string "email"
-    t.boolean "isActive"
-    t.string "role"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type '' for column 'isActive'
 
   add_foreign_key "apartments", "users"
   add_foreign_key "properties", "users"
