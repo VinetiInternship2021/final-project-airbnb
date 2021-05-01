@@ -1,8 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { createUser } from './../../redux/actions'
 import { error, success } from './../../../notification/notiication'
+import Spinner from 'react-bootstrap/Spinner'
 import { reqCreate } from './../../../api/api'
+import { useHistory } from 'react-router-dom'
+
 import './signup.css'
-export default function SignUp() {
+function SignUp({ createUser }) {
+    const history = useHistory()
+    const [load, setLoad] = useState(true)
+
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -13,35 +21,43 @@ export default function SignUp() {
         rePassword: '',
     })
 
-    function checked(e) {
-        e.preventDefault()
-        e.target.defaultChecked = true
-        setForm((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }))
-    }
     function getForm(e) {
+        if (e.target.type === 'radio') {
+            e.target.defaultChecked = true
+            return setForm((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+            }))
+        }
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }))
     }
 
-    async function creatUser(e) {
+    async function setUser(e) {
         e.preventDefault()
+        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
         if (form.password.length < 1) {
+            setLoad((prev) => !prev)
             return error('Password should not be empty')
         }
+
         if (form.password !== form.rePassword) {
+            setLoad((prev) => !prev)
             return error("Password don't match")
         }
-        const user = await reqCreate('aper')
+
+        const user = await reqCreate('users', form)
+        createUser(user) //react dispatch CREATE_USER
+        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
+        success('Account successfully created ') //alert
+        history.push('/results')
     }
 
     return (
         <div>
-            <form onSubmit={creatUser}>
+            <form onSubmit={setUser}>
                 <div className="sign_up_container">
                     <div className="sign_up_form">
                         <br />
@@ -50,11 +66,12 @@ export default function SignUp() {
                                 className="form-check-label"
                                 htmlFor="hostel"
                             >
-                                Hostel
+                                Host
                             </label>
                             <input
+                                data-cy="host"
                                 defaultChecked="true"
-                                onChange={checked}
+                                onChange={getForm}
                                 value="host"
                                 id="hostel"
                                 className="radio-light form-check-input"
@@ -70,7 +87,8 @@ export default function SignUp() {
                             </label>
 
                             <input
-                                onChange={checked}
+                                data-cy="reg"
+                                onChange={getForm}
                                 value="reg"
                                 id="reg_user"
                                 className="radio-light form-check-input"
@@ -81,6 +99,7 @@ export default function SignUp() {
                         <br />
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="firstName"
                                 value={form.firstName}
                                 name="firstName"
                                 type="text"
@@ -92,6 +111,7 @@ export default function SignUp() {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="lastName"
                                 value={form.lastName}
                                 name="lastName"
                                 type="text"
@@ -103,6 +123,7 @@ export default function SignUp() {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="email"
                                 value={form.email}
                                 name="email"
                                 type="email"
@@ -114,6 +135,7 @@ export default function SignUp() {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="password"
                                 type="password"
                                 className="form-control"
                                 name="password"
@@ -126,6 +148,7 @@ export default function SignUp() {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="rePassword"
                                 maxLength="21"
                                 minLength="6"
                                 value={form.rePassword}
@@ -138,10 +161,28 @@ export default function SignUp() {
                                 Repeat Password
                             </label>
                         </div>
-                        <button className="btn btn-danger">Sign up</button>
+
+                        <button
+                            data-cy="Sign_up"
+                            className="btn btn-danger signBtn"
+                        >
+                            {load ? (
+                                'Sign up'
+                            ) : (
+                                <>
+                                    <Spinner animation="border" role="status" />
+                                    <span className="sr-only">Loading...</span>
+                                </>
+                            )}
+                        </button>
                     </div>
                 </div>
             </form>
         </div>
     )
 }
+
+const mapDispatchToProps = {
+    createUser,
+}
+export default connect(null, mapDispatchToProps)(SignUp)

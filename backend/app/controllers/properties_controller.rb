@@ -1,9 +1,10 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :update, :destroy]
+  before_action :authorized
 
   # GET /properties
   def index
-    @properties = Property.all
+    @properties = Property.where(user_id: @user.id)
 
     render json: @properties
   end
@@ -16,7 +17,7 @@ class PropertiesController < ApplicationController
   # POST /properties
   def create
     @property = Property.new(property_params)
-
+    @note.user_id = @user.id
     if @property.save
       render json: @property, status: :created, location: @property
     else
