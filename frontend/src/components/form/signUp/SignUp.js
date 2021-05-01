@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useRef } from 'react'
 import { error, success } from './../../../notification/notiication'
-import { reqCreate, reqRed } from './../../../api/api'
-
-import { sha256 } from 'js-sha256'
+import { reqCreate } from './../../../api/api'
 import './signup.css'
-import { createUser } from '../../redux/actions'
-function SignUp({ userState }) {
+export default function SignUp() {
     const [form, setForm] = useState({
-        password: '',
-        rePassword: '',
         firstName: '',
         lastName: '',
         email: '',
+        isActive: true,
+        role: '',
+        password: '',
+        rePassword: '',
     })
 
+    function checked(e) {
+        e.preventDefault()
+        e.target.defaultChecked = true
+        setForm((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }))
+    }
     function getForm(e) {
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }))
     }
-
-    useEffect(() => {
-        console.log(userState, 'papya ')
-    }, [])
 
     async function creatUser(e) {
         e.preventDefault()
@@ -34,15 +36,7 @@ function SignUp({ userState }) {
         if (form.password !== form.rePassword) {
             return error("Password don't match")
         }
-        const data = JSON.parse(JSON.stringify(form))
-        data.password = sha256(data.password)
-        try {
-            await reqCreate('hosts', data)
-            return success('Success')
-        } catch (e) {
-            console.log('Messages')
-            return error(e)
-        }
+        const user = await reqCreate('aper')
     }
 
     return (
@@ -59,10 +53,13 @@ function SignUp({ userState }) {
                                 Hostel
                             </label>
                             <input
+                                defaultChecked="true"
+                                onChange={checked}
+                                value="host"
                                 id="hostel"
                                 className="radio-light form-check-input"
                                 type="radio"
-                                name="type"
+                                name="role"
                             />
 
                             <label
@@ -73,10 +70,12 @@ function SignUp({ userState }) {
                             </label>
 
                             <input
+                                onChange={checked}
+                                value="reg"
                                 id="reg_user"
                                 className="radio-light form-check-input"
                                 type="radio"
-                                name="type"
+                                name="role"
                             />
                         </div>
                         <br />
@@ -146,18 +145,3 @@ function SignUp({ userState }) {
         </div>
     )
 }
-
-//get state
-const mapStateToPros = (state) => {
-    console.log(state)
-    return {
-        userState: state.currentUser,
-    }
-}
-
-//add our action
-// const mapDispatchToProps = {
-//     createUser,
-// }
-
-export default connect(mapStateToPros, null)(SignUp)
