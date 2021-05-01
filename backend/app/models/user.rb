@@ -5,7 +5,7 @@ class User < ApplicationRecord
     format: { with: /\A(.+)@(.+)\z/, message: "Email invalid"  },
     uniqueness: { case_sensitive: true },
     length: { minimum: 4, maximum: 254 }
-    # validates :role ?
+    validates :role, presence: true, inclusion: { in: %w(host regular) }
     
     has_many :property
     has_secure_password
