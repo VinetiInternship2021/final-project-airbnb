@@ -1,11 +1,10 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :update, :destroy]
-  before_action :authorized
+  before_action :authorized, only:  [:show, :update, :destroy]
 
   # GET /properties
   def index
-    @properties = Property.where(user_id: @user.id)
-
+    @properties = Property.all
     render json: @properties
   end
 
@@ -16,6 +15,7 @@ class PropertiesController < ApplicationController
 
   # POST /properties
   def create
+   
     @property = Property.new(property_params)
     @note.user_id = @user.id
     if @property.save
@@ -26,7 +26,7 @@ class PropertiesController < ApplicationController
   end
 
   # PATCH/PUT /properties/1
-  def update
+  def update 
     if @property.update(property_params)
       render json: @property
     else
