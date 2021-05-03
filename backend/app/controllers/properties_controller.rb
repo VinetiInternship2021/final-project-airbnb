@@ -15,13 +15,14 @@ class PropertiesController < ApplicationController
 
   # POST /properties
   def create   
-    @property = Property.new(property_params)
-    # @property.user_id = @user.id
-    if @property.save
-      render json: @property, status: :created, location: @property
-    else
-      render json: @property.errors, status: :unprocessable_entity
-    end
+    if @user.role =='host' and @user.isActive
+      @property = Property.new(property_params)
+      if @property.save
+        render json: @property, status: :created, location: @property
+      else
+        render json: @property.errors, status: :unprocessable_entity
+      end
+    end     
   end
 
   # PATCH/PUT /properties/1
