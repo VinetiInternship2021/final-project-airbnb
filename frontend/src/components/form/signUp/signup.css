@@ -1,3 +1,9 @@
+.signBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sign_up_form {
     display: flex;
     flex-direction: column;

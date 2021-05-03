@@ -1,10 +1,10 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: [:show, :update, :destroy]
+  before_action :set_property, only:  [:show, :update, :destroy]
+  before_action :authorized,   only:  [:show, :update, :destroy,:create]
 
   # GET /properties
   def index
     @properties = Property.all
-
     render json: @properties
   end
 
@@ -14,18 +14,19 @@ class PropertiesController < ApplicationController
   end
 
   # POST /properties
-  def create
-    @property = Property.new(property_params)
-
-    if @property.save
-      render json: @property, status: :created, location: @property
-    else
-      render json: @property.errors, status: :unprocessable_entity
-    end
+  def create   
+    if @user.role =='host' and @user.isActive
+      @property = Property.new(property_params)
+      if @property.save
+        render json: @property, status: :created, location: @property
+      else
+        render json: @property.errors, status: :unprocessable_entity
+      end
+    end     
   end
 
   # PATCH/PUT /properties/1
-  def update
+  def update 
     if @property.update(property_params)
       render json: @property
     else

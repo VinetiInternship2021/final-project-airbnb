@@ -1,53 +1,63 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { createUser } from './../../redux/actions'
 import { error, success } from './../../../notification/notiication'
-import { reqCreate, reqRed } from './../../../api/api'
+import Spinner from 'react-bootstrap/Spinner'
+import { reqCreate } from './../../../api/api'
+import { useHistory } from 'react-router-dom'
 
-import { sha256 } from 'js-sha256'
 import './signup.css'
-import { createUser } from '../../redux/actions'
-function SignUp({ userState }) {
+function SignUp({ createUser }) {
+    const history = useHistory()
+    const [load, setLoad] = useState(true)
+
     const [form, setForm] = useState({
-        password: '',
-        rePassword: '',
         firstName: '',
         lastName: '',
         email: '',
+        isActive: true,
+        role: '',
+        password: '',
+        rePassword: '',
     })
 
     function getForm(e) {
+        if (e.target.type === 'radio') {
+            e.target.defaultChecked = true
+            return setForm((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+            }))
+        }
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }))
     }
 
-    useEffect(() => {
-        console.log(userState, 'papya ')
-    }, [])
-
-    async function creatUser(e) {
+    async function setUser(e) {
         e.preventDefault()
+        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
         if (form.password.length < 1) {
+            setLoad((prev) => !prev)
             return error('Password should not be empty')
         }
+
         if (form.password !== form.rePassword) {
+            setLoad((prev) => !prev)
             return error("Password don't match")
         }
-        const data = JSON.parse(JSON.stringify(form))
-        data.password = sha256(data.password)
-        try {
-            await reqCreate('hosts', data)
-            return success('Success')
-        } catch (e) {
-            console.log('Messages')
-            return error(e)
-        }
+
+        const user = await reqCreate('users', form)
+        createUser(user) //react dispatch CREATE_USER
+        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
+        success('Account successfully created ') //alert
+        history.push('/results')
     }
 
     return (
         <div>
-            <form onSubmit={creatUser}>
+            <form onSubmit={setUser}>
                 <div className="sign_up_container">
                     <div className="sign_up_form">
                         <br />
@@ -56,13 +66,17 @@ function SignUp({ userState }) {
                                 className="form-check-label"
                                 htmlFor="hostel"
                             >
-                                Hostel
+                                Host
                             </label>
                             <input
+                                data-cy="host"
+                                defaultChecked="true"
+                                onChange={getForm}
+                                value="host"
                                 id="hostel"
                                 className="radio-light form-check-input"
                                 type="radio"
-                                name="type"
+                                name="role"
                             />
 
                             <label
@@ -73,15 +87,19 @@ function SignUp({ userState }) {
                             </label>
 
                             <input
+                                data-cy="reg"
+                                onChange={getForm}
+                                value="reg"
                                 id="reg_user"
                                 className="radio-light form-check-input"
                                 type="radio"
-                                name="type"
+                                name="role"
                             />
                         </div>
                         <br />
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="firstName"
                                 value={form.firstName}
                                 name="firstName"
                                 type="text"
@@ -93,6 +111,7 @@ function SignUp({ userState }) {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="lastName"
                                 value={form.lastName}
                                 name="lastName"
                                 type="text"
@@ -104,6 +123,7 @@ function SignUp({ userState }) {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="email"
                                 value={form.email}
                                 name="email"
                                 type="email"
@@ -115,6 +135,7 @@ function SignUp({ userState }) {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="password"
                                 type="password"
                                 className="form-control"
                                 name="password"
@@ -127,6 +148,7 @@ function SignUp({ userState }) {
                         </div>
                         <div className="form-floating mb-3">
                             <input
+                                data-cy="rePassword"
                                 maxLength="21"
                                 minLength="6"
                                 value={form.rePassword}
@@ -139,7 +161,20 @@ function SignUp({ userState }) {
                                 Repeat Password
                             </label>
                         </div>
-                        <button className="btn btn-danger">Sign up</button>
+
+                        <button
+                            data-cy="Sign_up"
+                            className="btn btn-danger signBtn"
+                        >
+                            {load ? (
+                                'Sign up'
+                            ) : (
+                                <>
+                                    <Spinner animation="border" role="status" />
+                                    <span className="sr-only">Loading...</span>
+                                </>
+                            )}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -147,17 +182,7 @@ function SignUp({ userState }) {
     )
 }
 
-//get state
-const mapStateToPros = (state) => {
-    console.log(state)
-    return {
-        userState: state.currentUser,
-    }
+const mapDispatchToProps = {
+    createUser,
 }
-
-//add our action
-// const mapDispatchToProps = {
-//     createUser,
-// }
-
-export default connect(mapStateToPros, null)(SignUp)
+export default connect(null, mapDispatchToProps)(SignUp)
