@@ -1,11 +1,10 @@
-import { axios } from 'axios'
 const request = 'http://localhost:3000/'
 
 //CRUD requests
 
 //request | read get data
- function reqRed(path) {
-    return  fetch(request + path).then((response) => response.json())
+function reqRed(path) {
+    return fetch(request + path).then((response) => response.json())
 }
 
 //request | create new data

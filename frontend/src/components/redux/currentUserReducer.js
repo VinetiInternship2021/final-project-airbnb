@@ -1,12 +1,10 @@
-import { CREATE_USER } from './types'
+import { CREATE_USER, UPLOAD_LOCAL_IMG } from './types'
 
 const initialState = {
     currentUser: {
         status: [],
     },
-    userData: {
-        data: null,
-    },
+    localImgList: [],
 }
 
 export const currentUserReducer = (state = initialState, action) => {
@@ -15,6 +13,11 @@ export const currentUserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: { status: [action.payload] },
+            }
+        case UPLOAD_LOCAL_IMG:
+            return {
+                ...state,
+                localImgList: [...state.localImgList].concat(action.payload),
             }
         default:
             return state
