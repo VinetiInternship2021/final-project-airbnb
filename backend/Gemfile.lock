@@ -88,6 +88,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
     puma (5.2.2)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -142,8 +144,10 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x64-mingw32
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)

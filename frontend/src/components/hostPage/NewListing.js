@@ -24,7 +24,7 @@ function NewListing({ currentUser }) {
         rooms: '',
         guests: '',
         description: '',
-        user_id: 4,
+        user_id: currentUser[0].user.id,
     })
     useEffect(() => {
         if (!currentUser[0].user.role) {
