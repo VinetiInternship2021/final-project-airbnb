@@ -12,7 +12,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create property" do
     assert_difference('Property.count') do
-      post properties_url, params: { property: { address: @property.address, beds: @property.beds, description: @property.description, guests: @property.guests, price: @property.price, propType: @property.propType, rooms: @property.rooms, title: @property.title, user_id: @property.user_id } }, as: :json
+      post properties_url, params: { property: { address: @property.address, lattitude: @property.lattitude, longtitude: @property.longtitude beds: @property.beds, description: @property.description, guests: @property.guests, price: @property.price, propType: @property.propType, rooms: @property.rooms, title: @property.title, user_id: @property.user_id } }, as: :json
     end
 
     assert_response 201

@@ -4,6 +4,8 @@ class CreateProperties < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :propType
       t.string :address
+      t.string :lattitude
+      t.string :longtitude
       t.string :price
       t.string :beds
       t.string :rooms

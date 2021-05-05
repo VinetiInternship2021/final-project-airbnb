@@ -45,6 +45,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:title, :propType, :address, :price, :beds, :rooms, :guests, :description, :user_id)
+      params.require(:property).permit(:title, :propType, :address, :lattitude,:lattitude,:price, :beds, :rooms, :guests, :description, :user_id)
     end
 end
