@@ -1,1 +1,11 @@
 Client-ID 4409588f10776f7
+
+ let body = new FormData()
+    body.set('key', '32034bbba705948502da631ca3f98546')
+    body.append('image', 'https://www.synopsys.com/content/dam/synopsys/designware-ip/diagrams/adas-fig1-color.jpg.imgw.850.x.jpg')
+    
+fetch('https://api.imgbb.com/1/upload',{
+	method: 'POST',
+  body
+}).then((e)=>e.json())
+	.then((e)=>console.log(e))

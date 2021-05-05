@@ -16,7 +16,7 @@ function SignUp({ createUser }) {
         lastName: '',
         email: '',
         isActive: true,
-        role: '',
+        role: 'host',
         password: '',
         rePassword: '',
     })
@@ -38,7 +38,7 @@ function SignUp({ createUser }) {
     async function setUser(e) {
         e.preventDefault()
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on
-        if (form.password.length < 1) {
+        if (!form.password.length) {
             setLoad((prev) => !prev)
             return error('Password should not be empty')
         }
@@ -49,6 +49,7 @@ function SignUp({ createUser }) {
         }
 
         const user = await reqCreate('users', form)
+
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on
         success('Account successfully created ') //alert

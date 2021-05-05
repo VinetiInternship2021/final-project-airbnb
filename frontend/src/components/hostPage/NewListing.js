@@ -1,24 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { info } from './../../notification/notiication'
+import {
+    imgUploadToServer,
+    reqCreateToken,
+    uploadImgRails,
+} from './../../api/api'
+import Spinner from 'react-bootstrap/Spinner'
+import { info, success } from './../../notification/notiication'
 
 import './NewListing.css'
 import Preview from './Preview'
-function NewListing() {
+function NewListing({ currentUser }) {
+    const redirect = useHistory()
+    const [load, setLoad] = useState(false)
     const [imgList, setImgList] = useState([])
     const [form, setForm] = useState({
         title: '',
-        propType: 'Room',
+        propType: 'room',
         address: '',
         price: '',
         beds: '',
         rooms: '',
         guests: '',
         description: '',
+        user_id: 4,
     })
-
-    const handleGetImage = async (e) => {
-        setImgList((prev) => [...prev, URL.createObjectURL(e.target.files[0])])
+    useEffect(() => {
+        if (!currentUser[0].user.role) {
+            redirect.push('/')
+            return info('For create property register as hosts')
+        } else if (currentUser[0].user.role !== 'host') {
+            redirect.push('/find')
+            return info('Create property can only hosts')
+        }
+    }, [])
+    const handleGetImage = (e) => {
+        setImgList((prev) => [...prev, ...e.target.files])
     }
 
     const handleFormaChange = (e) => {
@@ -27,8 +45,36 @@ function NewListing() {
             [e.target.name]: e.target.value,
         }))
     }
-    const createNewProperty = (e) => {
+
+    function requestFilter(imgResponse) {
+        const arr = []
+        imgResponse.forEach(({ data }) => {
+            arr.push(data.display_url)
+        })
+        return arr
+    }
+
+    const createNewProperty = async (e) => {
         e.preventDefault()
+        setLoad((prev) => !prev) //btn loader on
+        const newProp = await reqCreateToken(
+            'create_property',
+            form,
+            currentUser[0].token
+        ) //create property
+        console.log(newProp)
+        const backData = await imgUploadToServer(imgList) //img upload to imgbb
+        console.log(backData)
+        const filtered = requestFilter(backData) // filler imgbb data only urls
+        console.log(filtered)
+        await uploadImgRails(
+            'img_lists',
+            filtered,
+            newProp.id,
+            currentUser[0].token
+        ) //add to rails table ;)
+        success('Property succes created')
+        setLoad((prev) => !prev) //btn loader off
     }
 
     return (
@@ -134,7 +180,16 @@ function NewListing() {
                     </div>
 
                     <br />
-                    <button className="btn btn-danger w-100">Submit</button>
+                    <button className="btn btn-danger w-100">
+                        {!load ? (
+                            'Submit'
+                        ) : (
+                            <>
+                                <Spinner animation="border" role="status" />
+                                <span className="sr-only">Loading...</span>
+                            </>
+                        )}
+                    </button>
                 </div>
             </form>
 
@@ -152,4 +207,9 @@ function NewListing() {
     )
 }
 
-export default connect()(NewListing)
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser.status,
+    }
+}
+export default connect(mapStateToProps, null)(NewListing)

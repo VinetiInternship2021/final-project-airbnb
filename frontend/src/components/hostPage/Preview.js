@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import AutoplaySlider from './../slider/Slider'
 
 function Preview(props) {
     const {
@@ -23,7 +24,7 @@ function Preview(props) {
             <h1 className="header">Preview</h1>
             <div>
                 <p className="h3">Title: {title} </p>
-                <div className="previewImg row">
+                <div className="previewImg row col-6 shadow-lg center w-100">
                     <img
                         className="col-8 shadow-lg"
                         src={prevCover}
@@ -33,7 +34,8 @@ function Preview(props) {
                         {imgList &&
                             imgList.map((el, index) => {
                                 return (
-                                    <div className="w-50">
+                                    <div className="w-50" key={el}>
+                                        {/* <button className="btn">x</button> */}
                                         <img
                                             onClick={handleCoverChange}
                                             key={el}

@@ -57,7 +57,7 @@ const HeadersBtn = ({ isLoggedIn, role, createUser }) => {
                         type="submit"
                         to="/sign_in"
                     >
-                        My Orders
+                        My Apartment
                     </Link>
                     <Link
                         className="btn btn-success reg"
