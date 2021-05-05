@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_122747) do
+ActiveRecord::Schema.define(version: 2021_05_05_080524) do
+
+  create_table "img_lists", force: :cascade do |t|
+    t.string "imgUrl"
+    t.integer "property_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_img_lists_on_property_id"
+  end
 
   create_table "properties", force: :cascade do |t|
     t.string "title"
@@ -38,5 +46,6 @@ ActiveRecord::Schema.define(version: 2021_04_30_122747) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "img_lists", "properties"
   add_foreign_key "properties", "users"
 end

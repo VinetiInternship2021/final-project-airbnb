@@ -10,19 +10,11 @@ function SignIn({ myUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
     const [form, setForm] = useState({
-        // role: '',
         email: '',
         password: '',
     })
 
-    function handleInputChange(e) {
-        // if (e.target.type === 'radio') {
-        //     e.target.defaultChecked = true
-        //     return setForm((prev) => ({
-        //         ...prev,
-        //         [e.target.name]: e.target.value,
-        //     }))
-        // }
+    function handleInputChange(e) {        
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -31,11 +23,11 @@ function SignIn({ myUser }) {
     async function loginUser(e) {
         e.preventDefault()
         setLoad((prev) => !prev)
-        const user = await reqCreate('/login', form)
-        createUser(user)
-        redirect.push('/results')
+        const user = await reqCreate('/login', form) //fetch to login or create user
+        createUser(user)  //add in redux store 
+        redirect.push('/results') //React Router redirect
         setLoad((prev) => !prev)
-        success('Log in ')
+        success('Log in ') //notification
     }
     return (
         <div className="signIncontainer">

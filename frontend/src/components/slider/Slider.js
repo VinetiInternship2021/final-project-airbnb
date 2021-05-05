@@ -9,7 +9,7 @@ export default function Slider({ imgList }) {
         <AutoplaySlider
             play={true}
             cancelOnInteraction={true} // should stop playing on user interaction
-            interval={1000}
+            interval={100}
         >
             {imgList.map(({ src }, index) => (
                 <div data-src={src} key={index + src} />
