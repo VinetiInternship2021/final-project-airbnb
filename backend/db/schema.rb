@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2021_05_05_080524) do
 
+  create_table "hosts", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
     t.integer "property_id", null: false
@@ -33,6 +42,15 @@ ActiveRecord::Schema.define(version: 2021_05_05_080524) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
+  create_table "reg_users", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
