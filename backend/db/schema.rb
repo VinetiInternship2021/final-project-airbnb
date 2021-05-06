@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2021_05_05_224346) do
 
   create_table "img_lists", force: :cascade do |t|
@@ -19,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_224346) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_img_lists_on_property_id"
   end
+
+ActiveRecord::Schema.define(version: 2021_05_06_065631) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "guest_id", null: false
@@ -43,7 +46,10 @@ ActiveRecord::Schema.define(version: 2021_05_05_224346) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+
     t.string "currency"
+    t.string "latitude"
+    t.string "longitude"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
