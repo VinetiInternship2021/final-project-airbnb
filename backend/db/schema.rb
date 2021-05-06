@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_173204) do
+ActiveRecord::Schema.define(version: 2021_05_06_063502) do
+
+  create_table "hosts", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -32,9 +41,18 @@ ActiveRecord::Schema.define(version: 2021_05_05_173204) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "lattitude"
-    t.string "longtitude"
+    t.string "latitude"
+    t.string "longitude"
     t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
+  create_table "reg_users", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
