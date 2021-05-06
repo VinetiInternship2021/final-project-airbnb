@@ -13,6 +13,5 @@ class Property < ApplicationRecord
     has_many :img_lists
 end
 
-# do not forget to customize validation error messages
 # command to create a new property
 # User.last.property.create!(title: 'wonderful place', propType: 'room',address: 'Yerevan, Armenia', price: '500',  currency: 'USD', beds: 2, rooms: 3, guests: 4, description: 'The best place to stay in Yerevan, blah blah blah')
