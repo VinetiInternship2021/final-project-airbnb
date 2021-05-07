@@ -14,7 +14,7 @@ function SignIn({ myUser }) {
         password: '',
     })
 
-    function handleInputChange(e) {        
+    function handleInputChange(e) {
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -24,7 +24,7 @@ function SignIn({ myUser }) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
-        createUser(user)  //add in redux store 
+        createUser(user) //add in redux store
         redirect.push('/results') //React Router redirect
         setLoad((prev) => !prev)
         success('Log in ') //notification

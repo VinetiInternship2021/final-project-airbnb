@@ -15,7 +15,7 @@ const HeadersBtn = ({ isLoggedIn, role, createUser }) => {
     }
 
     return (
-        <Link>
+        <>
             {!isLoggedIn.length || !isLoggedIn[0] ? (
                 <>
                     <Link
@@ -68,7 +68,7 @@ const HeadersBtn = ({ isLoggedIn, role, createUser }) => {
                     </Link>
                 </>
             )}
-        </Link>
+        </>
     )
 }
 

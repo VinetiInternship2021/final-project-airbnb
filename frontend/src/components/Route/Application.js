@@ -8,6 +8,7 @@ import Header from '../header/Header'
 import NewListing from './../hostPage/NewListing'
 import Cards from './../card/Card'
 import Find from './../find/Find'
+import { AdminForm } from '../form/adminForm/AdminForm'
 
 export default function Application() {
     return (
@@ -30,6 +31,9 @@ export default function Application() {
                 <Route exact path="/results">
                     <Find />
                     <Cards />
+                </Route>
+                <Route exact path="/admin">
+                    <AdminForm />
                 </Route>
             </div>
         </>
