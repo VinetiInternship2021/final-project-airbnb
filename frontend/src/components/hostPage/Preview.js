@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import AutoplaySlider from './../slider/Slider'
 
 function Preview(props) {
     const {

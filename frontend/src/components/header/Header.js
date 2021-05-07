@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './header.css'
@@ -9,7 +9,11 @@ function Header({ state }) {
     return (
         <nav className="navbar navbar-dark bg-dark justify-content-between header">
             <Link className="navbar-brand" to="/">
-                <img style={{ width: '200px' }} src={logo} />
+                <img
+                    alt="Low connection"
+                    style={{ width: '200px' }}
+                    src={logo}
+                />
             </Link>
             <div className="form-inline">
                 <HeadersBtn />
