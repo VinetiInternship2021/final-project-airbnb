@@ -8,7 +8,7 @@ import Header from '../header/Header'
 import NewListing from './../hostPage/NewListing'
 import Cards from './../card/Card'
 import Find from './../find/Find'
-import { AdminForm } from '../form/adminForm/AdminForm'
+import AdminForm from '../form/adminForm/AdminForm'
 
 export default function Application() {
     return (

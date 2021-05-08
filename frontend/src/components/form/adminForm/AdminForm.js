@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { reqCreate } from './../../../api/api'
+import { useHistory } from 'react-router'
 import { createUser } from './../../redux/actions'
 import Spinner from 'react-bootstrap/Spinner'
 import { connect } from 'react-redux'
+import { success } from '../../../notification/notiication'
 
-export const AdminForm = ({ createUser }) => {
+function AdminForm({ createUser }) {
+    const redirect = useHistory()
     const [load, setLoad] = useState(false)
+
     const [adminForms, setAdminForms] = useState({
         email: '',
         password: '',
@@ -16,13 +20,14 @@ export const AdminForm = ({ createUser }) => {
             [e.target.name]: e.target.value,
         }))
     }
-    const signInAsAdmin = async (e) => {
+    async function signInAsAdmin(e) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const admin = await reqCreate('/login', adminForms)
-        console.log(admin)
         createUser(admin)
+        success('Login as Admin')
         setLoad((prev) => !prev)
+        redirect.push('/results')
     }
 
     return (
@@ -70,10 +75,6 @@ export const AdminForm = ({ createUser }) => {
     )
 }
 
-const mapStateToProps = (state) => ({})
+// const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {
-    createUser,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminForm)
+export default connect(null, { createUser })(AdminForm)
