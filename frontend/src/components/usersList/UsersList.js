@@ -25,6 +25,7 @@ function UsersList({ currentUser, usersId, clearIds }) {
         const ids = usersId.join(',')
         await reqUpdate(`updateStatus?ids=${ids}&status=${e.target.name}`)
         setUpdateList((prev) => !prev)
+        info('Status changed')
     }
 
     return (
