@@ -40,7 +40,7 @@ function AdminForm({ createUser }) {
                             <input
                                 onChange={changeAdminForms}
                                 value={adminForms.email}
-                                type="email"
+                                type="text"
                                 name="email"
                                 className="form-control"
                                 placeholder="email"

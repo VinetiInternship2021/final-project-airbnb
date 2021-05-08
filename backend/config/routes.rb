@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 #  post '/addImageList' , to: 'property_imgs#create'
   post '/create_property', to: 'properties#create'
   resource :users, only: [:create]
+  get '/userLists', to: 'users#index'
   post "/login", to: "users#login"
   get "/auto_login", to: "users#auto_login"
 end

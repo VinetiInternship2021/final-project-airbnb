@@ -4,8 +4,8 @@ const imggbAPIkey = '32034bbba705948502da631ca3f98546'
 //CRUD requests
 
 //request | read get data
-function reqRed(path) {
-    return fetch(request + path).then((response) => response.json())
+async function reqRed(path) {
+    return await fetch(request + path).then((response) => response.json())
 }
 
 //request | create new data
@@ -39,6 +39,17 @@ async function reqDelete(path, id) {
         },
     })
 }
+
+// async function reqGetToken(path,token){
+//     return await fetch(request + path, {
+//         method: 'POST', // or 'PUT'
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data),
+//     }).then((response) => response.json())
+// }
 
 async function reqCreateToken(path, data, token) {
     return await fetch(request + path, {

@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
     def index
       
-      @users = User.all
+      # @users = User.all
+      @users = User.where(id:[1,2,4,5,7,9,4,1,5,6])
       render json: @users
 
     end
