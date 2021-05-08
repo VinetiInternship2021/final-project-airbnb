@@ -1,5 +1,6 @@
 import {
     APPEND_USERS_ID,
+    CLEAR_USERS_ID,
     CREATE_USER,
     REMOVE_USERS_ID,
     UPLOAD_LOCAL_IMG,
@@ -34,6 +35,11 @@ export const currentUserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersID: state.usersID.filter((el) => el !== action.payload),
+            }
+        case CLEAR_USERS_ID:
+            return {
+                ...state,
+                usersID: [],
             }
         default:
             return state

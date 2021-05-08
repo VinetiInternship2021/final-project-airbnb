@@ -20,13 +20,9 @@ async function reqCreate(path, data) {
 }
 
 //request | update current data
-async function reqUpdate(path, id, data) {
-    return await fetch(`${request}${path}/${id}`, {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+async function reqUpdate(path) {
+    return await fetch(`${request}${path}`, {
+        method: 'PUT',
     }).then((response) => response.json())
 }
 

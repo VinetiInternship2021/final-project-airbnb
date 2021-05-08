@@ -1,5 +1,6 @@
 import {
     APPEND_USERS_ID,
+    CLEAR_USERS_ID,
     CREATE_USER,
     REMOVE_USERS_ID,
     UPLOAD_LOCAL_IMG,
@@ -22,6 +23,12 @@ export function removeIds(ids) {
     return {
         type: REMOVE_USERS_ID,
         payload: ids,
+    }
+}
+
+export function clearIds() {
+    return {
+        type: CLEAR_USERS_ID,
     }
 }
 

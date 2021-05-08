@@ -1,13 +1,17 @@
 class UsersController < ApplicationController
     before_action :authorized, only: [:auto_login]
 
-    def index
-      
-      # @users = User.all
-      @users = User.where(id:[1,2,4,5,7,9,4,1,5,6])
-      render json: @users
+    def index      
+      @user = User.all
 
+      render json: @user
     end
+    
+    def updateStatus #put request
+      listid = params[:ids].split(',')
+      @users = User.where(id: listid).update(isActive: params[:status])
+      render json: @users 
+    end 
   # REGISTER
   def create
       @user = User.create(user_params)
