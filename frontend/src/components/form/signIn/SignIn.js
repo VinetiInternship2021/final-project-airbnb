@@ -25,7 +25,7 @@ function SignIn({ myUser, createUser }) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
-        if (user.user.isActive) {
+        if (!user.user.isActive) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
