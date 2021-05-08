@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
 import { success } from '../../../notification/notiication'
-function SignIn({ myUser }) {
+function SignIn({ myUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
     const [form, setForm] = useState({

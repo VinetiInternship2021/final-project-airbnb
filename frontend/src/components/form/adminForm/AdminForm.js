@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { reqCreate } from './../../../api/api'
+import { createUser } from './../../redux/actions'
+import Spinner from 'react-bootstrap/Spinner'
 import { connect } from 'react-redux'
 
-export const AdminForm = (props) => {
+export const AdminForm = ({ createUser }) => {
+    const [load, setLoad] = useState(false)
     const [adminForms, setAdminForms] = useState({
         email: '',
         password: '',
@@ -12,9 +16,13 @@ export const AdminForm = (props) => {
             [e.target.name]: e.target.value,
         }))
     }
-    const signInAsAdmin = (e) => {
+    const signInAsAdmin = async (e) => {
         e.preventDefault()
-        console.log(adminForms)
+        setLoad((prev) => !prev)
+        const admin = await reqCreate('/login', adminForms)
+        console.log(admin)
+        createUser(admin)
+        setLoad((prev) => !prev)
     }
 
     return (
@@ -46,7 +54,14 @@ export const AdminForm = (props) => {
                             <label htmlFor="floatingInput">Password</label>
                         </div>
                         <button className="btn btn-danger w-100">
-                            Sing in
+                            {!load ? (
+                                'Sign in'
+                            ) : (
+                                <>
+                                    <Spinner animation="border" role="status" />
+                                    <span className="sr-only">Loading...</span>
+                                </>
+                            )}
                         </button>
                     </form>
                 </div>
@@ -57,6 +72,8 @@ export const AdminForm = (props) => {
 
 const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+    createUser,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminForm)
