@@ -15,6 +15,7 @@ function Find() {
 
     const filter = (e) => {
         e.preventDefault()
+        console.log(pickerDate)
     }
 
     return (
