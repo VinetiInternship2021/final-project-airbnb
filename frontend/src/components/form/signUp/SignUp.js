@@ -54,7 +54,6 @@ function SignUp({ createUser }) {
             return Object.values(user).forEach((msg) => {
                 error(msg)
             })
-            // return error(user.email[0])
         }
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on

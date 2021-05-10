@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
-import { success } from '../../../notification/notiication'
+import { error, success } from '../../../notification/notiication'
 function SignIn({ myUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
@@ -34,7 +34,12 @@ function SignIn({ myUser, createUser }) {
             })
             return setLoad((prev) => !prev)
         }
-
+        if (!user.user) {
+            setLoad((prev) => !prev)
+            return Object.values(user).forEach((msg) => {
+                error(msg)
+            })
+        }
         createUser(user) //add in redux store
         redirect.push('/results') //React Router redirect
         setLoad((prev) => !prev)
