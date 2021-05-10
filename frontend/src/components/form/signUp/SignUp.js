@@ -50,10 +50,10 @@ function SignUp({ createUser, currentUser }) {
 
         const user = await reqCreate('users', form)
         if (!user.user) {
-            setLoad((prev) => !prev)
-            return Object.values(user).forEach((msg) => {
-                error(msg)
+            Object.entries(user).forEach((msg) => {
+                error(msg[0] + msg[1])
             })
+            return setLoad((prev) => !prev)
         }
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on
