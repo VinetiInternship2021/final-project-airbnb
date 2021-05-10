@@ -13,11 +13,9 @@ const HeadersBtn = ({ currentUser, createUser }) => {
         redirect.push('/')
         success('Log out')
     }
-
     useEffect(() => {
         console.log()
     }, [])
-    // return <button onClick={logOut}>asdasd</button>
     if (!currentUser.status.length || !currentUser.status[0]) {
         return (
             <>
