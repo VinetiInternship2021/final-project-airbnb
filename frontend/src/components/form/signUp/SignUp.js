@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useStore } from 'react-redux'
 import { createUser } from './../../redux/actions'
 import { error, success } from './../../../notification/notiication'
 import Spinner from 'react-bootstrap/Spinner'
@@ -49,7 +49,13 @@ function SignUp({ createUser }) {
         }
 
         const user = await reqCreate('users', form)
-
+        if (!user.user) {
+            setLoad((prev) => !prev)
+            return Object.values(user).forEach((msg) => {
+                error(msg)
+            })
+            // return error(user.email[0])
+        }
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on
         success('Account successfully created ') //alert
