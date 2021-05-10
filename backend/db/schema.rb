@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_065631) do
+
+ActiveRecord::Schema.define(version: 2021_05_05_224346) do
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -20,18 +21,33 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
     t.index ["property_id"], name: "index_img_lists_on_property_id"
   end
 
+ActiveRecord::Schema.define(version: 2021_05_06_065631) do
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "guest_id", null: false
+    t.integer "host_id", null: false
+    t.integer "property_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guest_id"], name: "index_orders_on_guest_id"
+    t.index ["host_id"], name: "index_orders_on_host_id"
+    t.index ["property_id"], name: "index_orders_on_property_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string "title"
     t.string "propType"
     t.string "address"
-    t.string "price"
-    t.string "beds"
-    t.string "rooms"
-    t.string "guests"
+    t.integer "price"
+    t.integer "beds"
+    t.integer "rooms"
+    t.integer "guests"
     t.text "description"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+
+    t.string "currency"
     t.string "latitude"
     t.string "longitude"
     t.index ["user_id"], name: "index_properties_on_user_id"
@@ -41,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
     t.string "firstName"
     t.string "lastName"
     t.string "email"
-    t.boolean "isActive"
+    t.boolean "isActive", default: true
     t.string "role"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
@@ -49,5 +65,8 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
   end
 
   add_foreign_key "img_lists", "properties"
+  add_foreign_key "orders", "guests"
+  add_foreign_key "orders", "hosts"
+  add_foreign_key "orders", "properties"
   add_foreign_key "properties", "users"
 end
