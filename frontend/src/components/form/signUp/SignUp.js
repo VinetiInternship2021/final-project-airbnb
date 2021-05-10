@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { connect, useStore } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { createUser } from './../../redux/actions'
 import { error, success } from './../../../notification/notiication'
 import Spinner from 'react-bootstrap/Spinner'
@@ -7,8 +7,8 @@ import { reqCreate } from './../../../api/api'
 import { useHistory } from 'react-router-dom'
 
 import './signup.css'
-function SignUp({ createUser }) {
-    const history = useHistory()
+function SignUp({ createUser, currentUser }) {
+    const redirect = useHistory()
     const [load, setLoad] = useState(true)
 
     const [form, setForm] = useState({
@@ -58,9 +58,15 @@ function SignUp({ createUser }) {
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // boostrap spinner for btn  turn on
         success('Account successfully created ') //alert
-        history.push('/results')
+        redirect.push('/results')
     }
-
+    useEffect(() => {
+        console.log(currentUser, 'currentUser')
+        if (!currentUser) {
+            redirect.push('/')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentUser])
     return (
         <div>
             <form onSubmit={setUser}>
@@ -187,8 +193,12 @@ function SignUp({ createUser }) {
         </div>
     )
 }
-
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser.status[0],
+    }
+}
 const mapDispatchToProps = {
     createUser,
 }
-export default connect(null, mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

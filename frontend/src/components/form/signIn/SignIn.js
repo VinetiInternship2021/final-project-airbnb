@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createUser } from './../../redux/actions'
 import { connect } from 'react-redux'
 import { reqCreate } from './../../../api/api'
@@ -7,7 +7,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
 import { error, success } from '../../../notification/notiication'
-function SignIn({ myUser, createUser }) {
+function SignIn({ currentUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
     const [form, setForm] = useState({
@@ -45,6 +45,14 @@ function SignIn({ myUser, createUser }) {
         setLoad((prev) => !prev)
         success('Log in ') //notification
     }
+
+    useEffect(() => {
+        console.log(currentUser, 'currentUser')
+        if (!currentUser) {
+            redirect.push('/')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentUser])
     return (
         <div className="signIncontainer">
             <div className="siginForm">
@@ -119,9 +127,8 @@ function SignIn({ myUser, createUser }) {
 }
 const mapStateToProps = (state) => {
     return {
-        myUser: state.user,
+        currentUser: state.user.currentUser.status[0],
     }
-    //i just imported the  state
 }
 
 const mapDispatchToProps = {
