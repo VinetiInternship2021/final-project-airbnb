@@ -15,6 +15,7 @@ function NewListing({ currentUser }) {
     const redirect = useHistory()
     const [load, setLoad] = useState(false)
     const [imgList, setImgList] = useState([])
+    const [imgsPreview, setImgPreview] = useState([])
     const [form, setForm] = useState({
         title: '',
         propType: 'room',
@@ -24,18 +25,22 @@ function NewListing({ currentUser }) {
         rooms: '',
         guests: '',
         description: '',
-        user_id: currentUser[0].user.id,
+        user_id: currentUser[0]?.user.id,
     })
     useEffect(() => {
-        if (!currentUser[0].user.role) {
+        if (!currentUser[0]?.user.role) {
             redirect.push('/')
             return info('For create property register as hosts')
         } else if (currentUser[0].user.role !== 'host') {
             redirect.push('/find')
             return info('Create property can only hosts')
         }
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentUser])
     const handleGetImage = (e) => {
+        Array.from(e.target.files).forEach((el) => {
+            setImgPreview((prev) => [...prev, URL.createObjectURL(el)])
+        })
         setImgList((prev) => [...prev, ...e.target.files])
     }
 
@@ -62,11 +67,8 @@ function NewListing({ currentUser }) {
             form,
             currentUser[0].token
         ) //create property
-        console.log(newProp)
         const backData = await imgUploadToServer(imgList) //img upload to imgbb
-        console.log(backData)
         const filtered = requestFilter(backData) // filler imgbb data only urls
-        console.log(filtered)
         await uploadImgRails(
             'img_lists',
             filtered,
@@ -194,7 +196,7 @@ function NewListing({ currentUser }) {
             </form>
 
             <Preview
-                imgList={imgList}
+                imgList={imgsPreview}
                 title={form.title}
                 price={form.price}
                 propType={form.propType}

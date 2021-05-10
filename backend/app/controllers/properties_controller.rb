@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
  before_action :set_property, only:  [:show, :update, :destroy]
-  before_action :authorized,   only:  [:show, :update, :destroy,:create]
+  # before_action :authorized,   only:  [:show, :update, :destroy,:create]
 
   # GET /properties
   def index
@@ -58,6 +58,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:title, :propType, :address, :price, :beds, :rooms, :guests, :description, :user_id)
+      params.require(:property).permit(:title, :propType, :address, :latitude, :longitude,:price, :beds, :rooms, :guests, :description, :user_id)
     end
 end

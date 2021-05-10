@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { createUser } from './../../redux/actions'
 import { connect } from 'react-redux'
 import { reqCreate } from './../../../api/api'
+import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
 import { success } from '../../../notification/notiication'
-function SignIn({ myUser }) {
+function SignIn({ myUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
     const [form, setForm] = useState({
@@ -14,7 +15,7 @@ function SignIn({ myUser }) {
         password: '',
     })
 
-    function handleInputChange(e) {        
+    function handleInputChange(e) {
         setForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -24,7 +25,17 @@ function SignIn({ myUser }) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
-        createUser(user)  //add in redux store 
+        if (!user.user.isActive) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Your account deactivated by admins!',
+                footer: `<a href=''>Write a message to support</a>`,
+            })
+            return setLoad((prev) => !prev)
+        }
+
+        createUser(user) //add in redux store
         redirect.push('/results') //React Router redirect
         setLoad((prev) => !prev)
         success('Log in ') //notification
