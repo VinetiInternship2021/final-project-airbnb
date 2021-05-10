@@ -5,7 +5,6 @@ class ImgListsController < ApplicationController
   # GET /img_lists
   def index
     @img_lists = ImgList.all
-
     render json: @img_lists
   end
 

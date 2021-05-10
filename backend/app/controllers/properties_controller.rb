@@ -8,6 +8,19 @@ class PropertiesController < ApplicationController
     render json: @properties
   end
 
+# ----------------------
+  def activeProperties  
+    @property = Property.where(user_id: User.where(isActive: true))
+    render json: @property 
+  end
+
+  def search    
+      @property = Property.joins(:user)
+      .where("users.isActive = ? AND guests = ? AND title LIKE ?", true, params[:guests],"%#{params[:title]}%")
+      render json: @property
+  end
+#-----------------------
+
   # GET /properties/1
   def show
     render json: @property
