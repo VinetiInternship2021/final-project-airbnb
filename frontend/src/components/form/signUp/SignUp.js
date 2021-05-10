@@ -62,7 +62,7 @@ function SignUp({ createUser, currentUser }) {
     }
     useEffect(() => {
         console.log(currentUser, 'currentUser')
-        if (!currentUser) {
+        if (currentUser) {
             redirect.push('/')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
