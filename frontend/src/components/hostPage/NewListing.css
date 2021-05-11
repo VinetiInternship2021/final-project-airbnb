@@ -1,5 +1,5 @@
 .listingForm {
-    width: 50vw;
+    /* width: 50vw; */
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -15,4 +15,18 @@
 select {
     width: 100%;
     margin-top: 10px;
+}
+.preview {
+    padding: 20px;
+    margin-left: 40px;
+    /* border: solid black 2px; */
+}
+.previewImg {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.miniImg {
+    display: inline-block;
 }
