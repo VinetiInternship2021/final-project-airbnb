@@ -7,13 +7,7 @@ import ModalPop from './Modal'
 
 const MyApartmentCard = ({ data, currentUser }) => {
     let { title, id, guests, beds, description, rooms, img_lists } = data
-    const [urlImg, setUrlImg] = useState([])
 
-    useEffect(() => {
-        img_lists = img_lists.map((el) => (el = el.imgUrl))
-        setUrlImg(img_lists)
-        console.log(urlImg)
-    }, [data])
     const deleteProperty = () => {
         Swal.fire({
             title: 'Are you sure?',
@@ -35,7 +29,7 @@ const MyApartmentCard = ({ data, currentUser }) => {
             <h5 className="card-title"> {title} </h5>
             <div className="card-body d-flex flex-row">
                 <div className="w-25">
-                    <Slider imgList={urlImg} />
+                    <Slider imgList={img_lists} />
                 </div>
                 <div className="p-2 d-flex flex-column w-50">
                     <span>id: {id}</span>

@@ -20,9 +20,15 @@ const MyApartments = ({ currentUser }) => {
 
     return (
         <div>
-            {data.map((property) => (
-                <MyApartmentCard data={property} key={property.id} />
-            ))}
+            {!data.length ? (
+                <h1 className="text-center">
+                    To see your property please add at least one
+                </h1>
+            ) : (
+                data.map((property) => (
+                    <MyApartmentCard data={property} key={property.id} />
+                ))
+            )}
         </div>
     )
 }
