@@ -12,8 +12,15 @@ class Property < ApplicationRecord
   validates :description, presence: true, length: { minimum: 8, maximum: 256 }
 
   belongs_to :user
+  belongs_to :order
   has_many :img_lists
 end
-
+[
+   {
+     
+   }
+]
 # command to create a new property
 # User.last.property.create!(title: 'wonderful place', propType: 'room', address: 'Yerevan, Armenia', price: '500',  currency: 'USD', beds: 2, rooms: 3, guests: 4, description: 'The best place to stay in Yerevan, blah blah blah')
+
+
