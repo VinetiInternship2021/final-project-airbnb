@@ -13,16 +13,20 @@ const list = [
 ]
 
 const MyApartmentCard = ({ data }) => {
-    const { title, id, guests, beds, description, rooms, img_lists } = data
-    const [ulImg, setUrlImg] = useState()
+    let { title, id, guests, beds, description, rooms, img_lists } = data
+    const [urlImg, setUrlImg] = useState([])
     const deleteApartment = () => {}
-    useEffect(() => {}, [data])
+    useEffect(() => {
+        img_lists = img_lists.map((el) => (el = el.imgUrl))
+        setUrlImg(img_lists)
+        console.log(urlImg)
+    }, [data])
     return (
         <div className="card">
             <h5 className="card-title"> {title} </h5>
             <div className="card-body d-flex flex-row">
                 <div className="w-25">
-                    <Slider imgList={img_lists} />
+                    <Slider imgList={urlImg} />
                 </div>
                 <div className="p-2 d-flex flex-column w-50">
                     <span>id: {id}</span>

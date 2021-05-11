@@ -20,6 +20,7 @@ function NewListing({ currentUser }) {
         title: '',
         propType: 'room',
         address: '',
+        currency: 'usd',
         price: '',
         beds: '',
         rooms: '',
@@ -100,8 +101,8 @@ function NewListing({ currentUser }) {
                         className="form-select"
                         aria-label="Default select example"
                     >
-                        <option value="Apartment"> Apartment</option>
-                        <option selected value="Room">
+                        <option value="apartment"> Apartment</option>
+                        <option selected value="room">
                             Room
                         </option>
                     </select>
@@ -165,6 +166,19 @@ function NewListing({ currentUser }) {
                             placeholder="Guests"
                         />
                         <label htmlFor="floatingInput">Guests</label>
+                    </div>
+                    <div className="form-floating mb-1  w-100">
+                        <textarea
+                            onChange={handleFormaChange}
+                            min="8"
+                            max="256"
+                            type="text"
+                            id="description"
+                            name="description"
+                            className="form-control "
+                            placeholder="description"
+                        />
+                        <label htmlFor="description">Description</label>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="formFileSm" className="form-label">

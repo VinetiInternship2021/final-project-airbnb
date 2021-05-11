@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/create_property', to: 'properties#create'
   get '/activeProperties', to: 'properties#activeProperties'
   get '/search', to: 'properties#search'
+  get '/myPropertyies', to: 'properties#myPropertyies'
 
   resource :users, only: [:create]
   put '/updateStatus',to: 'users#updateStatus' #update status users

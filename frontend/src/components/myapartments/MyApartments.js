@@ -4,23 +4,21 @@ import { reqRed } from '../../api/api'
 import MyApartmentCard from './MyApartmentCard'
 
 const MyApartments = (props) => {
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await reqRed('properties')
-            setData(data)
-            console.log(data)
+        async function req() {
+            const result = await reqRed('myPropertyies?id=95')
+            setData(result)
         }
-        fetchData()
+        req()
     }, [])
 
     return (
         <div>
-            {data &&
-                data.map((property) => (
-                    <MyApartmentCard data={property} key={property.id} />
-                ))}
+            {data.map((property) => (
+                <MyApartmentCard data={property} key={property.id} />
+            ))}
         </div>
     )
 }

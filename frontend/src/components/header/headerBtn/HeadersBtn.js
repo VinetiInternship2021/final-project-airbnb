@@ -49,7 +49,7 @@ const HeadersBtn = ({ currentUser, createUser }) => {
                 <Link
                     className="btn btn-success reg"
                     type="submit"
-                    to="/sign_in"
+                    to="/my_apartments"
                 >
                     My Apartments
                 </Link>
