@@ -62,7 +62,7 @@ function SignUp({ createUser, currentUser }) {
     }
 
     if (currentUser) {
-        redirect.push('/')
+        redirect.push('/results')
     }
 
     return (

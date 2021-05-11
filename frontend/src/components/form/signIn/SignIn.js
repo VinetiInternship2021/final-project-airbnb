@@ -46,8 +46,8 @@ function SignIn({ currentUser, createUser }) {
         success('Log in ') //notification
     }
 
-    if (!currentUser) {
-        redirect.push('/')
+    if (currentUser) {
+        redirect.push('/results')
     }
 
     return (

@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
 import { reqUpdate } from '../../api/api'
-import { error, success } from '../../notification/notiication'
+import { error } from '../../notification/notiication'
 
 const ModalPop = ({ buttonLabel, className, openModal, data, currentUser }) => {
     const [form, setForm] = useState(data)
