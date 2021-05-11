@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { createUser } from './../../redux/actions'
 import { connect } from 'react-redux'
 import { reqCreate } from './../../../api/api'
@@ -46,13 +46,10 @@ function SignIn({ currentUser, createUser }) {
         success('Log in ') //notification
     }
 
-    useEffect(() => {
-        console.log(currentUser, 'currentUser')
-        if (!currentUser) {
-            redirect.push('/')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser])
+    if (!currentUser) {
+        redirect.push('/')
+    }
+
     return (
         <div className="signIncontainer">
             <div className="siginForm">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { createUser } from '../../redux/actions'
@@ -13,9 +13,7 @@ const HeadersBtn = ({ currentUser, createUser }) => {
         redirect.push('/')
         success('Log out')
     }
-    useEffect(() => {
-        console.log()
-    }, [])
+
     if (!currentUser.status.length || !currentUser.status[0]) {
         return (
             <>

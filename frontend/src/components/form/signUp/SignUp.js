@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createUser } from './../../redux/actions'
 import { error, success } from './../../../notification/notiication'
@@ -60,13 +60,11 @@ function SignUp({ createUser, currentUser }) {
         success('Account successfully created ') //alert
         redirect.push('/results')
     }
-    useEffect(() => {
-        console.log(currentUser, 'currentUser')
-        if (currentUser) {
-            redirect.push('/')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser])
+
+    if (currentUser) {
+        redirect.push('/')
+    }
+
     return (
         <div>
             <form onSubmit={setUser}>

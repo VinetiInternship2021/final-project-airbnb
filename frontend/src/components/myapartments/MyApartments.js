@@ -7,7 +7,6 @@ const MyApartments = ({ currentUser }) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        console.log(currentUser.token)
         async function req() {
             const result = await reqGetToken(
                 `myPropertyies?id=${currentUser.user.id}`,

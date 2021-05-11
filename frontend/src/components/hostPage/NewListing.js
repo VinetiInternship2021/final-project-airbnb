@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
@@ -28,16 +28,15 @@ function NewListing({ currentUser }) {
         description: '',
         user_id: currentUser[0]?.user.id,
     })
-    useEffect(() => {
-        if (!currentUser[0]?.user.role) {
-            redirect.push('/')
-            return info('For create property register as hosts')
-        } else if (currentUser[0].user.role !== 'host') {
-            redirect.push('/find')
-            return info('Create property can only hosts')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser])
+
+    if (!currentUser[0]?.user.role) {
+        redirect.push('/')
+        return info('For create property register as hosts')
+    } else if (currentUser[0].user.role !== 'host') {
+        redirect.push('/find')
+        return info('Create property can only hosts')
+    }
+
     const handleGetImage = (e) => {
         Array.from(e.target.files).forEach((el) => {
             setImgPreview((prev) => [...prev, URL.createObjectURL(el)])
