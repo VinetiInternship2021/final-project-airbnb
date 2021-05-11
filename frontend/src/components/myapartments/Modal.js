@@ -2,18 +2,11 @@ import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
+import { reqUpdate } from '../../api/api'
+import { error, success } from '../../notification/notiication'
 
-const ModalPop = ({ buttonLabel, className, openModal }) => {
-    const [form, setForm] = useState({
-        title: 'Good home in yerevan',
-        id: 45,
-        propType: 'room',
-        address: 'Lav tun yerevanum',
-        guests: 8,
-        beds: 7,
-        rooms: 1,
-        description: 'God home in yerevan Best place ever',
-    })
+const ModalPop = ({ buttonLabel, className, openModal, data, currentUser }) => {
+    const [form, setForm] = useState(data)
     const [modal, setModal] = useState(openModal)
     const toggle = () => setModal(!modal)
 
@@ -23,6 +16,7 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
             [e.target.name]: e.target.value,
         }))
     }
+
     const updateProperty = () => {
         Swal.fire({
             title: 'Do you want to save the changes?',
@@ -30,8 +24,18 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
             showCancelButton: true,
             confirmButtonText: `Save`,
             denyButtonText: `Don't save`,
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
+                const update = await reqUpdate(
+                    `properties/${data.id}`,
+                    form,
+                    currentUser.token
+                )
+                if (!update.id) {
+                    return Object.entries(update).forEach((msg) => {
+                        error(msg[0] + msg[1])
+                    })
+                }
                 toggle()
                 Swal.fire('Saved!', '', 'success')
             } else if (result.isDenied) {
@@ -63,17 +67,18 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label for="Property">Property type</label>
-                        <input
+                        <select
                             onChange={handleChangeFrom}
                             name="propType"
                             value={form.propType}
-                            type="text"
-                            className="form-control"
-                            id="Property"
-                            aria-describedby="emailHelp"
-                            placeholder="Address"
-                        />
+                            className="form-select"
+                            aria-label="Default select example"
+                        >
+                            <option value="apartment"> Apartment</option>
+                            <option selected value="room">
+                                Room
+                            </option>
+                        </select>
                     </div>
                     <div className="form-group">
                         <label for="Address">Address</label>
@@ -85,7 +90,7 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
                             className="form-control"
                             id="Address"
                             aria-describedby="emailHelp"
-                            placeholder="Title"
+                            placeholder="Address"
                         />
                     </div>
                     <div className="form-group">
@@ -94,7 +99,9 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
                             onChange={handleChangeFrom}
                             name="beds"
                             value={form.beds}
-                            type="text"
+                            type="number"
+                            min="1"
+                            max="10"
                             className="form-control"
                             id="Beds"
                             aria-describedby="emailHelp"
@@ -107,7 +114,9 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
                             onChange={handleChangeFrom}
                             name="rooms"
                             value={form.rooms}
-                            type="text"
+                            type="number"
+                            min="1"
+                            max="10"
                             className="form-control"
                             id="Rooms"
                             aria-describedby="emailHelp"
@@ -120,7 +129,9 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
                             onChange={handleChangeFrom}
                             name="guests"
                             value={form.guests}
-                            type="text"
+                            type="number"
+                            min="1"
+                            max="10"
                             className="form-control"
                             id="Guests"
                             aria-describedby="emailHelp"
@@ -154,7 +165,11 @@ const ModalPop = ({ buttonLabel, className, openModal }) => {
     )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser.status[0],
+    }
+}
 
 const mapDispatchToProps = {}
 

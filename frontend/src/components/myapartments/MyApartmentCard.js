@@ -3,15 +3,6 @@ import { connect } from 'react-redux'
 import Slider from '../slider/Slider'
 import ModalPop from './Modal'
 
-const list = [
-    {
-        src: 'https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg',
-    },
-    {
-        src: 'https://storage.googleapis.com/static-content-hc/sites/default/files/cataloina_porto_doble_balcon2_2.jpg',
-    },
-]
-
 const MyApartmentCard = ({ data }) => {
     let { title, id, guests, beds, description, rooms, img_lists } = data
     const [urlImg, setUrlImg] = useState([])
@@ -39,7 +30,7 @@ const MyApartmentCard = ({ data }) => {
                     </p>
 
                     <div className="d-flex flex-row">
-                        <ModalPop buttonLabel="Edit" />
+                        <ModalPop buttonLabel="Edit" data={data} />
                         <button
                             onClick={deleteApartment}
                             className="btn btn-danger"

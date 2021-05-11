@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { reqRed } from '../../api/api'
+import { reqGetToken } from '../../api/api'
 import MyApartmentCard from './MyApartmentCard'
 
-const MyApartments = (props) => {
+const MyApartments = ({ currentUser }) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
+        console.log(currentUser.token)
         async function req() {
-            const result = await reqRed('myPropertyies?id=95')
+            const result = await reqGetToken(
+                `myPropertyies?id=${currentUser.user.id}`,
+                currentUser.token
+            )
             setData(result)
         }
         req()
@@ -23,7 +27,11 @@ const MyApartments = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser.status[0],
+    }
+}
 
 const mapDispatchToProps = {}
 
