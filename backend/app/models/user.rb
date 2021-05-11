@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+
   validates :email, presence: true,
                     format: { with: /\A(.+)@(.+)\z/ },
                     uniqueness: { case_sensitive: true },
@@ -11,4 +12,5 @@ class User < ApplicationRecord
 
   has_many :property
   has_secure_password
+
 end

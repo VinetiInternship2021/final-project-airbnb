@@ -21,19 +21,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_224346) do
     t.index ["property_id"], name: "index_img_lists_on_property_id"
   end
 
-ActiveRecord::Schema.define(version: 2021_05_06_065631) do
-
-  create_table "orders", force: :cascade do |t|
-    t.integer "guest_id", null: false
-    t.integer "host_id", null: false
-    t.integer "property_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["guest_id"], name: "index_orders_on_guest_id"
-    t.index ["host_id"], name: "index_orders_on_host_id"
-    t.index ["property_id"], name: "index_orders_on_property_id"
-  end
-
   create_table "properties", force: :cascade do |t|
     t.string "title"
     t.string "propType"
@@ -46,7 +33,6 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-
     t.string "currency"
     t.string "latitude"
     t.string "longitude"
@@ -65,8 +51,5 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
   end
 
   add_foreign_key "img_lists", "properties"
-  add_foreign_key "orders", "guests"
-  add_foreign_key "orders", "hosts"
-  add_foreign_key "orders", "properties"
   add_foreign_key "properties", "users"
 end
