@@ -10,6 +10,7 @@ import Cards from './../card/Card'
 import Find from './../find/Find'
 import AdminForm from '../form/adminForm/AdminForm'
 import UsersList from '../usersList/UsersList'
+import MyApartments from '../myapartments/MyApartments'
 
 export default function Application() {
     return (
@@ -32,6 +33,9 @@ export default function Application() {
                 <Route exact path="/results">
                     <Find />
                     <Cards />
+                </Route>
+                <Route exact path="/my_apartments">
+                    <MyApartments />
                 </Route>
                 <Route exact path="/admin">
                     <AdminForm />

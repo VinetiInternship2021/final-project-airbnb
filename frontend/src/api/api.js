@@ -20,32 +20,36 @@ async function reqCreate(path, data) {
 }
 
 //request | update current data
-async function reqUpdate(path) {
+async function reqUpdate(path, data, token) {
     return await fetch(`${request}${path}`, {
         method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
     }).then((response) => response.json())
 }
 
 //request | delete current data
-async function reqDelete(path, id) {
+async function reqDelete(path, id, token) {
     return await fetch(`${request}${path}/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
         },
     })
 }
 
-// async function reqGetToken(path,token){
-//     return await fetch(request + path, {
-//         method: 'POST', // or 'PUT'
-//         headers: {
-//             Authorization: `Bearer ${token}`,
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(data),
-//     }).then((response) => response.json())
-// }
+async function reqGetToken(path, token) {
+    return await fetch(request + path, {
+        method: 'GET', // or 'PUT'
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((response) => response.json())
+}
 
 async function reqCreateToken(path, data, token) {
     return await fetch(request + path, {
@@ -102,5 +106,6 @@ export {
     imgUploadToServer,
     uploadImgRails,
     reqCreateToken,
+    reqGetToken,
     request,
 }

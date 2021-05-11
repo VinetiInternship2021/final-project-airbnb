@@ -7,17 +7,6 @@ import { Provider } from 'react-redux'
 import { store, persistor } from './components/redux/configPersist'
 import { PersistGate } from 'redux-persist/integration/react'
 
-// import { compose, createStore } from 'redux'
-// import { rootReducer } from './components/redux/rootReducer'
-
-// const store = createStore(
-//     rootReducer,
-//     compose(
-//         window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//             window.__REDUX_DEVTOOLS_EXTENSION__()
-//     )
-// )
-
 const application = (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

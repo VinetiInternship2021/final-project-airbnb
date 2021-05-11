@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
     before_action :authorized, only: [:auto_login]
 
-    def index      
+    def index
       @user = User.all
-
       render json: @user
     end
     
@@ -12,6 +11,8 @@ class UsersController < ApplicationController
       @users = User.where(id: listid).update(isActive: params[:status])
       render json: @users 
     end 
+   
+
   # REGISTER
   def create
       @user = User.create(user_params)
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
         token = encode_token({user_id: @user.id})
         render json: {user: @user, token: token}
       else
-        render json: {error: "Invalid username or password"}
+        render json: @user.errors
       end    
   end
 
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}
     else
-      render json: {error: "Invalid username or password"}
+      render json: @user.errors
     end
   end
 

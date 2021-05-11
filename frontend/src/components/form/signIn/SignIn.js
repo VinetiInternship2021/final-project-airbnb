@@ -6,8 +6,8 @@ import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
-import { success } from '../../../notification/notiication'
-function SignIn({ myUser, createUser }) {
+import { error, success } from '../../../notification/notiication'
+function SignIn({ currentUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
     const [form, setForm] = useState({
@@ -34,12 +34,22 @@ function SignIn({ myUser, createUser }) {
             })
             return setLoad((prev) => !prev)
         }
-
+        if (!user.user) {
+            setLoad((prev) => !prev)
+            return Object.values(user).forEach((msg) => {
+                error(msg)
+            })
+        }
         createUser(user) //add in redux store
         redirect.push('/results') //React Router redirect
         setLoad((prev) => !prev)
         success('Log in ') //notification
     }
+
+    if (currentUser) {
+        redirect.push('/results')
+    }
+
     return (
         <div className="signIncontainer">
             <div className="siginForm">
@@ -114,9 +124,8 @@ function SignIn({ myUser, createUser }) {
 }
 const mapStateToProps = (state) => {
     return {
-        myUser: state.user,
+        currentUser: state.user.currentUser.status[0],
     }
-    //i just imported the  state
 }
 
 const mapDispatchToProps = {

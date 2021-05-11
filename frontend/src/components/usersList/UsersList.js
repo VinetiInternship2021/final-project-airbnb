@@ -10,11 +10,12 @@ function UsersList({ currentUser, usersId, clearIds }) {
     const redirect = useHistory()
     const [updateList, setUpdateList] = useState(false)
     const [users, setUsers] = useState([])
+    if (currentUser.user.role !== 'admin') {
+        info("You haven't permission in this page")
+        redirect.push('/results')
+    }
+
     useEffect(() => {
-        if (currentUser.user.role !== 'admin') {
-            info("You haven't permission in this page")
-            return redirect.push('/results')
-        }
         clearIds()
         reqRed('/userLists').then((e) => {
             setUsers(() => e)

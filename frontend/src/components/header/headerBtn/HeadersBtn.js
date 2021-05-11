@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { createUser } from '../../redux/actions'
@@ -14,10 +14,6 @@ const HeadersBtn = ({ currentUser, createUser }) => {
         success('Log out')
     }
 
-    useEffect(() => {
-        console.log()
-    }, [])
-    // return <button onClick={logOut}>asdasd</button>
     if (!currentUser.status.length || !currentUser.status[0]) {
         return (
             <>
@@ -51,7 +47,7 @@ const HeadersBtn = ({ currentUser, createUser }) => {
                 <Link
                     className="btn btn-success reg"
                     type="submit"
-                    to="/sign_in"
+                    to="/my_apartments"
                 >
                     My Apartments
                 </Link>
