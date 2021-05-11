@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { reqDelete } from './../../api/api'
+import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import ModalPop from './Modal'
 
-const MyApartmentCard = ({ data }) => {
+const MyApartmentCard = ({ data, currentUser }) => {
     let { title, id, guests, beds, description, rooms, img_lists } = data
     const [urlImg, setUrlImg] = useState([])
-    const deleteApartment = () => {}
+
     useEffect(() => {
         img_lists = img_lists.map((el) => (el = el.imgUrl))
         setUrlImg(img_lists)
         console.log(urlImg)
     }, [data])
+    const deleteProperty = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await reqDelete('properties', id, currentUser.token)
+                Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
+            }
+        })
+    }
     return (
         <div className="card">
             <h5 className="card-title"> {title} </h5>
@@ -32,7 +50,7 @@ const MyApartmentCard = ({ data }) => {
                     <div className="d-flex flex-row">
                         <ModalPop buttonLabel="Edit" data={data} />
                         <button
-                            onClick={deleteApartment}
+                            onClick={deleteProperty}
                             className="btn btn-danger"
                         >
                             Delete
@@ -44,7 +62,11 @@ const MyApartmentCard = ({ data }) => {
     )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser.status[0],
+    }
+}
 
 const mapDispatchToProps = {}
 

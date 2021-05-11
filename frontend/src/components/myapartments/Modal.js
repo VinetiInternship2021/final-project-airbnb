@@ -42,7 +42,6 @@ const ModalPop = ({ buttonLabel, className, openModal, data, currentUser }) => {
                 Swal.fire('Changes are not saved', '', 'info')
             }
         })
-        console.log(form)
     }
 
     return (

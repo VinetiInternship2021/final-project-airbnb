@@ -32,11 +32,12 @@ async function reqUpdate(path, data, token) {
 }
 
 //request | delete current data
-async function reqDelete(path, id) {
+async function reqDelete(path, id, token) {
     return await fetch(`${request}${path}/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
         },
     })
 }
