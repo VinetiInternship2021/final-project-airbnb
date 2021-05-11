@@ -12,8 +12,11 @@ class Property < ApplicationRecord
   validates :description, presence: true, length: { minimum: 8, maximum: 256 }
 
   belongs_to :user
-  has_many :img_lists
+
   has_many :order
+
+  has_many :img_lists
+
 end
 
 # command to create a new property
