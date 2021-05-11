@@ -1,9 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  property: one
   user: one
+  property: one
+  priceNight: 1
+  totalAmount: 1
+  start_date: 2021-05-11
+  end_date: 2021-05-11
 
 two:
-  property: two
   user: two
+  property: two
+  priceNight: 1
+  totalAmount: 1
+  start_date: 2021-05-11
+  end_date: 2021-05-11
+

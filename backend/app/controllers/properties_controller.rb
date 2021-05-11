@@ -19,6 +19,10 @@ class PropertiesController < ApplicationController
       .where("users.isActive = ? AND guests = ? AND title LIKE ?", true, params[:guests],"%#{params[:title]}%")
       render json: @property
   end
+  def myPropertyies
+    @property = Property.where(user_id: params[:id])
+    render json: @property
+  end
 #-----------------------
 
   # GET /properties/1
