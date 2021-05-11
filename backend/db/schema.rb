@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_065631) do
+ActiveRecord::Schema.define(version: 2021_05_11_171557) do
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -18,6 +18,19 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_img_lists_on_property_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "property_id", null: false
+    t.integer "priceNight"
+    t.integer "totalAmount"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_orders_on_property_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -32,9 +45,9 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "currency"
     t.string "latitude"
     t.string "longitude"
-    t.string "currency"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
@@ -50,5 +63,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_065631) do
   end
 
   add_foreign_key "img_lists", "properties"
+  add_foreign_key "orders", "properties"
+  add_foreign_key "orders", "users"
   add_foreign_key "properties", "users"
 end

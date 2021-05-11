@@ -13,7 +13,10 @@ class Property < ApplicationRecord
 
   belongs_to :user
   has_many :img_lists
+  has_many :order
 end
 
 # command to create a new property
 # User.last.property.create!(title: 'wonderful place', propType: 'room', address: 'Yerevan, Armenia', price: '500',  currency: 'USD', beds: 2, rooms: 3, guests: 4, description: 'The best place to stay in Yerevan, blah blah blah')
+
+

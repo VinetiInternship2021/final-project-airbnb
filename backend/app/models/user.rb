@@ -13,5 +13,7 @@ class User < ApplicationRecord
   validates :role,  presence: true, inclusion: { in: %w[host reg], message: "Role should be two types ` host or reg"}
 
   has_many :property
+  has_many :order
   has_secure_password
+  
 end
