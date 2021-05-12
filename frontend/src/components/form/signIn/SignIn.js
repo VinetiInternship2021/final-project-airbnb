@@ -37,6 +37,7 @@ function SignIn({ currentUser, createUser }) {
         if (!user.user) {
             setLoad((prev) => !prev)
             return Object.values(user).forEach((msg) => {
+                //error handle
                 error(msg)
             })
         }

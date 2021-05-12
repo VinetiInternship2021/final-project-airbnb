@@ -1,4 +1,5 @@
 import {
+    ADD_OWN_DATE,
     APPEND_USERS_ID,
     CLEAR_USERS_ID,
     CREATE_USER,
@@ -36,5 +37,11 @@ export function localUploader(list) {
     return {
         type: UPLOAD_LOCAL_IMG,
         payload: list,
+    }
+}
+export function ownDatePicker({ start_date, end_date, duration }) {
+    return {
+        type: ADD_OWN_DATE,
+        payload: { start_date, end_date, duration },
     }
 }

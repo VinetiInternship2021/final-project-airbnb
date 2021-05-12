@@ -3,9 +3,11 @@ import 'react-dates/lib/css/_datepicker.css'
 import { DateRangePicker } from 'react-dates'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
+import { ownDatePicker } from './../redux/actions'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class DatePicker extends Component {
+class DatePicker extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -44,3 +46,9 @@ export default class DatePicker extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+    ownDatePicker,
+}
+
+export default connect(null, mapDispatchToProps)(DatePicker)
