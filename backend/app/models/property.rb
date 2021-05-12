@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Property < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 8, maximum: 25 }
+  validates :title, presence: true, length: { minimum: 8, maximum: 45 }
   validates :propType, presence: true, inclusion: { in: %w[room apartment] }
   validates :address, presence: true, length: { minimum: 8, maximum: 128 }
   validates :price, presence: true, numericality: { in: 1..3000 }
-  validates :currency, presence: true, inclusion: { in: %w[USD] }
+  # validates :currency, presence: true, inclusion: { in: %w[USD] }
   validates :beds, presence: true, numericality: { in: 1..10 }
   validates :rooms, presence: true, numericality: { in: 1..10 }
   validates :guests, presence: true, numericality: { in: 1..10 }

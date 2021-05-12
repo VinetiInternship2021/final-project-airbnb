@@ -19,6 +19,9 @@ const MyApartmentCard = ({ data, currentUser }) => {
             confirmButtonText: 'Yes, delete it!',
         }).then(async (result) => {
             if (result.isConfirmed) {
+                img_lists.forEach(async ({ id }) => {
+                    await reqDelete('img_lists', id, currentUser.token)
+                })
                 await reqDelete('properties', id, currentUser.token)
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
             }
