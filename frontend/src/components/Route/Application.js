@@ -32,7 +32,6 @@ export default function Application() {
                 </Route>
                 <Route exact path="/results">
                     <Find />
-                    <Cards />
                 </Route>
                 <Route exact path="/my_apartments">
                     <MyApartments />

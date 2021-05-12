@@ -1,6 +1,7 @@
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
+import Card from './../card/Card'
 
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
@@ -14,6 +15,7 @@ import { info } from '../../notification/notiication'
 import { reqGetToken } from '../../api/api'
 
 function Find({ datePicker, currentUser }) {
+    const [results, setResults] = useState([])
     const [form, setFrom] = useState({
         title: '',
         guests: 1,
@@ -28,6 +30,7 @@ function Find({ datePicker, currentUser }) {
 
         const url = `search?guests=${form.guests}&title=${form.title}&start=${form.start_date}&end=${form.end_date}`
         const property = await reqGetToken(url, currentUser.token)
+        setResults(() => property)
         console.log(property)
     }
     const changeSearchData = (e) => {
@@ -38,26 +41,27 @@ function Find({ datePicker, currentUser }) {
     }
 
     return (
-        <div className="findFormContainer mt-2">
-            <div className="findForm ">
-                <input
-                    onChange={changeSearchData}
-                    value={form.title}
-                    name="title"
-                    placeholder="Find anything"
-                    id="name"
-                />
-                <DatePicker />
-                <input
-                    type="number"
-                    placeholder="Guests"
-                    name="guests"
-                    value={form.guests}
-                    onChange={changeSearchData}
-                    min="1"
-                    max="10"
-                />
-                {/* <OverlayTrigger
+        <div>
+            <div className="findFormContainer mt-2">
+                <div className="findForm ">
+                    <input
+                        onChange={changeSearchData}
+                        value={form.title}
+                        name="title"
+                        placeholder="Find anything"
+                        id="name"
+                    />
+                    <DatePicker />
+                    <input
+                        type="number"
+                        placeholder="Guests"
+                        name="guests"
+                        value={form.guests}
+                        onChange={changeSearchData}
+                        min="1"
+                        max="10"
+                    />
+                    {/* <OverlayTrigger
                     trigger="click"
                     key={'bottom'}
                     placement={'bottom'}
@@ -78,15 +82,25 @@ function Find({ datePicker, currentUser }) {
                     </button>
                 </OverlayTrigger> */}
 
-                <button className="btn btn-danger findBtn" onClick={filter}>
-                    <svg
-                        width="30"
-                        height="30"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <image href={searchIcon} height="30" width="30" />
-                    </svg>
-                </button>
+                    <button className="btn btn-danger findBtn" onClick={filter}>
+                        <svg
+                            width="30"
+                            height="30"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <image href={searchIcon} height="30" width="30" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div>
+                {!results.length ? (
+                    <h1 className="text-center">No result </h1>
+                ) : (
+                    results.map((el) => {
+                        return <Card data={el} key={el.id} />
+                    })
+                )}
             </div>
         </div>
     )
