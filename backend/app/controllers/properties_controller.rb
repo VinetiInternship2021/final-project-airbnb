@@ -23,7 +23,11 @@ class PropertiesController < ApplicationController
                             true,
                             params[:guests],
                             "%#{params[:title]}%",
-                           ).where(order: Order.where.not('start_date <= ? AND end_date >= ?', dateStart, dateEnd))
+                           ).where(order: 
+                                Order.where.not('
+                                  start_date BETWEEN ?AND ?
+                                  AND end_date BETWEEN ? AND ?', 
+                                  dateStart,dateEnd,dateStart,dateEnd))
       render json: @property
   end
 
