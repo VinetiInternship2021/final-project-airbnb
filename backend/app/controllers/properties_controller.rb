@@ -15,6 +15,7 @@ class PropertiesController < ApplicationController
   end
 
   def search    
+       # empty order with includes i think ;) //  AND start_date NOT NULL  
        # syntax example http://localhost:3000/search?guests=1&title=yerevan&start=2021-05-12&end=2021-05-13
        dateStart = params[:start]
        dateEnd = params[:end]
@@ -24,10 +25,12 @@ class PropertiesController < ApplicationController
                             params[:guests],
                             "%#{params[:title]}%",
                            ).where(order: 
-                                Order.where.not('
-                                  start_date BETWEEN ?AND ?
-                                  AND end_date BETWEEN ? AND ?', 
-                                  dateStart,dateEnd,dateStart,dateEnd))
+                                Order.where.not(
+                                  'start_date BETWEEN ?AND ?
+                                  AND end_date BETWEEN ? AND ?                                                               
+                                 ', 
+                                  dateStart,dateEnd,dateStart,dateEnd)
+                                )
       render json: @property
   end
 

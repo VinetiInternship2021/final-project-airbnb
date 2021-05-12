@@ -19,8 +19,16 @@ class DatePicker extends Component {
         const { ownDatePicker } = this.props
         this.setState(() => ({ startDate, endDate }))
         const datePicker = {
-            start_date: startDate?._d.toLocaleDateString(),
-            end_date: endDate?._d.toLocaleDateString(),
+            start_date: startDate?._d
+                .toLocaleDateString()
+                .split('/')
+                .reverse()
+                .join('-'),
+            end_date: endDate?._d
+                .toLocaleDateString()
+                .split('/')
+                .reverse()
+                .join('-'),
             duration:
                 (new Date(endDate?._d.toLocaleDateString()) -
                     new Date(startDate?._d.toLocaleDateString())) /

@@ -20,7 +20,7 @@ function NewListing({ currentUser }) {
         title: '',
         propType: 'room',
         address: '',
-        currency: 'usd',
+        // currency: 'usd',
         price: '',
         beds: '',
         rooms: '',
