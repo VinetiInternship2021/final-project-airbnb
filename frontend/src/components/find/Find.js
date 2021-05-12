@@ -10,52 +10,53 @@ import DatePicker from './DatePicker'
 import searchIcon from './search.svg'
 import './find.css'
 import { connect } from 'react-redux'
+import { info } from '../../notification/notiication'
 
 function Find({ datePicker }) {
     const filter = (e) => {
         e.preventDefault()
-        console.log(datePicker)
+        if (!datePicker.start_date || !datePicker.end_date) {
+            info('Please choose correct date')
+        }
     }
 
     return (
         <div className="findFormContainer mt-2">
-            <form onSubmit={filter}>
-                <div className="findForm ">
-                    <input placeholder="Location" id="name" />
-                    <DatePicker />
+            <div className="findForm ">
+                <input placeholder="Location" id="name" />
+                <DatePicker />
 
-                    <OverlayTrigger
-                        trigger="click"
-                        key={'bottom'}
-                        placement={'bottom'}
-                        overlay={
-                            <Popover id={`popover-positioned-bottom'`}>
-                                <Popover.Content>
-                                    <div>
-                                        <Count name="Adults" />
-                                        <Count name="Children" />
-                                        <Count name="Infants" />
-                                    </div>
-                                </Popover.Content>
-                            </Popover>
-                        }
-                    >
-                        <button className="btn btn-outline-secondary hover-btn-outline-secondary">
-                            Guests
-                        </button>
-                    </OverlayTrigger>
-
-                    <button className="btn btn-danger findBtn">
-                        <svg
-                            width="30"
-                            height="30"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <image href={searchIcon} height="30" width="30" />
-                        </svg>
+                <OverlayTrigger
+                    trigger="click"
+                    key={'bottom'}
+                    placement={'bottom'}
+                    overlay={
+                        <Popover id={`popover-positioned-bottom'`}>
+                            <Popover.Content>
+                                <div>
+                                    <Count name="Adults" />
+                                    <Count name="Children" />
+                                    <Count name="Infants" />
+                                </div>
+                            </Popover.Content>
+                        </Popover>
+                    }
+                >
+                    <button className="btn btn-outline-secondary hover-btn-outline-secondary">
+                        Guests
                     </button>
-                </div>
-            </form>
+                </OverlayTrigger>
+
+                <button className="btn btn-danger findBtn" onClick={filter}>
+                    <svg
+                        width="30"
+                        height="30"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <image href={searchIcon} height="30" width="30" />
+                    </svg>
+                </button>
+            </div>
         </div>
     )
 }

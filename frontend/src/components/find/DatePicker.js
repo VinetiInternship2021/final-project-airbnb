@@ -28,7 +28,6 @@ class DatePicker extends Component {
         }
         ownDatePicker(datePicker) //redux
     }
-
     render() {
         return (
             <div>
