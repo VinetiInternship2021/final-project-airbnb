@@ -9,13 +9,12 @@ import React, { useState } from 'react'
 import DatePicker from './DatePicker'
 import searchIcon from './search.svg'
 import './find.css'
+import { connect } from 'react-redux'
 
-function Find() {
-    const [pickerDate, setPickerDate] = useState()
-
+function Find({ datePicker }) {
     const filter = (e) => {
         e.preventDefault()
-        console.log(pickerDate)
+        console.log(datePicker)
     }
 
     return (
@@ -23,7 +22,7 @@ function Find() {
             <form onSubmit={filter}>
                 <div className="findForm ">
                     <input placeholder="Location" id="name" />
-                    <DatePicker datePicker={setPickerDate} />
+                    <DatePicker />
 
                     <OverlayTrigger
                         trigger="click"
@@ -95,4 +94,11 @@ function Count(props) {
     )
 }
 
-export default Find
+const mapDispatchToProps = {}
+const mapStateToProps = (state) => {
+    return {
+        datePicker: state.user.datePicker,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Find)
