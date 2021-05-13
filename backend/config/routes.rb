@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :orders
   get '/searchOrder', to: 'orders#searchOrder'
+  get '/userOrders', to: 'orders#userOrders'
 
 
   resources :properties

@@ -11,6 +11,7 @@ import Find from './../find/Find'
 import AdminForm from '../form/adminForm/AdminForm'
 import UsersList from '../usersList/UsersList'
 import MyApartments from '../myapartments/MyApartments'
+import OrderList from '../OrderList/OrderList'
 
 export default function Application() {
     return (
@@ -41,6 +42,9 @@ export default function Application() {
                 </Route>
                 <Route exact path="/users">
                     <UsersList />
+                </Route>
+                <Route exact path="/order_list">
+                    <OrderList />
                 </Route>
             </div>
         </>
