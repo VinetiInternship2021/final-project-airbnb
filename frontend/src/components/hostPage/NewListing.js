@@ -7,7 +7,7 @@ import {
     uploadImgRails,
 } from './../../api/api'
 import Spinner from 'react-bootstrap/Spinner'
-import { info, success } from './../../notification/notiication'
+import { error, info, success } from './../../notification/notiication'
 
 import './NewListing.css'
 import Preview from './Preview'
@@ -67,6 +67,12 @@ function NewListing({ currentUser }) {
             form,
             currentUser[0].token
         ) //create property
+        if (!newProp.id) {
+            Object.entries(newProp).forEach((msg) => {
+                error(msg[0] + ' ' + msg[1].join(' '))
+            })
+            return setLoad((prev) => !prev)
+        }
         const backData = await imgUploadToServer(imgList) //img upload to imgbb
         const filtered = requestFilter(backData) // filler imgbb data only urls
         await uploadImgRails(

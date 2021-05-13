@@ -37,8 +37,7 @@ function SignIn({ currentUser, createUser }) {
         if (!user.user) {
             setLoad((prev) => !prev)
             return Object.values(user).forEach((msg) => {
-                //error handle
-                error(msg)
+                error(msg[0] + ' ' + msg[1].join(' '))
             })
         }
         createUser(user) //add in redux store

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { reqDelete } from './../../api/api'
 import Swal from 'sweetalert2'
@@ -6,6 +6,7 @@ import Slider from '../slider/Slider'
 import ModalPop from './Modal'
 
 const MyApartmentCard = ({ data, currentUser }) => {
+    const [load, setLoad] = useState(true)
     let { title, id, guests, beds, description, rooms, img_lists } = data
 
     const deleteProperty = () => {
@@ -16,9 +17,14 @@ const MyApartmentCard = ({ data, currentUser }) => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
+            confirmButtonText: `${load ? 'Yes, delete it!' : 'Loading...'}`,
         }).then(async (result) => {
             if (result.isConfirmed) {
+                setLoad((prev) => !prev)
+                img_lists.forEach(async ({ id }) => {
+                    await reqDelete('img_lists', id, currentUser.token)
+                })
+                setLoad((prev) => !prev)
                 await reqDelete('properties', id, currentUser.token)
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
             }

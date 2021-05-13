@@ -51,7 +51,7 @@ function SignUp({ createUser, currentUser }) {
         const user = await reqCreate('users', form)
         if (!user.user) {
             Object.entries(user).forEach((msg) => {
-                error(msg[0] + msg[1])
+                error(msg[0] + ' ' + msg[1].join(' '))
             })
             return setLoad((prev) => !prev)
         }
