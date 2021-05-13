@@ -38,7 +38,12 @@ class DatePicker extends Component {
     }
     render() {
         return (
-            <div>
+            <div  
+                  style={{
+                    position: 'relative',
+                    'z-index': '15',
+                }}
+                          >
                 <DateRangePicker
                     startDate={this.state.startDate}
                     startDateId="your_unique_start_date_id"
