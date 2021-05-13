@@ -24,10 +24,10 @@ class PropertiesController < ApplicationController
                             true,
                             params[:guests],
                             "%#{params[:title]}%",
-                           ).where(order: 
-                                Order.where.not(
-                                  'start_date BETWEEN ?AND ?
-                                  AND end_date BETWEEN ? AND ?                                                               
+                           ).where.not(order: 
+                                Order.where(
+                                  'start_date BETWEEN ? AND ?
+                                  OR end_date BETWEEN ? AND ?                     
                                  ', 
                                   dateStart,dateEnd,dateStart,dateEnd)
                                 )
