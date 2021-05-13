@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :img_lists
+  
+  resources :orders
+  get '/searchOrder', to: 'orders#searchOrder'
+
 
   resources :properties
   post '/create_property', to: 'properties#create'

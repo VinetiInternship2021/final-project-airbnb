@@ -15,10 +15,27 @@ class PropertiesController < ApplicationController
   end
 
   def search    
-      @property = Property.joins(:user)
-      .where("users.isActive = ? AND guests = ? AND title LIKE ?", true, params[:guests],"%#{params[:title]}%")
+       # empty order with includes i think ;) //  AND start_date NOT NULL  
+       # syntax example http://localhost:3000/search?guests=1&title=yerevan&start=2021-05-12&end=2021-05-13
+       dateStart = params[:start]
+       dateEnd = params[:end]
+       @property = Property.joins(:user)
+                           .where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
+                            true,
+                            params[:guests],
+                            "%#{params[:title]}%",
+                           ).where.not(order: 
+                                Order.where(
+                                  'start_date BETWEEN ? AND ?
+                                  OR end_date BETWEEN ? AND ?                     
+                                 ', 
+                                  dateStart,dateEnd,dateStart,dateEnd)
+                                )
       render json: @property
   end
+
+
+
   def myPropertyies
     @property = Property.where(user_id: params[:id])
     render json: @property

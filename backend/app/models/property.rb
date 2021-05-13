@@ -56,4 +56,5 @@ class Property < ApplicationRecord
     if Property.all.count < 12
         self.import_record()
     end
+
 end

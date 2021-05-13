@@ -1,4 +1,5 @@
 import {
+    ADD_OWN_DATE,
     APPEND_USERS_ID,
     CLEAR_USERS_ID,
     CREATE_USER,
@@ -12,6 +13,11 @@ const initialState = {
     },
     usersID: [],
     localImgList: [],
+    datePicker: {
+        start_date: new Date(),
+        end_date: new Date(),
+        duration: 0,
+    },
 }
 
 export const currentUserReducer = (state = initialState, action) => {
@@ -40,6 +46,11 @@ export const currentUserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersID: [],
+            }
+        case ADD_OWN_DATE:
+            return {
+                ...state,
+                datePicker: action.payload,
             }
         default:
             return state
