@@ -13,6 +13,14 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  def searchOrder
+    #date format 2021-05-13
+    #url syntax http://localhost:3000/searchOrder?start=2021-05-15&end=2021-05-16
+    dateStart = params[:start]
+    dateEnd = params[:end]
+    @orders  =  Order.where.not('start_date <= ? AND end_date >= ?', dateStart, dateEnd) 
+    render json: @orders
+  end
   # POST /orders
   def create
     @order = Order.new(order_params)
@@ -23,6 +31,7 @@ class OrdersController < ApplicationController
       render json: @order.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /orders/1
   def update
