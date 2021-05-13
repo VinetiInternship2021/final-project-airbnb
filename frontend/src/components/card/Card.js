@@ -4,7 +4,7 @@ import Slider from '../slider/Slider'
 export default function Cards({ data }) {
     return (
         <>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} className="cardPos">
                 <Slider imgList={data?.img_lists} />
                 <br />
                 <Card.Body>
@@ -12,6 +12,7 @@ export default function Cards({ data }) {
                     <Card.Text>
                         <b>Guests | </b>
                         <span>{data.guests}</span>
+                        <br />
                         <b>Day Price | </b>
                         <span>{data.price}</span>
                     </Card.Text>

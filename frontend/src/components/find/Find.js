@@ -61,26 +61,6 @@ function Find({ datePicker, currentUser }) {
                         min="1"
                         max="10"
                     />
-                    {/* <OverlayTrigger
-                    trigger="click"
-                    key={'bottom'}
-                    placement={'bottom'}
-                    overlay={
-                        <Popover id={`popover-positioned-bottom'`}>
-                            <Popover.Content>
-                                <div>
-                                    <Count name="Adults" />
-                                    <Count name="Children" />
-                                    <Count name="Infants" />
-                                </div>
-                            </Popover.Content>
-                        </Popover>
-                    }
-                >
-                    <button className="btn btn-outline-secondary hover-btn-outline-secondary">
-                        Guests
-                    </button>
-                </OverlayTrigger> */}
 
                     <button className="btn btn-danger findBtn" onClick={filter}>
                         <svg
@@ -93,9 +73,11 @@ function Find({ datePicker, currentUser }) {
                     </button>
                 </div>
             </div>
-            <div>
+            <div className="d-flex flex-wrap">
                 {!results.length ? (
-                    <h1 className="text-center">No result </h1>
+                    <div className="w-100">
+                        <h1 className="text-center">No result </h1>
+                    </div>
                 ) : (
                     results.map((el) => {
                         return <Card data={el} key={el.id} />
