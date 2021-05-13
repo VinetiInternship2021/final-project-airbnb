@@ -2,27 +2,28 @@
 require 'csv'
 
 class Property < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 8, maximum: 128 }
-  validates :propType, presence: true, inclusion: { in: %w[room apartment] }
-  validates :address, presence: true, length: { minimum: 8, maximum: 128 }
-  validates :price, presence: true, numericality: { in: 1..3000 }
-  validates :currency, presence: true, inclusion: { in: %w[USD] }
-  validates :beds, presence: true, numericality: { in: 1..10 }
-  validates :rooms, presence: true, numericality: { in: 1..10 }
-  validates :guests, presence: true, numericality: { in: 1..10 }
-  validates :description, presence: true, length: { minimum: 8 }
+    validates :title, presence: true, length: { minimum: 8, maximum: 128 }
+    validates :propType, presence: true, inclusion: { in: %w[room apartment] }
+    validates :address, presence: true, length: { minimum: 8, maximum: 128 }
+    validates :price, presence: true, numericality: { in: 1..3000 }
+    validates :currency, presence: true, inclusion: { in: %w[USD] }
+    validates :beds, presence: true, numericality: { in: 1..10 }
+    validates :rooms, presence: true, numericality: { in: 1..10 }
+    validates :guests, presence: true, numericality: { in: 1..10 }
+    validates :description, presence: true, length: { minimum: 8 }
 
-  belongs_to :user
-  has_many :order
-  has_many :img_lists
+    belongs_to :user
+    has_many :order
+    has_many :img_lists
 
-  @propertiesFilePath = 'app/CSVs/properties.csv'
+    @propertiesFilePath = 'app/CSVs/properties.csv'
+    @imagesFilePath = 'app/CSVs/images.csv'
 
     private
     def self.import_record
         puts '::::::::::::::::::::::::::inserting prroperties::::::::::::::::::::::::::'
         properties = array_of_properties
-        Property.create!(properties)
+        Property.create(properties)
         puts '::::::::::::::::::::::::::::::inserted::::::::::::::::::::::::::'
     end
 
@@ -43,7 +44,7 @@ class Property < ApplicationRecord
             propType: record[2],
             price: record[3],
             user_id: User.find_by(email: record[4]).id,
-            # img_url: RECORD[5],
+
             address: 'Bali, Indonesia',
             beds: 1,
             rooms: 2,
@@ -58,8 +59,3 @@ class Property < ApplicationRecord
         self.import_record()
     end
 end
-
-# command to create a new property
-# User.last.property.create!(title: 'wonderful place', propType: 'room', address: 'Yerevan, Armenia', price: '500',  currency: 'USD', beds: 2, rooms: 3, guests: 4, description: 'The best place to stay in Yerevan, blah blah blah')
-
-
