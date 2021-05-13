@@ -1,6 +1,6 @@
 class ImgListsController < ApplicationController
   before_action :set_img_list, only: [:show, :update, :destroy]
-  before_action :authorized,   only: [:show, :update, :destroy,:create]
+  # before_action :authorized,   only: [:show, :update, :destroy,:create]
 
   # GET /img_lists
   def index
