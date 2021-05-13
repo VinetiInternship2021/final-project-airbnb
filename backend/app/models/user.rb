@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
     private
     def self.import_record
-        puts '::::::::::::::::::::::::::importing users::::::::::::::::::::::::::'
+        puts '::::::::::::::::::::::::::inserting users::::::::::::::::::::::::::'
         users = array_of_regulars + array_of_hosts
         User.create(users)
         puts '::::::::::::::::::::::::::::::inserted::::::::::::::::::::::::::'

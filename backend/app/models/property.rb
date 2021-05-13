@@ -17,11 +17,10 @@ class Property < ApplicationRecord
     has_many :img_lists
 
     @propertiesFilePath = 'app/CSVs/properties.csv'
-    @imagesFilePath = 'app/CSVs/images.csv'
 
     private
     def self.import_record
-        puts '::::::::::::::::::::::::::inserting prroperties::::::::::::::::::::::::::'
+        puts '::::::::::::::::::::::::::inserting properties::::::::::::::::::::::::::'
         properties = array_of_properties
         Property.create(properties)
         puts '::::::::::::::::::::::::::::::inserted::::::::::::::::::::::::::'
@@ -44,7 +43,6 @@ class Property < ApplicationRecord
             propType: record[2],
             price: record[3],
             user_id: User.find_by(email: record[4]).id,
-
             address: 'Bali, Indonesia',
             beds: 1,
             rooms: 2,
