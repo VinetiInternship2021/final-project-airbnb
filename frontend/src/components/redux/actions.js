@@ -1,5 +1,6 @@
 import {
     ADD_OWN_DATE,
+    ADD_PROPERTY_INFO,
     APPEND_USERS_ID,
     CLEAR_USERS_ID,
     CREATE_USER,
@@ -43,5 +44,12 @@ export function ownDatePicker({ start_date, end_date, duration }) {
     return {
         type: ADD_OWN_DATE,
         payload: { start_date, end_date, duration },
+    }
+}
+
+export function propertyData(data) {
+    return {
+        type: ADD_PROPERTY_INFO,
+        payload: data,
     }
 }
