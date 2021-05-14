@@ -13,6 +13,10 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  def userOrders
+    @orders  = Order.where(user_id: User.where(id:params[:id]))
+    render json: @orders
+  end
   def searchOrder
     #date format 2021-05-13
     #url syntax http://localhost:3000/searchOrder?start=2021-05-15&end=2021-05-16
