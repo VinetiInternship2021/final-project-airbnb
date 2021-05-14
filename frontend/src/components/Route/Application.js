@@ -6,12 +6,11 @@ import SignUp from '../form/signUp/SignUp'
 import HomePage from '../HomePage/HomePage'
 import Header from '../header/Header'
 import NewListing from './../hostPage/NewListing'
-import Cards from './../card/Card'
 import Find from './../find/Find'
 import AdminForm from '../form/adminForm/AdminForm'
 import UsersList from '../usersList/UsersList'
 import MyApartments from '../myapartments/MyApartments'
-import OrderList from '../OrderList/OrderList'
+import Order from '../order/Order'
 
 export default function Application() {
     return (
@@ -43,8 +42,8 @@ export default function Application() {
                 <Route exact path="/users">
                     <UsersList />
                 </Route>
-                <Route exact path="/order_list">
-                    <OrderList />
+                <Route exact path="/order">
+                    <Order />
                 </Route>
             </div>
         </>
