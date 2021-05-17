@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './homepage.css'
 import Nearby from './nearby/Nearby'
 export default function HomePage() {
@@ -15,9 +16,12 @@ export default function HomePage() {
                         <span>Wishlists curated by Airbnbnbnb</span>
                         <br />
                         <br />
-                        <a className="btn btn-success getStart" href="/results">
+                        <Link
+                            className="btn btn-success getStart"
+                            to="/results"
+                        >
                             Get Start
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

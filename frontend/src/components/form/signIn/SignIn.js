@@ -25,6 +25,16 @@ function SignIn({ currentUser, createUser }) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
+        if (user.errors) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Can't find account in this email address!`,
+                footer: `<a href='/singup'>Create new account </a>`,
+            })
+
+            return setLoad((prev) => !prev)
+        }
         if (!user.user.isActive) {
             Swal.fire({
                 icon: 'error',

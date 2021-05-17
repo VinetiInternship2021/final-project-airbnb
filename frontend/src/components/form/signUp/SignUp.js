@@ -71,6 +71,7 @@ function SignUp({ createUser, currentUser }) {
                 <div className="sign_up_container">
                     <div className="sign_up_form">
                         <br />
+                        <h1 className="text-center">Sign Up</h1>
                         <div className="radio_btn">
                             <label
                                 className="form-check-label"
