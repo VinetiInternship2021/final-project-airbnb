@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { reqCreate } from './../../../api/api'
 import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
-import './signIn.css'
+import './signin.css'
 import { useHistory } from 'react-router'
 import { error, success } from '../../../notification/notification'
 function SignIn({ currentUser, createUser }) {
