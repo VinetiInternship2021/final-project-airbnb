@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router'
 import { clearIds } from './../redux/actions'
 import { reqRed, reqUpdate } from '../../api/api'
-import { info } from '../../notification/notiication'
+import { info } from '../../notification/notification'
 import UserCard from './UserCard'
 
 function UsersList({ currentUser, usersId, clearIds }) {
@@ -20,6 +20,7 @@ function UsersList({ currentUser, usersId, clearIds }) {
         reqRed('/userLists').then((e) => {
             setUsers(() => e)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateList])
 
     const changeStatus = async (e) => {
@@ -43,7 +44,7 @@ function UsersList({ currentUser, usersId, clearIds }) {
                 name="false"
                 className="btn btn-danger mt-2"
             >
-                Change InActive
+                Change In-Active
             </button>
             {users.map((el) => {
                 return <UserCard users={el} key={el[0]} />

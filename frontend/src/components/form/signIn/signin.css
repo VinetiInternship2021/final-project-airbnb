@@ -1,17 +1,17 @@
-.siginForm {
+.sigInForm {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     width: 400px;
 }
-.siginForm > form > input {
+.sigInForm > form > input {
     margin-bottom: 10px;
 }
-.siginForm > form {
+.sigInForm > form {
     width: 350px;
 }
-.signIncontainer {
+.signInContainer {
     display: flex;
     justify-content: center;
 }

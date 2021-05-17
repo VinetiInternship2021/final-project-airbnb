@@ -3,7 +3,6 @@ import withAutoplay from 'react-awesome-slider/dist/autoplay'
 import 'react-awesome-slider/dist/styles.css'
 
 const AutoplaySlider = withAutoplay(AwesomeSlider)
-
 export default function Slider({ imgList }) {
     if (!imgList) return null
     return (

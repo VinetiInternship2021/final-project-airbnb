@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { reqCreate } from './../../../api/api'
 import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
-import './signin.css'
+import './signIn.css'
 import { useHistory } from 'react-router'
-import { error, success } from '../../../notification/notiication'
+import { error, success } from '../../../notification/notification'
 function SignIn({ currentUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
@@ -51,29 +51,10 @@ function SignIn({ currentUser, createUser }) {
     }
 
     return (
-        <div className="signIncontainer">
-            <div className="siginForm">
+        <div className="signInContainer">
+            <div className="sigInForm">
                 <form onSubmit={loginUser}>
-                    <div className="radio_btn">
-                        <label htmlFor="regular">Regular user</label>
-                        <input
-                            defaultChecked="true"
-                            onChange={handleInputChange}
-                            type="radio"
-                            value="reg"
-                            name="role"
-                            id="regular"
-                        />
-                        <label htmlFor="host">Host user</label>
-                        <input
-                            onChange={handleInputChange}
-                            type="radio"
-                            value="host"
-                            name="role"
-                            id="host"
-                        />
-                    </div>
-
+                    <h1 className="text-center">Sign in </h1>
                     <div className="form-floating mb-3 mt-2">
                         <input
                             data-cy="email"
@@ -104,7 +85,7 @@ function SignIn({ currentUser, createUser }) {
                     </div>
 
                     <button
-                        data-cy="saignin"
+                        data-cy="signIn"
                         className="btn btn-danger w-100 signBtn"
                     >
                         {load ? (

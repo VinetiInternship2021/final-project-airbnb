@@ -1,5 +1,5 @@
 import React from 'react'
-import NerbyName from './NerbyName'
+import NearbyName from './NearbyName'
 import { exploreNearby } from './data'
 export default function Nearby() {
     return (
@@ -7,7 +7,7 @@ export default function Nearby() {
             <h1>Explore nearby</h1>
             <div className="exploreNearby">
                 {exploreNearby.map(({ img, duration, location }) => (
-                    <NerbyName
+                    <NearbyName
                         img={img}
                         duration={duration}
                         location={location}

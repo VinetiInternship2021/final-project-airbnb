@@ -1,6 +1,5 @@
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
 import Card from './../card/Card'
 
 import 'react-date-range/dist/styles.css' // main style file
@@ -11,14 +10,14 @@ import DatePicker from './DatePicker'
 import searchIcon from './search.svg'
 import './find.css'
 import { connect } from 'react-redux'
-import { info } from '../../notification/notiication'
+import { info } from '../../notification/notification'
 import { reqGetToken } from '../../api/api'
 
 function Find({ datePicker, currentUser }) {
     const [results, setResults] = useState([])
     const [form, setFrom] = useState({
         title: '',
-        guests: 1,
+        guests: '',
         start_date: datePicker?.start_date,
         end_date: datePicker?.end_date,
     })
@@ -83,40 +82,6 @@ function Find({ datePicker, currentUser }) {
                         return <Card data={el} key={el.id} />
                     })
                 )}
-            </div>
-        </div>
-    )
-}
-
-function Count(props) {
-    const [num, setNum] = useState(0)
-    const increment = () => {
-        if (num < 13) {
-            setNum((prev) => prev + 1)
-        }
-    }
-    const decrement = () => {
-        if (num > 0) {
-            setNum((prev) => prev - 1)
-        }
-    }
-    return (
-        <div className="increment">
-            <span>{props.name}</span>
-            <div className="incButtons">
-                <button
-                    onClick={decrement}
-                    className="btn btn-outline-danger rounded-circle inc"
-                >
-                    -
-                </button>
-                <span>{num}</span>
-                <button
-                    onClick={increment}
-                    className="btn btn-outline-success rounded-circle inc"
-                >
-                    +
-                </button>
             </div>
         </div>
     )

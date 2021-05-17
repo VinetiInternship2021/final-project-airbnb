@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { createUser } from '../../redux/actions'
 
 import { useHistory } from 'react-router-dom'
-import { success } from '../../../notification/notiication'
+import { success } from '../../../notification/notification'
 
 const HeadersBtn = ({ currentUser, createUser }) => {
     const redirect = useHistory()

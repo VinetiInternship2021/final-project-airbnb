@@ -7,7 +7,7 @@ import {
     uploadImgRails,
 } from './../../api/api'
 import Spinner from 'react-bootstrap/Spinner'
-import { error, info, success } from './../../notification/notiication'
+import { error, info, success } from '../../notification/notification'
 
 import './NewListing.css'
 import Preview from './Preview'
