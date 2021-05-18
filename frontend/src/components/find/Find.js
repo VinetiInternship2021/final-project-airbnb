@@ -12,6 +12,7 @@ import './find.css'
 import { connect } from 'react-redux'
 import { info } from '../../notification/notification'
 import { reqGetToken } from '../../api/api'
+import moment from 'moment'
 
 function Find({ datePicker, currentUser }) {
     const [results, setResults] = useState([])
@@ -21,6 +22,7 @@ function Find({ datePicker, currentUser }) {
         start_date: datePicker?.start_date,
         end_date: datePicker?.end_date,
     })
+    const format = 'YYYY-MM-DD'
     const filter = async (e) => {
         e.preventDefault()
         if (!datePicker.start_date || !datePicker.end_date) {
@@ -42,15 +44,22 @@ function Find({ datePicker, currentUser }) {
     return (
         <div>
             <div className="findFormContainer mt-2">
-                <div className="findForm ">
+                <div className="findForm">
                     <input
                         onChange={changeSearchData}
                         value={form.title}
                         name="title"
-                        placeholder="Find anything"
+                        placeholder="Search anything"
                         id="name"
                     />
-                    <DatePicker />
+                    <DatePicker
+                        disabledRanges={[
+                            {
+                                start: moment('2021-05-21', format),
+                                end: moment('2021-05-27', format),
+                            },
+                        ]}
+                    />
                     <input
                         type="number"
                         placeholder="Guests"
@@ -62,13 +71,11 @@ function Find({ datePicker, currentUser }) {
                     />
 
                     <button className="btn btn-danger findBtn" onClick={filter}>
-                        <svg
-                            width="30"
-                            height="30"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <image href={searchIcon} height="30" width="30" />
-                        </svg>
+                        <img
+                            width="20"
+                            src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png"
+                            alt="Can't Upload img"
+                        />
                     </button>
                 </div>
             </div>
@@ -96,3 +103,11 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Find)
+
+// const disabledDates = [
+//     {
+//        start: moment('2021-05-20', format),
+//          end: moment('2021-05-26', format),
+//     },
+//
+//   ]; for example
