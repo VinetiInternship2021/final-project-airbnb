@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_11_171557) do
+ActiveRecord::Schema.define(version: 2021_05_18_184020) do
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(version: 2021_05_11_171557) do
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "score"
+    t.integer "property_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_reviews_on_property_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
@@ -66,4 +78,6 @@ ActiveRecord::Schema.define(version: 2021_05_11_171557) do
   add_foreign_key "orders", "properties"
   add_foreign_key "orders", "users"
   add_foreign_key "properties", "users"
+  add_foreign_key "reviews", "properties"
+  add_foreign_key "reviews", "users"
 end

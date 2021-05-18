@@ -15,6 +15,11 @@ class Property < ApplicationRecord
     belongs_to :user
     has_many :order
     has_many :img_lists
+    has_many :reviews
+
+    def avg_score
+      reviews.average(:score).round(2).to_f
+    end
 
     @propertiesFilePath = 'app/CSVs/properties.csv'
 
