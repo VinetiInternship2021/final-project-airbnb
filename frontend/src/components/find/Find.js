@@ -19,10 +19,9 @@ function Find({ datePicker, currentUser }) {
     const [form, setFrom] = useState({
         title: '',
         guests: '',
-        start_date: datePicker?.start_date,
-        end_date: datePicker?.end_date,
+        ...datePicker,
     })
-    const format = 'YYYY-MM-DD'
+    const format = 'YYYY-DD-MM'
     const filter = async (e) => {
         e.preventDefault()
         if (!datePicker.start_date || !datePicker.end_date) {

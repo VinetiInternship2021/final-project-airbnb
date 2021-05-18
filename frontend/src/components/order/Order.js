@@ -16,6 +16,7 @@ const Order = ({ datePicker, property, currentUser }) => {
             start_date: datePicker.start_date,
             end_date: datePicker.end_date,
         }
+        console.log(data)
         reqCreateToken('orders', data, currentUser.token)
         setLoad((prev) => !prev)
         success('Success')

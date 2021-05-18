@@ -7,8 +7,8 @@ import moment from 'moment'
 
 const { RangePicker } = DatePicker
 
-const DateRange = ({ disabledRanges }) => {
-    const format = 'YYYY-MM-DD'
+const DateRange = ({ disabledRanges, ownDatePicker }) => {
+    const format = 'YYYY-DD-MM'
     const getDate = (date, dateString) => {
         const days =
             (new Date(dateString[1]) - new Date(dateString[0])) /
@@ -20,8 +20,6 @@ const DateRange = ({ disabledRanges }) => {
         }
         ownDatePicker(reduxDATE) //redux
     }
-    const beforeToday = new Date(0).toLocaleDateString()
-
     let disabledDates = [
         ...disabledRanges,
         {
