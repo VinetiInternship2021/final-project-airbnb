@@ -103,11 +103,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Find)
-
-// const disabledDates = [
-//     {
-//        start: moment('2021-05-20', format),
-//          end: moment('2021-05-26', format),
-//     },
-//
-//   ]; for example

@@ -18,9 +18,18 @@ const DateRange = ({ disabledRanges }) => {
             end_date: dateString[1],
             duration: days,
         }
-        ownDatePicker(reduxDATE)
+        ownDatePicker(reduxDATE) //redux
     }
-    let disabledDates = disabledRanges
+    const beforeToday = new Date(0).toLocaleDateString()
+
+    let disabledDates = [
+        ...disabledRanges,
+        {
+            //for disable beforeToday dates
+            start: moment(new Date(0).toLocaleDateString(), format),
+            end: moment(new Date(), format),
+        },
+    ]
     const getDisabledHours = (date, type) => {
         const array = []
         if (date[0]) {
