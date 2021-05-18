@@ -5,6 +5,7 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
 import { ownDatePicker } from './../redux/actions'
 import React, { Component } from 'react'
+import { moment, range } from 'moment'
 import { connect } from 'react-redux'
 
 class DatePicker extends Component {
@@ -28,6 +29,24 @@ class DatePicker extends Component {
         }
         ownDatePicker(datePicker) //redux
     }
+
+    bookings = [{ startDate: '25/05/2021', endDate: '29/05/2021' }]
+    isBlocked = (date) => {
+        let bookedRanges = []
+        let blocked
+        this.bookings.map((booking) => {
+            bookedRanges = [
+                ...bookedRanges,
+                moment().range( 
+                    moment(booking.startDate),
+                    moment(booking.endDate)
+                ),
+            ]
+        })
+        blocked = bookedRanges.find((range) => range.contains(date))
+        return blocked
+    }
+
     render() {
         return (
             <div
@@ -37,6 +56,7 @@ class DatePicker extends Component {
                 }}
             >
                 <DateRangePicker
+                    isDayBlocked={this.isBlocked}
                     startDate={this.state.startDate}
                     startDateId="your_unique_start_date_id"
                     endDate={this.state.endDate} // momentPropTypes.momentObj or null,
