@@ -52,6 +52,7 @@ const error = (msg) => {
         progress: undefined,
     })
 }
+//default messages
 const dflt = (msg) => {
     return toast(`${getEmoji()} ${msg}`, {
         position: 'bottom-right',

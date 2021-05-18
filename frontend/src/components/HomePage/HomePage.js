@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './homepage.css'
 import Nearby from './nearby/Nearby'
-export default function HaomePage() {
+export default function HomePage() {
     return (
         <div>
             <div className="home">
@@ -12,13 +13,15 @@ export default function HaomePage() {
                             Greatest
                             <br /> Outdoors
                         </h1>
-                        <span>Wishlists curated by Airbnb</span>
+                        <span>Wishlists curated by Airbnbnbnb</span>
                         <br />
-
                         <br />
-                        <a className="btn btn-success getStart" href="/find">
+                        <Link
+                            className="btn btn-success getStart"
+                            to="/results"
+                        >
                             Get Start
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import './nrb.css'
 
-export default function NerbyName({ img, location, duration }) {
+export default function NearbyName({ img, location, duration }) {
     return (
         <div style={{ display: 'inline-block' }}>
             <div className="nrb">

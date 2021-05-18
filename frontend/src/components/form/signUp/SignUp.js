@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createUser } from './../../redux/actions'
-import { error, success } from './../../../notification/notiication'
+import { error, success } from '../../../notification/notification'
 import Spinner from 'react-bootstrap/Spinner'
 import { reqCreate } from './../../../api/api'
 import { useHistory } from 'react-router-dom'
@@ -37,7 +37,7 @@ function SignUp({ createUser, currentUser }) {
 
     async function setUser(e) {
         e.preventDefault()
-        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
+        setLoad((prev) => !prev) // bootstrap spinner for btn  turn on
         if (!form.password.length) {
             setLoad((prev) => !prev)
             return error('Password should not be empty')
@@ -56,7 +56,7 @@ function SignUp({ createUser, currentUser }) {
             return setLoad((prev) => !prev)
         }
         createUser(user) //react dispatch CREATE_USER
-        setLoad((prev) => !prev) // boostrap spinner for btn  turn on
+        setLoad((prev) => !prev) // bootstrap spinner for btn  turn on
         success('Account successfully created ') //alert
         redirect.push('/results')
     }
@@ -71,6 +71,7 @@ function SignUp({ createUser, currentUser }) {
                 <div className="sign_up_container">
                     <div className="sign_up_form">
                         <br />
+                        <h1 className="text-center">Sign Up</h1>
                         <div className="radio_btn">
                             <label
                                 className="form-check-label"

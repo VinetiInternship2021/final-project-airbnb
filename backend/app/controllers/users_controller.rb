@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}
     else
-      render json: @user.errors
+      render json: {errors: "Can't find account in this email address"}
     end
   end
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router'
 import { reqGetToken } from '../../api/api'
-import { info } from '../../notification/notiication'
+import { info } from '../../notification/notification'
 
 const OrderCard = ({ currentUser }) => {
     const redirect = useHistory()

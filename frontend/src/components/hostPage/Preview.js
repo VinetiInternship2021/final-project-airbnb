@@ -2,16 +2,8 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 function Preview(props) {
-    const {
-        title,
-        price,
-        address,
-        beds,
-        rooms,
-        guests,
-        propType,
-        imgList,
-    } = props
+    const { title, price, address, beds, rooms, guests, propType, imgList } =
+        props
     const [prevCover, setPrevCover] = useState(
         'https://www.airbnbsecrets.com/wp-content/uploads/2016/12/Airbnb-co-host-1132x670.jpg'
     )
@@ -27,7 +19,7 @@ function Preview(props) {
                     <img
                         className="col-8 shadow-lg"
                         src={prevCover}
-                        alt="chka nkar "
+                        alt="Can't upload img"
                     />
                     <div className="col-8 d-flex justify-content-center">
                         {imgList &&
@@ -50,7 +42,7 @@ function Preview(props) {
                 </div>
                 <div className="row">
                     <div className="col-5">
-                        <p className="h4">Pice </p>
+                        <p className="h4">Price </p>
                         <p className="h4">Address </p>
                         <p className="h4">Property type </p>
                         <p className="h4">Beds </p>

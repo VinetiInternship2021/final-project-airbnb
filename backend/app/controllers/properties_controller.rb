@@ -36,7 +36,7 @@ class PropertiesController < ApplicationController
 
 
 
-  def myPropertyies
+  def myProperties
     @property = Property.where(user_id: params[:id])
     render json: @property
   end

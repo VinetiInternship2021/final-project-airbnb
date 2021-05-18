@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { createUser } from './../../redux/actions'
 import Spinner from 'react-bootstrap/Spinner'
 import { connect } from 'react-redux'
-import { success } from '../../../notification/notiication'
+import { success } from '../../../notification/notification'
 
 function AdminForm({ createUser }) {
     const redirect = useHistory()

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { reqCreateToken } from '../../api/api'
-import { success } from '../../notification/notiication'
+import { success } from '../../notification/notification'
 import Slider from '../slider/Slider'
 
 const Order = ({ datePicker, property, currentUser }) => {

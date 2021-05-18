@@ -1,7 +1,4 @@
-Client-ID 4409588f10776f7
-"email": "MyAdmin@gmail.com",
-"password": "123456"
-
-
-    "email": "superAdmin", //with role is admin
-    "password": "superAdmin"
+ACP address: https://cp.beget.com
+Username: airbnbnbnb
+Password: r2JtqgEj
+Server: elisa

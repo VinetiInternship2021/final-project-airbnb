@@ -9,12 +9,13 @@ const MyApartments = ({ currentUser }) => {
     useEffect(() => {
         async function req() {
             const result = await reqGetToken(
-                `myPropertyies?id=${currentUser.user.id}`,
+                `myProperties?id=${currentUser.user.id}`,
                 currentUser.token
             )
             setData(result)
         }
         req()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
