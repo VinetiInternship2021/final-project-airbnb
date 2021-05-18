@@ -53,6 +53,9 @@ const Order = ({ datePicker, property, currentUser }) => {
                         <li className="list-group-item">
                             Total Price: {datePicker.duration * property.price}$
                         </li>
+                        <li className="list-group-item">
+                            Description: {datePicker.description}$
+                        </li>
                     </ul>
                     <button
                         href="/"

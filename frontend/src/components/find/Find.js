@@ -54,8 +54,8 @@ function Find({ datePicker, currentUser }) {
                     <DatePicker
                         disabledRanges={[
                             {
-                                start: moment('2021-05-21', format),
-                                end: moment('2021-05-27', format),
+                                start: moment('2021-05-22', format),
+                                end: moment('2021-05-26', format),
                             },
                         ]}
                     />
