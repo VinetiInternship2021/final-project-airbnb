@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_184020) do
+ActiveRecord::Schema.define(version: 2021_05_18_191604) do
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_184020) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "score"
+    t.integer "rate"
     t.integer "property_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
