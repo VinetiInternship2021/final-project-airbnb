@@ -6,8 +6,7 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
 
 import React, { useState } from 'react'
-import DatePicker from './../datPicker/DatePicker'
-import searchIcon from './search.svg'
+import DatePicker from './../datPicker/DateRange'
 import './find.css'
 import { connect } from 'react-redux'
 import { info } from '../../notification/notification'

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { ownDatePicker } from './../redux/actions'
+import { ownDatePicker } from '../redux/actions'
 import 'antd/dist/antd.css'
 import { DatePicker } from 'antd'
 import moment from 'moment'
@@ -12,12 +12,14 @@ const format = 'YYYY-DD-MM'
 
 const DateRange = ({ disabledRanges, ownDatePicker }) => {
     const [disabledDates, setDisabledDates] = useState([
+        ...disabledRanges,
         {
             start: moment(new Date(0).toLocaleDateString(), disabled),
             end: moment(new Date(), disabled),
         },
     ])
     const getDate = (date, dateString) => {
+        //first argument from momentJS second correct dates
         const days =
             (new Date(dateString[1]) - new Date(dateString[0])) /
             (24 * 60 * 60 * 1000)
@@ -29,32 +31,20 @@ const DateRange = ({ disabledRanges, ownDatePicker }) => {
         ownDatePicker(reduxDATE) //redux
     }
 
+    //disabled before today and props dates
+
     const getDisabledHours = (date, type) => {
         const array = []
         if (date[0]) {
             if (type === 'start') {
                 disabledDates.forEach((values) => {
                     if (date[0].isSame(values.start, 'day')) {
-                        for (let i = 0; i < values.start.hour(); i += 1) {
+                        for (let i = 0; i <= values.start.hour(); i++) {
                             array.push(i)
                         }
                     }
                     if (date[0].isSame(values.end, 'day')) {
-                        for (let i = 0; i < values.end.hour(); i += 1) {
-                            array.push(i)
-                        }
-                    }
-                })
-            } else {
-                disabledDates.forEach((values) => {
-                    if (date[1].isSame(values.start, 'day')) {
-                        for (let i = values.start.hour(); i < 24; i += 1) {
-                            array.push(i)
-                        }
-                    }
-
-                    if (date[1].isSame(values.end, 'day')) {
-                        for (let i = 0; i < values.end.hour(); i += 1) {
+                        for (let i = 0; i <= values.end.hour(); i++) {
                             array.push(i)
                         }
                     }

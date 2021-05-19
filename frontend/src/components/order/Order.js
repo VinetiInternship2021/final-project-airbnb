@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { reqCreateToken } from '../../api/api'
+import { reqCreateToken, reqRed } from '../../api/api'
 import { success } from '../../notification/notification'
 import Slider from '../slider/Slider'
+import moment from 'moment'
+import DateRange from './../datPicker/DateRange'
 
 const Order = ({ datePicker, property, currentUser }) => {
     const [load, setLoad] = useState(false)
+    const [orderedDates, setOrderedDates] = useState([])
     const order = (e) => {
         setLoad((prev) => !prev)
         const data = {
@@ -16,11 +19,41 @@ const Order = ({ datePicker, property, currentUser }) => {
             start_date: datePicker.start_date,
             end_date: datePicker.end_date,
         }
-        console.log(data)
         reqCreateToken('orders', data, currentUser.token)
         setLoad((prev) => !prev)
         success('Success')
     }
+
+    const disableDates = (start, end) => {
+        //during the disable, these {start,end} are not excluded there
+        //for this we increase and decrease one day
+        const disabled = 'YYYY-MM-DD'
+        let datesObj = {}
+        let day = new Date(start)
+        let prevDay = new Date(day)
+        prevDay.setDate(day.getDate() + 1)
+        let start_day = new Date(end)
+        let nextDay = new Date(start_day)
+        nextDay.setDate(day.getDate() + 1)
+        datesObj.start = moment(prevDay, disabled)
+        datesObj.end = moment(nextDay, disabled)
+        return datesObj
+    }
+
+    useEffect(() => {
+        async function getAllOrderedDates() {
+            const deActiveDates = []
+            let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
+            console.log(datesList)
+            datesList.forEach(([start_date, end_date]) => {
+                if (start_date !== null || start_date !== null) {
+                    deActiveDates.push(disableDates(start_date, end_date))
+                }
+            })
+            setOrderedDates(deActiveDates)
+        }
+        getAllOrderedDates()
+    }, [])
     return (
         <div className="d-flex justify-content-lg-center mt-4">
             <div className="card" style={{ width: '60rem' }}>
@@ -32,6 +65,9 @@ const Order = ({ datePicker, property, currentUser }) => {
                     </h6>
 
                     <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <DateRange disabledRanges={orderedDates} />
+                        </li>
                         <li className="list-group-item">
                             Type : {property.propType}
                         </li>
@@ -54,7 +90,7 @@ const Order = ({ datePicker, property, currentUser }) => {
                             Total Price: {datePicker.duration * property.price}$
                         </li>
                         <li className="list-group-item">
-                            Description: {datePicker.description}$
+                            Description: {datePicker.description}
                         </li>
                     </ul>
                     <button
