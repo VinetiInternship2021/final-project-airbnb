@@ -12,8 +12,8 @@ const format = 'YYYY-DD-MM'
 const DateRange = ({ disabledRanges, ownDatePicker }) => {
     const [disabledDates, setDisabledDates] = useState([
         {
-            start: moment(new Date(0).toLocaleDateString(), disabled),
-            end: moment(new Date().toLocaleDateString(), disabled),
+            start: moment(new Date(0), disabled),
+            end: moment(new Date(), disabled),
         },
     ])
 
@@ -33,7 +33,6 @@ const DateRange = ({ disabledRanges, ownDatePicker }) => {
             duration: days,
         }
         ownDatePicker(reduxDATE) //redux
-        console.log(disabledDates, 'from date picker')
     }
 
     //disabled before today and props dates
@@ -44,12 +43,12 @@ const DateRange = ({ disabledRanges, ownDatePicker }) => {
             if (type === 'start') {
                 disabledDates.forEach((values) => {
                     if (date[0].isSame(values.start, 'day')) {
-                        for (let i = 0; i <= values.start.hour(); i++) {
+                        for (let i = 0; i < values.start.hour(); i++) {
                             array.push(i)
                         }
                     }
                     if (date[0].isSame(values.end, 'day')) {
-                        for (let i = 0; i <= values.end.hour(); i++) {
+                        for (let i = 0; i < values.end.hour(); i++) {
                             array.push(i)
                         }
                     }

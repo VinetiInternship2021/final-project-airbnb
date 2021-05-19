@@ -35,8 +35,6 @@ const Order = ({ datePicker, property, currentUser }) => {
         let start_day = new Date(end)
         let nextDay = new Date(start_day)
         nextDay.setDate(day.getDate() + 1)
-        nextDay = nextDay.toLocaleDateString()
-        prevDay = prevDay.toLocaleDateString()
         datesObj.start = moment(prevDay, disabled)
         datesObj.end = moment(nextDay, disabled)
         return datesObj
