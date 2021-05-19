@@ -9,6 +9,8 @@ import moment from 'moment'
 const { RangePicker } = DatePicker
 const disabled = 'YYYY-MM-DD'
 const format = 'YYYY-DD-MM'
+
+//for disabled before todays dates
 const initialDisable = [
     {
         start: moment(new Date(0), disabled),
@@ -19,7 +21,6 @@ const DateRange = ({ ownDatePicker, orderedDates }) => {
     const [disabledDates, setDisabledDates] = useState(initialDisable)
     useEffect(() => {
         setDisabledDates((prev) => [...prev, ...orderedDates])
-    
     }, [orderedDates])
 
     const getDate = (date, dateString) => {
@@ -32,11 +33,10 @@ const DateRange = ({ ownDatePicker, orderedDates }) => {
             end_date: dateString[1],
             duration: days,
         }
-       
+
         ownDatePicker(reduxDATE) //redux
     }
 
-    //disabled before today and props dates
     const getDisabledHours = (date, type) => {
         const array = []
         if (date[0]) {
