@@ -19,6 +19,7 @@ function Cards({ data, propertyData }) {
                 <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
                     <Card.Text>
+                        <b>{data.id}</b>
                         <b>Guests | </b>
                         <span>{data.guests}</span>
                         <br />

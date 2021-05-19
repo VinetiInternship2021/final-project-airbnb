@@ -61,7 +61,7 @@ export function addOrderedDates(dates) {
         payload: dates,
     }
 }
-export function clearOrderedDates(user) {
+export function clearOrderedDates() {
     return {
         type: CLEAR_ORDERED_DATES,
     }

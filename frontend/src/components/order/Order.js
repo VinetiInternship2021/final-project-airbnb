@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { addOrderedDates, clearOrderedDates } from './../redux/actions'
 import { reqCreateToken, reqRed } from '../../api/api'
-import { success } from '../../notification/notification'
+import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import moment from 'moment'
 import DateRange from './../datPicker/DateRange'
@@ -18,19 +18,41 @@ const Order = (props) => {
     const [load, setLoad] = useState(false)
     const order = (e) => {
         setLoad((prev) => !prev)
-        const data = {
-            user_id: currentUser.user.id,
-            property_id: property.id,
-            priceNight: property.price,
-            totalAmount: datePicker.duration * property.price,
-            start_date: datePicker.start_date,
-            end_date: datePicker.end_date,
-        }
-        reqCreateToken('orders', data, currentUser.token)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Please confirm your order',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Order',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const data = {
+                    user_id: currentUser.user.id,
+                    property_id: property.id,
+                    priceNight: property.price,
+                    totalAmount: datePicker.duration * property.price,
+                    start_date: datePicker.start_date,
+                    end_date: datePicker.end_date,
+                }
+                reqCreateToken('orders', data, currentUser.token)
+                setLoad((prev) => !prev)
+                Swal.fire(
+                    'Order accepted!',
+                    'Your order has been successfully completed.',
+                    'success'
+                )
+            }
+        })
+
         setLoad((prev) => !prev)
-        success('Success')
     }
 
+    const changeFormat = (day) => {
+        const [DD, MM, YYYY] = day.split('/')
+        return YYYY + '-' + MM + '-' + DD
+    }
     const disableDates = (start, end) => {
         //during the disable, these {start,end} are not excluded there
         //for this we increase and decrease one day
@@ -39,11 +61,15 @@ const Order = (props) => {
 
         let day = new Date(start)
         let prevDay = new Date(day)
-        prevDay.setDate(day.getDate() + 1)
+        prevDay.setDate(day.getDate() - 1)
+        prevDay = new Date(prevDay).toLocaleDateString()
+        prevDay = changeFormat(prevDay)
 
         let start_day = new Date(end)
         let nextDay = new Date(start_day)
         nextDay.setDate(day.getDate() + 1)
+        nextDay = new Date(prevDay).toLocaleDateString()
+        nextDay = changeFormat(nextDay)
 
         datesObj.start = moment(prevDay, disabled)
         datesObj.end = moment(nextDay, disabled)
@@ -51,16 +77,16 @@ const Order = (props) => {
     }
 
     useEffect(() => {
+        clearOrderedDates()
         async function getAllOrderedDates() {
-            clearOrderedDates()
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
+            console.log(property.id)
             datesList.forEach(([start_date, end_date]) => {
-                if (start_date !== null || start_date !== null) {
+                if (start_date || end_date) {
                     deActiveDates.push(disableDates(start_date, end_date))
                 }
             })
-            console.log(deActiveDates)
             addOrderedDates(deActiveDates)
         }
         getAllOrderedDates()
@@ -83,7 +109,7 @@ const Order = (props) => {
                             Type : {property.propType}
                         </li>
                         <li className="list-group-item">
-                            Rooms : {property.room}
+                            Rooms : {property.rooms}
                         </li>
                         <li className="list-group-item">
                             Beds : {property.bads}

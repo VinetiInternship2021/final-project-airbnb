@@ -4,8 +4,8 @@ import Card from './../card/Card'
 
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
-
-import React, { useState } from 'react'
+import { clearOrderedDates } from '../redux/actions'
+import React, { useState, useEffect } from 'react'
 import DatePicker from './../datPicker/DateRange'
 import './find.css'
 import { connect } from 'react-redux'
@@ -13,25 +13,28 @@ import { info } from '../../notification/notification'
 import { reqGetToken } from '../../api/api'
 import moment from 'moment'
 
-function Find({ datePicker, currentUser }) {
+function Find({ datePicker, currentUser, clearOrderedDates }) {
     const [results, setResults] = useState([])
     const [form, setFrom] = useState({
         title: '',
         guests: '',
-        ...datePicker,
     })
     const format = 'YYYY-DD-MM'
     const filter = async (e) => {
         e.preventDefault()
+
         if (!datePicker.start_date || !datePicker.end_date) {
-            info('Please choose correct date')
+            return info('Please choose correct date')
         }
 
-        const url = `search?guests=${form.guests}&title=${form.title}&start=${form.start_date}&end=${form.end_date}`
+        const url = `search?guests=${form.guests}&title=${form.title}&start=${datePicker.start_date}&end=${datePicker.end_date}`
         const property = await reqGetToken(url, currentUser.token)
         setResults(() => property)
         console.log(property)
     }
+    useEffect(() => {
+        clearOrderedDates()
+    }, [])
     const changeSearchData = (e) => {
         setFrom((prev) => ({
             ...prev,
@@ -92,7 +95,7 @@ function Find({ datePicker, currentUser }) {
     )
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { clearOrderedDates }
 const mapStateToProps = (state) => {
     return {
         currentUser: state.user.currentUser.status[0],
