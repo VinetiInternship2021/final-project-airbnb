@@ -78,13 +78,13 @@ const Order = (props) => {
         async function getAllOrderedDates() {
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
-            console.log(property.id)
+           
             datesList.forEach(([start_date, end_date]) => {
                 if (start_date || end_date) {
                     deActiveDates.push(disableDates(start_date, end_date))
                 }
             })
-            console.log(deActiveDates)
+           
             addOrderedDates(deActiveDates) //redux
         }
         getAllOrderedDates()
