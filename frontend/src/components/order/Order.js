@@ -15,9 +15,8 @@ const Order = (props) => {
         addOrderedDates,
         clearOrderedDates,
     } = props
-    const [load, setLoad] = useState(false)
+
     const order = (e) => {
-        setLoad((prev) => !prev)
         Swal.fire({
             title: 'Are you sure?',
             text: 'Please confirm your order',
@@ -37,7 +36,6 @@ const Order = (props) => {
                     end_date: datePicker.end_date,
                 }
                 reqCreateToken('orders', data, currentUser.token)
-                setLoad((prev) => !prev)
                 Swal.fire(
                     'Order accepted!',
                     'Your order has been successfully completed.',
@@ -45,8 +43,6 @@ const Order = (props) => {
                 )
             }
         })
-
-        setLoad((prev) => !prev)
     }
 
     const changeFormat = (day) => {
@@ -56,27 +52,24 @@ const Order = (props) => {
     const disableDates = (start, end) => {
         //during the disable, these {start,end} are not excluded there
         //for this we increase and decrease one day
+
         const disabled = 'YYYY-MM-DD'
         let datesObj = {}
 
         let start_day = new Date(start)
         let prevDay = new Date(start_day)
         prevDay.setDate(start_day.getDate() - 1)
-        prevDay = new Date(prevDay).toLocaleDateString()
-        prevDay = changeFormat(prevDay)
-        console.log(prevDay)
+        prevDay = new Date(prevDay)
+        // prevDay = changeFormat(prevDay)
 
         let end_day = new Date(end)
         let nextDay = new Date(end_day)
         nextDay.setDate(end_day.getDate() - 1)
-        nextDay = new Date(nextDay).toLocaleDateString()
-        nextDay = changeFormat(nextDay)
-        console.log(nextDay)
+        nextDay = new Date(nextDay)
+        // nextDay = changeFormat(nextDay)
 
-        nextDay = changeFormat(nextDay)
-
-        datesObj.start = moment(prevDay, disabled)
-        datesObj.end = moment(nextDay, disabled)
+        datesObj.start = moment(new Date(prevDay), disabled)
+        datesObj.end = moment(new Date(nextDay), disabled)
         return datesObj
     }
 
@@ -140,7 +133,7 @@ const Order = (props) => {
                         className="btn btn-danger w-100"
                         onClick={order}
                     >
-                        {!load ? 'Order' : 'Loading...'}
+                        Order
                     </button>
                 </div>
             </div>

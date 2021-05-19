@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { ownDatePicker, clearOrderedDates } from '../redux/actions'
+import { ownDatePicker } from '../redux/actions'
 import 'antd/dist/antd.css'
 import { DatePicker } from 'antd'
 
@@ -15,11 +15,11 @@ const initialDisable = [
         end: moment(new Date(), disabled),
     },
 ]
-const DateRange = ({ ownDatePicker, orderedDates, clearOrderedDates }) => {
+const DateRange = ({ ownDatePicker, orderedDates }) => {
     const [disabledDates, setDisabledDates] = useState(initialDisable)
     useEffect(() => {
         setDisabledDates((prev) => [...prev, ...orderedDates])
-        console.log(disabledDates)
+        console.log(orderedDates)
     }, [orderedDates])
 
     const getDate = (date, dateString) => {
@@ -86,6 +86,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { ownDatePicker, clearOrderedDates }
+const mapDispatchToProps = { ownDatePicker }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateRange)

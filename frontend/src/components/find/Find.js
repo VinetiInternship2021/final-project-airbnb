@@ -13,7 +13,7 @@ import { info } from '../../notification/notification'
 import { reqGetToken } from '../../api/api'
 import moment from 'moment'
 
-function Find({ datePicker, currentUser, clearOrderedDates }) {
+function Find({ datePicker, currentUser, clearOrderedDates, orderedDates }) {
     const [results, setResults] = useState([])
     const [form, setFrom] = useState({
         title: '',
@@ -30,11 +30,11 @@ function Find({ datePicker, currentUser, clearOrderedDates }) {
         const url = `search?guests=${form.guests}&title=${form.title}&start=${datePicker.start_date}&end=${datePicker.end_date}`
         const property = await reqGetToken(url, currentUser.token)
         setResults(() => property)
-        console.log(property)
     }
     useEffect(() => {
         clearOrderedDates()
-    }, [])
+    }, [datePicker])
+    
     const changeSearchData = (e) => {
         setFrom((prev) => ({
             ...prev,
@@ -100,6 +100,7 @@ const mapStateToProps = (state) => {
     return {
         currentUser: state.user.currentUser.status[0],
         datePicker: state.user.datePicker,
+        orderedDates: state.user.orderedDates,
     }
 }
 
