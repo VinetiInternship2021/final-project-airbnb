@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { ownDatePicker } from '../redux/actions'
 import 'antd/dist/antd.css'
@@ -8,16 +8,20 @@ import moment from 'moment'
 const { RangePicker } = DatePicker
 const disabled = 'YYYY-MM-DD'
 const format = 'YYYY-DD-MM'
-// 'YYYY-DD-MM' format for rails
 
 const DateRange = ({ disabledRanges, ownDatePicker }) => {
     const [disabledDates, setDisabledDates] = useState([
-        ...disabledRanges,
         {
             start: moment(new Date(0).toLocaleDateString(), disabled),
-            end: moment(new Date(), disabled),
+            end: moment(new Date().toLocaleDateString(), disabled),
         },
     ])
+
+    useEffect(() => {
+        setDisabledDates((prev) => [...prev, ...disabledRanges])
+        console.log(disabledDates, 'picker')
+    }, [])
+
     const getDate = (date, dateString) => {
         //first argument from momentJS second correct dates
         const days =
@@ -29,6 +33,7 @@ const DateRange = ({ disabledRanges, ownDatePicker }) => {
             duration: days,
         }
         ownDatePicker(reduxDATE) //redux
+        console.log(disabledDates, 'from date picker')
     }
 
     //disabled before today and props dates

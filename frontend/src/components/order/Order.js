@@ -35,6 +35,8 @@ const Order = ({ datePicker, property, currentUser }) => {
         let start_day = new Date(end)
         let nextDay = new Date(start_day)
         nextDay.setDate(day.getDate() + 1)
+        nextDay = nextDay.toLocaleDateString()
+        prevDay = prevDay.toLocaleDateString()
         datesObj.start = moment(prevDay, disabled)
         datesObj.end = moment(nextDay, disabled)
         return datesObj
@@ -44,12 +46,12 @@ const Order = ({ datePicker, property, currentUser }) => {
         async function getAllOrderedDates() {
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
-            console.log(datesList)
             datesList.forEach(([start_date, end_date]) => {
                 if (start_date !== null || start_date !== null) {
                     deActiveDates.push(disableDates(start_date, end_date))
                 }
             })
+            console.log(deActiveDates)
             setOrderedDates(deActiveDates)
         }
         getAllOrderedDates()
@@ -60,7 +62,7 @@ const Order = ({ datePicker, property, currentUser }) => {
                 <Slider imgList={property.img_lists} />
                 <div className="card-body">
                     <h5 className="card-title">{property.title}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
+                    <h6 className="card-subtitle mb-2 text-muted">
                         {property.address}
                     </h6>
 
