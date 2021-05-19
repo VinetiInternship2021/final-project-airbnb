@@ -17,9 +17,9 @@ const initialDisable = [
 ]
 const DateRange = ({ ownDatePicker, orderedDates, clearOrderedDates }) => {
     const [disabledDates, setDisabledDates] = useState(initialDisable)
-
     useEffect(() => {
         setDisabledDates((prev) => [...prev, ...orderedDates])
+        console.log(disabledDates)
     }, [orderedDates])
 
     const getDate = (date, dateString) => {

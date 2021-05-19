@@ -59,16 +59,20 @@ const Order = (props) => {
         const disabled = 'YYYY-MM-DD'
         let datesObj = {}
 
-        let day = new Date(start)
-        let prevDay = new Date(day)
-        prevDay.setDate(day.getDate() - 1)
+        let start_day = new Date(start)
+        let prevDay = new Date(start_day)
+        prevDay.setDate(start_day.getDate() - 1)
         prevDay = new Date(prevDay).toLocaleDateString()
         prevDay = changeFormat(prevDay)
+        console.log(prevDay)
 
-        let start_day = new Date(end)
-        let nextDay = new Date(start_day)
-        nextDay.setDate(day.getDate() + 1)
-        nextDay = new Date(prevDay).toLocaleDateString()
+        let end_day = new Date(end)
+        let nextDay = new Date(end_day)
+        nextDay.setDate(end_day.getDate() - 1)
+        nextDay = new Date(nextDay).toLocaleDateString()
+        nextDay = changeFormat(nextDay)
+        console.log(nextDay)
+
         nextDay = changeFormat(nextDay)
 
         datesObj.start = moment(prevDay, disabled)
@@ -87,7 +91,8 @@ const Order = (props) => {
                     deActiveDates.push(disableDates(start_date, end_date))
                 }
             })
-            addOrderedDates(deActiveDates)
+            console.log(deActiveDates)
+            addOrderedDates(deActiveDates) //redux
         }
         getAllOrderedDates()
     }, [])
