@@ -45,10 +45,7 @@ const Order = (props) => {
         })
     }
 
-    const changeFormat = (day) => {
-        const [DD, MM, YYYY] = day.split('/')
-        return YYYY + '-' + MM + '-' + DD
-    }
+
     const disableDates = (start, end) => {
         //during the disable, these {start,end} are not excluded there
         //for this we increase and decrease one day
@@ -60,13 +57,13 @@ const Order = (props) => {
         let prevDay = new Date(start_day)
         prevDay.setDate(start_day.getDate() - 1)
         prevDay = new Date(prevDay)
-        // prevDay = changeFormat(prevDay)
+     
 
         let end_day = new Date(end)
         let nextDay = new Date(end_day)
         nextDay.setDate(end_day.getDate() - 1)
         nextDay = new Date(nextDay)
-        // nextDay = changeFormat(nextDay)
+     
 
         datesObj.start = moment(new Date(prevDay), disabled)
         datesObj.end = moment(new Date(nextDay), disabled)

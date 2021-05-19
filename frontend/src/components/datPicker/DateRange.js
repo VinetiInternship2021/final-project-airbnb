@@ -19,7 +19,7 @@ const DateRange = ({ ownDatePicker, orderedDates }) => {
     const [disabledDates, setDisabledDates] = useState(initialDisable)
     useEffect(() => {
         setDisabledDates((prev) => [...prev, ...orderedDates])
-        console.log(orderedDates)
+    
     }, [orderedDates])
 
     const getDate = (date, dateString) => {
@@ -32,7 +32,7 @@ const DateRange = ({ ownDatePicker, orderedDates }) => {
             end_date: dateString[1],
             duration: days,
         }
-        console.log(reduxDATE)
+       
         ownDatePicker(reduxDATE) //redux
     }
 
