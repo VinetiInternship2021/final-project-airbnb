@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { addOrderedDates, clearOrderedDates } from './../redux/actions'
 import { reqCreateToken, reqRed } from '../../api/api'
 import { success } from '../../notification/notification'
 import Slider from '../slider/Slider'
 import moment from 'moment'
 import DateRange from './../datPicker/DateRange'
 
-const Order = ({ datePicker, property, currentUser }) => {
+const Order = (props) => {
+    const {
+        datePicker,
+        property,
+        currentUser,
+        addOrderedDates,
+        clearOrderedDates,
+    } = props
     const [load, setLoad] = useState(false)
-    const [orderedDates, setOrderedDates] = useState([])
     const order = (e) => {
         setLoad((prev) => !prev)
         const data = {
@@ -29,12 +36,15 @@ const Order = ({ datePicker, property, currentUser }) => {
         //for this we increase and decrease one day
         const disabled = 'YYYY-MM-DD'
         let datesObj = {}
+
         let day = new Date(start)
         let prevDay = new Date(day)
         prevDay.setDate(day.getDate() + 1)
+
         let start_day = new Date(end)
         let nextDay = new Date(start_day)
         nextDay.setDate(day.getDate() + 1)
+
         datesObj.start = moment(prevDay, disabled)
         datesObj.end = moment(nextDay, disabled)
         return datesObj
@@ -42,6 +52,7 @@ const Order = ({ datePicker, property, currentUser }) => {
 
     useEffect(() => {
         async function getAllOrderedDates() {
+            clearOrderedDates()
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
             datesList.forEach(([start_date, end_date]) => {
@@ -50,7 +61,7 @@ const Order = ({ datePicker, property, currentUser }) => {
                 }
             })
             console.log(deActiveDates)
-            setOrderedDates(deActiveDates)
+            addOrderedDates(deActiveDates)
         }
         getAllOrderedDates()
     }, [])
@@ -66,7 +77,7 @@ const Order = ({ datePicker, property, currentUser }) => {
 
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
-                            <DateRange disabledRanges={orderedDates} />
+                            <DateRange />
                         </li>
                         <li className="list-group-item">
                             Type : {property.propType}
@@ -114,6 +125,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { addOrderedDates, clearOrderedDates }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order)

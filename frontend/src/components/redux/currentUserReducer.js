@@ -2,8 +2,10 @@ import {
     ADD_OWN_DATE,
     ADD_PROPERTY_INFO,
     APPEND_USERS_ID,
+    CLEAR_ORDERED_DATES,
     CLEAR_USERS_ID,
     CREATE_USER,
+    ORDERED_DATES,
     REMOVE_USERS_ID,
     UPLOAD_LOCAL_IMG,
 } from './types'
@@ -14,6 +16,7 @@ const initialState = {
     },
     propID: [],
     usersID: [],
+    orderedDates: [],
     localImgList: [],
     datePicker: {
         start_date: new Date(),
@@ -58,6 +61,16 @@ export const currentUserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 propID: [action.payload],
+            }
+        case ORDERED_DATES:
+            return {
+                ...state,
+                orderedDates: action.payload,
+            }
+        case CLEAR_ORDERED_DATES:
+            return {
+                ...state,
+                orderedDates: [],
             }
         default:
             return state

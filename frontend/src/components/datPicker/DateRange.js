@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ownDatePicker } from '../redux/actions'
 import 'antd/dist/antd.css'
 import { DatePicker } from 'antd'
+
 import moment from 'moment'
 
 const { RangePicker } = DatePicker
@@ -11,16 +12,12 @@ const format = 'YYYY-DD-MM'
 
 const DateRange = ({ disabledRanges, ownDatePicker }) => {
     const [disabledDates, setDisabledDates] = useState([
+        ...disabledRanges,
         {
             start: moment(new Date(0), disabled),
             end: moment(new Date(), disabled),
         },
     ])
-
-    useEffect(() => {
-        setDisabledDates((prev) => [...prev, ...disabledRanges])
-        console.log(disabledDates, 'picker')
-    }, [])
 
     const getDate = (date, dateString) => {
         //first argument from momentJS second correct dates
@@ -36,7 +33,6 @@ const DateRange = ({ disabledRanges, ownDatePicker }) => {
     }
 
     //disabled before today and props dates
-
     const getDisabledHours = (date, type) => {
         const array = []
         if (date[0]) {
