@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { reqCreateToken } from '../../api/api'
 import { success } from '../../notification/notification'
 import Slider from '../slider/Slider'
-import Modal from 'react-bootstrap/Modal'
-import ReactStars from "react-rating-stars-component";
+import Review from '../review/Review'
 
 const Order = ({ datePicker, property, currentUser }) => {
     const [modalShow, setModalShow] = React.useState(false);
@@ -25,58 +24,13 @@ const Order = ({ datePicker, property, currentUser }) => {
         success('Success')
     }
 
-    const Review = (props) => {
-      setLoad((prev) => !prev)
-      // const data = {
-      //     user_id: currentUser.user.id,
-      //     property_id: property.id
-      // }
-      // reqCreateToken('review', data, currentUser.token)
-      
-      const ratingChanged = (newRating) => {
-        console.log(newRating);
-      };
-
-      return (
-        <Modal
-          {...props}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          style={{opacity:1}}
-        >
-          <Modal.Header>
-            <Modal.Title id="contained-modal-title-vcenter">
-            <ReactStars
-              count={5}
-              onChange={ratingChanged}
-              size={24}
-              activeColor="#ffd700"
-            />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Your review's title input here</h4>
-            <p>
-              And descriotion: Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-              consectetur ac, vestibulum at eros.
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={props.onHide}>Submit</button>
-          </Modal.Footer>
-        </Modal>
-      );
-    }
-
     return (
         <div className="d-flex justify-content-lg-center mt-4">
             <div className="card" style={{ width: '60rem' }}>
                 <Slider imgList={property.img_lists} />
                 <div className="card-body">
                     <h5 className="card-title">{property.title}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
+                    <h6 className="card-subtitle mb-2 text-muted">
                         {property.address}
                     </h6>
 
@@ -115,7 +69,7 @@ const Order = ({ datePicker, property, currentUser }) => {
                     </button>
                     <button 
                         href="/"
-                        class="btn btn-success w-50"
+                        className="btn btn-success w-50"
                         onClick={() => setModalShow(true)}
                     >
                         Review
