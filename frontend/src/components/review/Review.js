@@ -6,7 +6,7 @@ import { reqCreateToken } from '../../api/api'
 
 const Review = (props) => {
   const [form, setForm] = useState({
-      rate: 1,
+      rate: -1,
       title: '',
       description: '',
       property_id: props.property.id,
@@ -18,9 +18,8 @@ const Review = (props) => {
         [e.target.name]: e.target.value,
     }))
   }
-  let reviewContent = {}
   const rate = (newRating) => {
-    reviewContent.rate = newRating
+    form.rate = newRating
   }
 
   const addReview = (e) => {
@@ -29,8 +28,22 @@ const Review = (props) => {
         'add-review',
         form,
         props.currentUser.token)
-    .then(res => console.log('~res~', res))
-    .catch(err => alert(err.message))
+    .then((res) => {
+      if(res.id){
+        props.onHide()
+        alert('Thank you for your feedback!')
+      } else {
+        if(res.errors){
+          let errors = ''
+          Object.entries(res.errors).forEach((msg) => {
+            errors += (msg[0] + ' ' + msg[1].join(' ') + '\n') 
+          })
+          alert(errors)
+        } else {
+          alert('Something went wrong')
+        }
+      }
+    })
   }
 
   return (
@@ -55,28 +68,29 @@ const Review = (props) => {
         <form onSubmit={addReview}>
           <label>
             <input
+            required
             name="title"
             placeholder="Title"
-            onChange={handleFormChange}>
+            onChange={handleFormChange}
+            size="90">
             </input>
           </label>
           <br/>
           <br/>
-          <br/>
           <label>
             <textarea
+            required
             name="description"
-            cols="50" rows="7"
+            cols="90" rows="7"
             placeholder="Tell us about your experience in this property."
             onChange={handleFormChange}
             />
           </label>
-          <button onClick={props.onHide}>Submit</button>
+          <button>Submit</button>
         </form>
       </Modal.Body>
-      {/* <Modal.Footer>
-        
-      </Modal.Footer> */}
+      <Modal.Footer>
+      </Modal.Footer>
     </Modal>
   );
 }
