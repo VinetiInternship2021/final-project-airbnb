@@ -4,6 +4,7 @@ import { reqCreateToken } from '../../api/api'
 import { success } from '../../notification/notification'
 import Slider from '../slider/Slider'
 import Review from '../review/Review'
+import PropertyReviews from '../review/PropertyReviews'
 
 const Order = ({ datePicker, property, currentUser }) => {
     const [modalShow, setModalShow] = React.useState(false);
@@ -25,6 +26,7 @@ const Order = ({ datePicker, property, currentUser }) => {
     }
 
     return (
+      <>
         <div className="d-flex justify-content-lg-center mt-4">
             <div className="card" style={{ width: '60rem' }}>
                 <Slider imgList={property.img_lists} />
@@ -80,7 +82,10 @@ const Order = ({ datePicker, property, currentUser }) => {
                     />
                 </div>
             </div>
+
         </div>
+        <PropertyReviews />
+      </>
     )
 }
 

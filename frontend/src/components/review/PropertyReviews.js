@@ -1,0 +1,80 @@
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { reqGetToken } from '../../api/api'
+import StarRatings from 'react-star-ratings';
+
+const PropertyReviews = ({ currentUser, property }) => {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    async function req() {
+      const reviews = await reqGetToken(
+        `thisPropertyReviews?id=${property.id}`,
+        currentUser.token
+      )
+      setData(reviews)
+    }
+    req()
+  }, [])
+
+  return (
+
+
+    <div className="d-flex justify-content-lg-center mt-4">
+      <div className="container" style={{ width: '60rem' }}>
+        <div className="row">
+          {!data.length ?(
+            <h1>There are no reviews, be the first!</h1>
+            ) : (
+            data.map((review) => (
+              <div className="card" style={{ width: '29.5rem', marginBottom: "1rem", padding: 0, marginLeft: review.id % 2 === 0 ? "1rem" : 0 }}>
+                <div className="card-img-top d-flex align-items-center bg-light">
+                  <div>
+                    <img
+                    src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png"
+                    alt="avatar"
+                    style={{width: "5rem", borderRadius: "50%", margin: "1rem"}}/>
+                  </div>
+                  <span>
+                    <h5 className="card-title">
+                      {currentUser.user.firstName}  {currentUser.user.lastName}
+                    </h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                      <StarRatings
+                        rating={review.rate}
+                        starRatedColor="#e0366f"
+                        numberOfStars={5}
+                        starDimension="1.8rem"
+                        starSpacing="0"
+                      />
+                    </h6>
+                  </span>
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">
+                    {review.title}
+                  </h5>
+                  <hr/>
+                  <p className="card-text">
+                    {review.description}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user.currentUser.status[0],
+    property: state.user.propID[0]
+  }
+}
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PropertyReviews)

@@ -29,9 +29,11 @@ const Review = (props) => {
         form,
         props.currentUser.token)
     .then((res) => {
+      form.rate = -1
       if(res.id){
         props.onHide()
         alert('Thank you for your feedback!')
+        window.location.reload()
       } else {
         if(res.errors){
           let errors = ''
