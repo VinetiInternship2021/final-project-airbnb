@@ -27,10 +27,10 @@ const PropertyReviews = ({ currentUser, property, usersId }) => {
       <div className="container" style={{ width: '60rem' }}>
         <div className="row">
           {!data.length ?(
-            <h1>There are no reviews, be the first!</h1>
+            <h1>There are no reviews, be the first to rate this property!</h1>
             ) : (
             data.map((review) => (
-              <div className="card" style={{ width: '29.5rem', marginBottom: "1rem", padding: 0, marginLeft: review.id % 2 === 0 ? "1rem" : 0 }}>
+              <div className="card" style={{ width: '29.5rem', marginBottom: "1rem", padding: 0, marginRight: review.id % 2 === 0 ? 0 : "1rem" }}>
                 <div className="card-img-top d-flex align-items-center bg-light">
                   <div>
                     <img

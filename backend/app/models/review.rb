@@ -26,7 +26,7 @@ class Review < ApplicationRecord
       puts '::::::::::::::::::::::::::inserting reviews::::::::::::::::::::::::::'
       reviews = array_of_reviews
       Property.all.each do |property|
-        property.reviews.create!(reviews)
+        property.reviews.create(reviews)
       end
       puts '::::::::::::::::::::::::::::::inserted::::::::::::::::::::::::::'
   end
