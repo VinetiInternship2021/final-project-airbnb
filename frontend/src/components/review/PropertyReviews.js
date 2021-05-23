@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { reqGetToken } from '../../api/api'
+import { reqGetToken, reqRed } from '../../api/api'
 import StarRatings from 'react-star-ratings';
 
-const PropertyReviews = ({ currentUser, property }) => {
+const PropertyReviews = ({ currentUser, property, usersId }) => {
   const [data, setData] = useState([])
-
+  const [users, setUsers] = useState([])
+  
   useEffect(() => {
     async function req() {
       const reviews = await reqGetToken(
         `thisPropertyReviews?id=${property.id}`,
         currentUser.token
-      )
-      setData(reviews)
-    }
-    req()
-  }, [])
+        )
+        setData(reviews)
+      }
+      req()
+
+      reqRed('/userLists').then((e) => {
+        setUsers(() => e)
+      })
+    }, [])
 
   return (
-
-
     <div className="d-flex justify-content-lg-center mt-4">
       <div className="container" style={{ width: '60rem' }}>
         <div className="row">
@@ -37,7 +40,9 @@ const PropertyReviews = ({ currentUser, property }) => {
                   </div>
                   <span>
                     <h5 className="card-title">
-                      {currentUser.user.firstName}  {currentUser.user.lastName}
+                      {users.map((user) => {
+                        return user.id === review.user_id ? `${user.firstName} ${user.lastName}` : ''
+                      })}
                     </h5>
                     <h6 className="card-subtitle mb-2 text-muted">
                       <StarRatings

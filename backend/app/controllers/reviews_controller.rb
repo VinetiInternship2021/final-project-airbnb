@@ -8,6 +8,12 @@ class ReviewsController < ApplicationController
     render json: @reviews
   end
 
+  # GET current property's all reviews
+  def thisPropertyReviews
+    @reviews = Review.where(property_id: params[:id])
+    render json: @reviews
+  end
+
   # GET /reviews/1
   def show
     render json: @review
