@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
     addOrderedDates,
@@ -14,6 +14,7 @@ import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
 const Order = (props) => {
+    const [orderedDays, setOrderedDAYS] = useState([])
     const {
         datePicker,
         property,
@@ -27,6 +28,23 @@ const Order = (props) => {
         if (!datePicker.start_date || !datePicker.end_date) {
             return info('Please choose your preferred date for your order')
         }
+
+        for (let [start, end] of orderedDays) {
+            const start_date = moment(start).isBetween(
+                datePicker.start_date,
+                datePicker.end_date
+            )
+            const end_date = moment(end).isBetween(
+                datePicker.start_date,
+                datePicker.end_date
+            )
+            if (start_date || end_date) {
+                return info(
+                    'Your selected date is between in already ordered dates'
+                )
+            }
+        }
+
         Swal.fire({
             title: 'Are you sure?',
             text: 'Please confirm your order',
@@ -76,7 +94,9 @@ const Order = (props) => {
         clearDatePicker()
         async function getAllOrderedDates() {
             const deActiveDates = []
+
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
+            setOrderedDAYS(() => datesList)
             datesList.forEach(([start_date, end_date]) => {
                 if (start_date || end_date) {
                     deActiveDates.push(disableDates(start_date, end_date))
