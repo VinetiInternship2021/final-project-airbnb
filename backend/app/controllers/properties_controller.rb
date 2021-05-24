@@ -30,7 +30,7 @@ class PropertiesController < ApplicationController
            )
           return render json: @property
        end
-
+        
        @property = Property.joins(:user)
                            .where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
                             true,

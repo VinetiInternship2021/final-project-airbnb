@@ -17,7 +17,7 @@ const initialDisable = [
         end: moment(new Date(), disabled),
     },
 ]
-const DateRange = ({ ownDatePicker, orderedDates }) => {
+const DateRange = ({ ownDatePicker, orderedDates, selectedRange }) => {
     const [disabledDates, setDisabledDates] = useState(initialDisable)
     useEffect(() => {
         setDisabledDates((prev) => [...prev, ...orderedDates])
@@ -62,7 +62,7 @@ const DateRange = ({ ownDatePicker, orderedDates }) => {
         <div className="d-flex align-items-center">
             <RangePicker
                 onChange={getDate}
-                defaultValue={[moment(), moment()]}
+                defaultValue={selectedRange}
                 disabledTime={(date, type) => ({
                     disabledHours: () => getDisabledHours(date, type),
                 })}

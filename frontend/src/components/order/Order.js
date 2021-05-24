@@ -7,6 +7,7 @@ import Slider from '../slider/Slider'
 import moment from 'moment'
 import DateRange from './../datPicker/DateRange'
 
+const disabled = 'YYYY-MM-DD'
 const Order = (props) => {
     const {
         datePicker,
@@ -47,9 +48,8 @@ const Order = (props) => {
 
     const disableDates = (start, end) => {
         //during the disable, these {start,end} are not excluded there
-        //for this we increase and decrease one day
+        //for this we increase or decrease one day
 
-        const disabled = 'YYYY-MM-DD'
         let datesObj = {}
 
         let start_day = new Date(start)
@@ -57,13 +57,8 @@ const Order = (props) => {
         prevDay.setDate(start_day.getDate() - 1)
         prevDay = new Date(prevDay)
 
-        let end_day = new Date(end)
-        // let nextDay = new Date(end_day)
-        // nextDay.setDate(end_day.getDate() - 1)
-        // nextDay = new Date(nextDay)
-
         datesObj.start = moment(prevDay, disabled)
-        datesObj.end = moment(end_day, disabled)
+        datesObj.end = moment(new Date(end), disabled)
         return datesObj
     }
 
@@ -93,7 +88,14 @@ const Order = (props) => {
 
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
-                            <DateRange />
+                            <DateRange
+                                selectedRange={
+                                    datePicker.start_date && [
+                                        moment(datePicker.start_date, disabled),
+                                        moment(datePicker.end_date, disabled),
+                                    ]
+                                }
+                            />
                         </li>
                         <li className="list-group-item">
                             Type : {property.propType}
