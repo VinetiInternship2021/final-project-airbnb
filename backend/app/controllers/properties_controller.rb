@@ -19,11 +19,23 @@ class PropertiesController < ApplicationController
        # syntax example http://localhost:3000/search?guests=1&title=yerevan&start=2021-05-12&end=2021-05-13
        dateStart = params[:start]
        dateEnd = params[:end]
+       guests = params[:guests]
+       title = params[:title]
+
+       if dateEnd ==nil and  dateStart==nil
+          @property = Property.joins(:user).where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
+            true,
+            guests,
+            "%#{title}%",
+           )
+          return render json: @property
+       end
+
        @property = Property.joins(:user)
                            .where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
                             true,
-                            params[:guests],
-                            "%#{params[:title]}%",
+                            guests,
+                            "%#{title}%",
                            ).where.not(order: 
                                 Order.where(
                                   'start_date BETWEEN ? AND ?

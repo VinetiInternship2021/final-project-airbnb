@@ -45,7 +45,6 @@ const Order = (props) => {
         })
     }
 
-
     const disableDates = (start, end) => {
         //during the disable, these {start,end} are not excluded there
         //for this we increase and decrease one day
@@ -57,16 +56,14 @@ const Order = (props) => {
         let prevDay = new Date(start_day)
         prevDay.setDate(start_day.getDate() - 1)
         prevDay = new Date(prevDay)
-     
 
         let end_day = new Date(end)
-        let nextDay = new Date(end_day)
-        nextDay.setDate(end_day.getDate() - 1)
-        nextDay = new Date(nextDay)
-     
+        // let nextDay = new Date(end_day)
+        // nextDay.setDate(end_day.getDate() - 1)
+        // nextDay = new Date(nextDay)
 
-        datesObj.start = moment(new Date(prevDay), disabled)
-        datesObj.end = moment(new Date(nextDay), disabled)
+        datesObj.start = moment(prevDay, disabled)
+        datesObj.end = moment(end_day, disabled)
         return datesObj
     }
 
@@ -75,13 +72,11 @@ const Order = (props) => {
         async function getAllOrderedDates() {
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
-           
             datesList.forEach(([start_date, end_date]) => {
                 if (start_date || end_date) {
                     deActiveDates.push(disableDates(start_date, end_date))
                 }
             })
-           
             addOrderedDates(deActiveDates) //redux
         }
         getAllOrderedDates()
