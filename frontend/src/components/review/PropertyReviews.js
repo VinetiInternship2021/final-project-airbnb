@@ -20,7 +20,7 @@ const PropertyReviews = ({ currentUser, property }) => {
       reqRed('/userLists').then((e) => {
         setUsers(() => e)
       })
-    })
+    }, [])
 
   return (
     <>
@@ -54,9 +54,7 @@ const PropertyReviews = ({ currentUser, property }) => {
                   </div>
                   <span>
                     <h5 className="card-title">
-                      {users.map((user) => {
-                        return user.id === review.user_id ? `${user.firstName} ${user.lastName}` : ''
-                      })}
+                      {users[review.user_id].firstName} {users[review.user_id].lastName}
                     </h5>
                     <h6 className="card-subtitle mb-2 text-muted">
                       <StarRatings
