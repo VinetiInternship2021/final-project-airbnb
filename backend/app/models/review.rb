@@ -4,15 +4,11 @@ class Review < ApplicationRecord
   validates :rate, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5}
   validates :title, presence: true, length: { minimum: 8, maximum: 128 }
   validates :description, presence: true, length: { minimum: 8, maximum: 1024 }
-  validates :property_id, presence: true
-  # validates :user_id, presence: true, numericality: {only_integer: true, other_than: Property.find_by_id(@property_id).user_id } # Property.find_by_id(@property_id).user_id}
 
-  # puts "helloooooooo #{@property_id.eql? 12} and #{:user_id}" 
-  # puts self.property_id
-  # , less_than: 20
-  # a = :user_is_not_the_owner
-  # puts "helllllllooooooooo #{self.user_id.equal? Property.find_by_id(self.property_id).user_id}"
+  # validates :property_id, presence: true
+  # validates :user_id, presence: true, numericality: { other_than: Property.find_by_id(@property_id).user_id }
 
+  # validate :user_is_not_the_owner?
   # def user_is_not_the_owner
   #   user_id.equal? Property.find_by_id(self.property_id).user_id
   # end
@@ -52,7 +48,7 @@ class Review < ApplicationRecord
       }
   end
 
-  if Property.all.count <= 12
+  if Review.count < 72
     self.import_record()
   end
 end

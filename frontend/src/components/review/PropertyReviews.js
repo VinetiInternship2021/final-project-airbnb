@@ -1,35 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { reqGetToken, reqRed } from '../../api/api'
-import StarRatings from 'react-star-ratings';
+import StarRatings from 'react-star-ratings'
 
-const PropertyReviews = ({ currentUser, property, usersId }) => {
+const PropertyReviews = ({ currentUser, property }) => {
   const [data, setData] = useState([])
   const [users, setUsers] = useState([])
-  
+
   useEffect(() => {
     async function req() {
-      const reviews = await reqGetToken(
+      const results = await reqGetToken(
         `thisPropertyReviews?id=${property.id}`,
         currentUser.token
         )
-        setData(reviews)
+        setData(results)
       }
       req()
 
       reqRed('/userLists').then((e) => {
         setUsers(() => e)
       })
-    }, [])
+    })
 
   return (
+    <>
+    <div className="container" style={{ width: '60rem' }}>
+      <p>
+        <StarRatings
+          rating={data.avg_rating}
+          starRatedColor="#e0366f"
+          numberOfStars={5}
+          starDimension="1.8rem"
+          starSpacing="0"
+        />
+
+        Average: {data.avg_rating} stars by {data.count} people
+      </p>
+    </div>
     <div className="d-flex justify-content-lg-center mt-4">
       <div className="container" style={{ width: '60rem' }}>
         <div className="row">
-          {!data.length ?(
-            <h1>There are no reviews, be the first to rate this property!</h1>
+          {!data.reviews ?(
+            <h1> There are no reviews, be the first to rate this property!</h1>
             ) : (
-            data.map((review) => (
+            data.reviews.map((review) => (
               <div className="card" style={{ width: '29.5rem', marginBottom: "1rem", padding: 0, marginRight: review.id % 2 === 0 ? 0 : "1rem" }}>
                 <div className="card-img-top d-flex align-items-center bg-light">
                   <div>
@@ -70,6 +84,7 @@ const PropertyReviews = ({ currentUser, property, usersId }) => {
         </div>
       </div>
     </div>
+  </>
   )
 }
 

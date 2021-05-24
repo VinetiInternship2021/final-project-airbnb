@@ -16,10 +16,6 @@ class Property < ApplicationRecord
     has_many :img_lists
     has_many :reviews
 
-    def avg_rating
-      reviews.average(:rate).round(2).to_f
-    end
-
     @propertiesFilePath = 'app/CSVs/properties.csv'
 
     private

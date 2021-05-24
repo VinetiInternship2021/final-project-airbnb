@@ -11,7 +11,8 @@ class ReviewsController < ApplicationController
   # GET current property's all reviews
   def thisPropertyReviews
     @reviews = Review.where(property_id: params[:id])
-    render json: @reviews
+    @avg_rating = @reviews.average(:rate).round(2).to_f
+    render json: { reviews: @reviews, avg_rating: @avg_rating, count: @reviews.count }
   end
 
   # GET /reviews/1
