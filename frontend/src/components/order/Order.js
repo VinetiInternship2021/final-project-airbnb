@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { addOrderedDates, clearOrderedDates } from './../redux/actions'
+import {
+    addOrderedDates,
+    clearOrderedDates,
+    clearDatePicker,
+} from './../redux/actions'
 import { reqCreateToken, reqRed } from '../../api/api'
 import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import moment from 'moment'
 import DateRange from './../datPicker/DateRange'
+import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
 const Order = (props) => {
@@ -15,9 +20,13 @@ const Order = (props) => {
         currentUser,
         addOrderedDates,
         clearOrderedDates,
+        clearDatePicker,
     } = props
 
     const order = (e) => {
+        if (!datePicker.start_date || !datePicker.end_date) {
+            return info('Please choose your preferred date for your order')
+        }
         Swal.fire({
             title: 'Are you sure?',
             text: 'Please confirm your order',
@@ -64,6 +73,7 @@ const Order = (props) => {
 
     useEffect(() => {
         clearOrderedDates()
+        clearDatePicker()
         async function getAllOrderedDates() {
             const deActiveDates = []
             let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
@@ -143,6 +153,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { addOrderedDates, clearOrderedDates }
+const mapDispatchToProps = {
+    addOrderedDates,
+    clearOrderedDates,
+    clearDatePicker,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order)

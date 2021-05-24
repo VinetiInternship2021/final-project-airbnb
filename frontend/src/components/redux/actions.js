@@ -2,6 +2,7 @@ import {
     ADD_OWN_DATE,
     ADD_PROPERTY_INFO,
     APPEND_USERS_ID,
+    CLEAR_DATE_PICKER,
     CLEAR_ORDERED_DATES,
     CLEAR_USERS_ID,
     CREATE_USER,
@@ -46,6 +47,11 @@ export function ownDatePicker({ start_date, end_date, duration }) {
     return {
         type: ADD_OWN_DATE,
         payload: { start_date, end_date, duration },
+    }
+}
+export function clearDatePicker() {
+    return {
+        type: CLEAR_DATE_PICKER,
     }
 }
 

@@ -22,11 +22,6 @@ function Find({ datePicker, currentUser, clearOrderedDates, orderedDates }) {
     const format = 'YYYY-DD-MM'
     const filter = async (e) => {
         e.preventDefault()
-
-        if (!datePicker.start_date || !datePicker.end_date) {
-            return info('Please choose correct date')
-        }
-
         const url = `search?guests=${form.guests}&title=${form.title}&start=${datePicker.start_date}&end=${datePicker.end_date}`
         const property = await reqGetToken(url, currentUser.token)
         setResults(() => property)
@@ -34,7 +29,7 @@ function Find({ datePicker, currentUser, clearOrderedDates, orderedDates }) {
     useEffect(() => {
         clearOrderedDates()
     }, [datePicker])
-    
+
     const changeSearchData = (e) => {
         setFrom((prev) => ({
             ...prev,
