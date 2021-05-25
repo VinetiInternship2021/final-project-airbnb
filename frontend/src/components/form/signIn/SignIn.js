@@ -32,7 +32,6 @@ function SignIn({ currentUser, createUser }) {
                 text: `Can't find account in this email address!`,
                 footer: `<a href='/singup'>Create new account </a>`,
             })
-
             return setLoad((prev) => !prev)
         }
         if (!user.user.isActive) {
@@ -113,12 +112,12 @@ function SignIn({ currentUser, createUser }) {
         </div>
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         currentUser: state.user.currentUser.status[0],
     }
 }
-
 const mapDispatchToProps = {
     createUser,
 }

@@ -2,6 +2,7 @@
     border: solid black 2px;
     display: flex;
     border-radius: 20px 22px 20px 20px;
+    height: 37px;
 }
 .findFormContainer {
     display: flex;
@@ -15,6 +16,9 @@
     border-radius: 20px 0px 0px 20px;
 }
 .findBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: solid 4px #dc3545;
     border-radius: 0px 20px 17px 0px;
 }
