@@ -1,3 +1,4 @@
+#rspec ./spec/requests/users_spec.rb 
 require 'rails_helper'
 require 'spec_helper'
 
@@ -89,8 +90,8 @@ RSpec.describe "/users", type: :request do
       it 'Shuld not create property' do        
           myProperty = Property.new(property)
           myProperty.save
-          get  properties_url
-          expect(response).to be_successful  
+          get  properties_url  
+          expect(response).to be_successful
       end    
     end  
   end 
