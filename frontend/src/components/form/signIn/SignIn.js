@@ -66,7 +66,7 @@ function SignIn({ currentUser, createUser }) {
                     <h1 className="text-center">Sign in </h1>
                     <div className="form-floating mb-3 mt-2">
                         <input
-                            data-cy="email"
+                            data-testid="email"
                             onChange={handleInputChange}
                             value={form.email}
                             type="email"
@@ -104,7 +104,7 @@ function SignIn({ currentUser, createUser }) {
                                 <Spinner animation="border" role="status" />
                                 <span className="sr-only">Loading...</span>
                             </>
-                        )}{' '}
+                        )}
                     </button>
                     <br />
                 </form>
@@ -121,4 +121,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     createUser,
 }
+export { SignIn as SignInTest }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
