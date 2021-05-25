@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
-import { error, success } from '../../../notification/notification'
+import { error, info, success } from '../../../notification/notification'
 function SignIn({ currentUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
@@ -23,6 +23,9 @@ function SignIn({ currentUser, createUser }) {
     }
     async function loginUser(e) {
         e.preventDefault()
+        if (!form.email || !form.password) {
+            return info('Inputs Should not be empty')
+        }
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
         if (user.errors) {
