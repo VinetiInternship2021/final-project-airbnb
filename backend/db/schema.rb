@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_191604) do
+ActiveRecord::Schema.define(version: 2021_05_25_235425) do
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_191604) do
     t.string "firstName"
     t.string "lastName"
     t.string "email"
-    t.boolean "isActive", default: true
+    t.boolean "isActive", default: false
     t.string "role"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false

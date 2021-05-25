@@ -10,7 +10,6 @@ class CreateProperties < ActiveRecord::Migration[6.1]
       t.string :guests
       t.text :description
       t.references :user, null: false, foreign_key: true
-      # t.references :property, null: false, foreign_key: true
 
       t.timestamps
     end
