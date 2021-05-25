@@ -1,10 +1,17 @@
 import React from 'react'
-import ReactDom from 'react-dom'
-import { SignInTest } from './../components/form/signIn/SignIn'
+import { mount, shallow } from 'enzyme'
+import SignIn, { SignInTest } from './../components/form/signIn/SignIn'
+import enzymeConfig from './enzymeConfig'
 
 describe('User forms', () => {
     it('Should sign in', () => {
-        const div = document.createElement('div')
-        ReactDom.render(<SignInTest />, div)
+        const component = mount(<SignInTest />)
+        const email = component.find('[data-testid="email"]').at(0)
+        email.instance().value = 'hi@hotmail.com'
+        email.simulate('change')
+        expect(
+            component.find('[data-testid="email"]').at(0).find('input').get(0)
+                .props.value
+        ).toEqual('hi@hotmail.com')
     })
 })
