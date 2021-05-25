@@ -4,16 +4,8 @@ class Review < ApplicationRecord
   validates :rate, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5}
   validates :title, presence: true, length: { minimum: 8, maximum: 128 }
   validates :description, presence: true, length: { minimum: 8, maximum: 1024 }
-
-  # validates :property_id, presence: true
-  # validates :user_id, presence: true, numericality: { other_than: Property.find_by_id(@property_id).user_id }
-
-  # validate :user_is_not_the_owner?
-  # def user_is_not_the_owner
-  #   user_id.equal? Property.find_by_id(self.property_id).user_id
-  # end
-  
-  belongs_to :property
+  validates :property_id, presence: true
+  validates :user_id, presence: true
 
   @reviewsFilePath = 'app/CSVs/reviews.csv'
 

@@ -23,6 +23,16 @@ class ReviewsController < ApplicationController
   # POST /reviews
   def create
     review = Review.new(review_params)
+    user_id = review_params[:user_id]
+
+    if Property.exists?(user_id: user_id)
+      user_id.eql? Property.find_by_id(review_params[:property_id]).user_id
+      raise '>Trying to rate your own property? What a shame!'
+    elsif Review.exists?(user_id: user_id)
+      raise ">You've already rated this property."
+    else
+      review.save
+    end
 
     if review.save
       render json: review, status: :created, location: review

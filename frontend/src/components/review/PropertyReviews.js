@@ -15,12 +15,15 @@ const PropertyReviews = ({ currentUser, property }) => {
         )
         setData(results)
       }
-      req()
+    req()
 
-      reqRed('/userLists').then((e) => {
-        setUsers(() => e)
-      })
-    }, [])
+    async function getUsers() {
+      const users = await reqRed('/userLists')
+      setUsers(users)
+    }
+
+    getUsers()
+  }, [])
 
   return (
     <>
@@ -54,7 +57,7 @@ const PropertyReviews = ({ currentUser, property }) => {
                   </div>
                   <span>
                     <h5 className="card-title">
-                      {users[review.user_id].firstName} {users[review.user_id].lastName}
+                      { users.length !== 0 && users[review.user_id].firstName + ' ' + users[review.user_id].lastName }
                     </h5>
                     <h6 className="card-subtitle mb-2 text-muted">
                       <StarRatings

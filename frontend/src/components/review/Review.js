@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Modal from 'react-bootstrap/Modal'
 import ReactStars from "react-rating-stars-component"
 import { reqCreateToken } from '../../api/api'
+import Swal from 'sweetalert2'
 
 const Review = (props) => {
   const [form, setForm] = useState({
@@ -40,9 +41,18 @@ const Review = (props) => {
           Object.entries(res.errors).forEach((msg) => {
             errors += (msg[0] + ' ' + msg[1].join(' ') + '\n') 
           })
-          alert(errors)
+          Swal.fire({
+            icon: 'error',
+            title: 'Hey!',
+            text: errors
+          })
         } else {
-          alert('Something went wrong')
+          const errorMsg = res.exception.split('>')[1]
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMsg || 'Something went wrong'
+          })
         }
       }
     })
