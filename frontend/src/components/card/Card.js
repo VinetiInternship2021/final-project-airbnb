@@ -10,6 +10,7 @@ function Cards({ data, propertyData }) {
         propertyData(data)
         redirect.push('/order')
     }
+
     return (
         <>
             <Card style={{ width: '18rem' }} className="cardPos">
@@ -18,6 +19,7 @@ function Cards({ data, propertyData }) {
                 <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
                     <Card.Text>
+                        <b>{data.id}</b>
                         <b>Guests | </b>
                         <span>{data.guests}</span>
                         <br />

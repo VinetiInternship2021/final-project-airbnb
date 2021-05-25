@@ -25,6 +25,15 @@ class OrdersController < ApplicationController
     @orders  =  Order.where.not('start_date <= ? AND end_date >= ?', dateStart, dateEnd) 
     render json: @orders
   end
+  
+  def currentDatesList
+    # filtered only dates
+    propid = params[:id]
+    @order = Order.where(property_id:  propid).pluck(:start_date , :end_date)
+    render json: @order
+  end
+
+
   # POST /orders
   def create
     @order = Order.new(order_params)
