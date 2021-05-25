@@ -66,7 +66,7 @@ function SignIn({ currentUser, createUser }) {
                     <h1 className="text-center">Sign in </h1>
                     <div className="form-floating mb-3 mt-2">
                         <input
-                            data-testid="email"
+                            data-testId="email"
                             onChange={handleInputChange}
                             value={form.email}
                             type="email"
@@ -79,7 +79,7 @@ function SignIn({ currentUser, createUser }) {
                     </div>
                     <div className="form-floating mb-3">
                         <input
-                            data-cy="password"
+                            data-testId="password"
                             onChange={handleInputChange}
                             value={form.password}
                             minLength="6"
