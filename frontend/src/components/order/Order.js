@@ -16,12 +16,10 @@ import DateRange from '../datePicker/DateRange'
 import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
-  
+
 const Order = (props) => {
-    const [modalShow, setModalShow] = React.useState(false);
-    const [load, setLoad] = useState(false)
+    const [modalShow, setModalShow] = React.useState(false)
     const [orderedDays, setOrderedDAYS] = useState([])
-    const [load, setLoad] = useState(false)
     const {
         datePicker,
         property,
@@ -30,8 +28,14 @@ const Order = (props) => {
         clearOrderedDates,
         clearDatePicker,
     } = props
-
     const order = (e) => {
+        if (currentUser.role !== 'reg') {
+            return Swal.fire(
+                'Ooops!',
+                'You need to be a regular user',
+                'warning'
+            )
+        }
         if (!datePicker.start_date || !datePicker.end_date) {
             return info('Please choose your preferred date for your order')
         }
@@ -119,79 +123,85 @@ const Order = (props) => {
     }, [])
 
     return (
-      <>
-        <div className="d-flex justify-content-lg-center mt-4">
-            <div className="card" style={{ width: '60rem' }}>
-                <Slider imgList={property.img_lists} />
-                <div className="card-body">
-                    <h5 className="card-title">{property.title}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                        {property.address}
-                    </h6>
+        <>
+            <div className="d-flex justify-content-lg-center mt-4">
+                <div className="card" style={{ width: '60rem' }}>
+                    <Slider imgList={property.img_lists} />
+                    <div className="card-body">
+                        <h5 className="card-title">{property.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">
+                            {property.address}
+                        </h6>
 
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <DateRange
-                                selectedRange={
-                                    datePicker.start_date && [
-                                        moment(datePicker.start_date, disabled),
-                                        moment(datePicker.end_date, disabled),
-                                    ]
-                                }
-                            />
-                        </li>
-                        <li className="list-group-item">
-                            Type : {property.propType}
-                        </li>
-                        <li className="list-group-item">
-                            Rooms : {property.rooms}
-                        </li>
-                        <li className="list-group-item">
-                            Beds : {property.beds}
-                        </li>
-                        <li className="list-group-item">
-                            Day price : ${property.price}
-                        </li>
-                        <li className="list-group-item">
-                            Start date: {datePicker.start_date}
-                        </li>
-                        <li className="list-group-item">
-                            End date:{datePicker.end_date}
-                        </li>
-                        <li className="list-group-item">
-                            Total Price: ${datePicker.duration * property.price}
-                        </li>
-                        <li className="list-group-item">
-                            {property.description}
-                        </li>
-                        <li className="list-group-item">
-                            Description: {datePicker.description}
-                        </li>
-                    </ul>
-                    <button
-                        href="/"
-                        className="btn btn-danger w-50"
-                        onClick={order}
-                    >
-                        Order
-                    </button>
-                    <button 
-                        href="/"
-                        className="btn btn-success w-50"
-                        onClick={() => setModalShow(true)}
-                    >
-                        Review
-                    </button>
-                    <Review
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    />
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                                <DateRange
+                                    selectedRange={
+                                        datePicker.start_date && [
+                                            moment(
+                                                datePicker.start_date,
+                                                disabled
+                                            ),
+                                            moment(
+                                                datePicker.end_date,
+                                                disabled
+                                            ),
+                                        ]
+                                    }
+                                />
+                            </li>
+                            <li className="list-group-item">
+                                Type : {property.propType}
+                            </li>
+                            <li className="list-group-item">
+                                Rooms : {property.rooms}
+                            </li>
+                            <li className="list-group-item">
+                                Beds : {property.beds}
+                            </li>
+                            <li className="list-group-item">
+                                Day price : ${property.price}
+                            </li>
+                            <li className="list-group-item">
+                                Start date: {datePicker.start_date}
+                            </li>
+                            <li className="list-group-item">
+                                End date:{datePicker.end_date}
+                            </li>
+                            <li className="list-group-item">
+                                Total Price: $
+                                {datePicker.duration * property.price}
+                            </li>
+                            <li className="list-group-item">
+                                {property.description}
+                            </li>
+                            <li className="list-group-item">
+                                Description: {datePicker.description}
+                            </li>
+                        </ul>
+                        <button
+                            href="/"
+                            className="btn btn-danger w-50"
+                            onClick={order}
+                        >
+                            Order
+                        </button>
+                        <button
+                            href="/"
+                            className="btn btn-success w-50"
+                            onClick={() => setModalShow(true)}
+                        >
+                            Review
+                        </button>
+                        <Review
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                        />
+                    </div>
                 </div>
             </div>
-
-        </div>
-        <PropertyReviews />
-      </>
+            <PropertyReviews />
+        </>
     )
 }
 

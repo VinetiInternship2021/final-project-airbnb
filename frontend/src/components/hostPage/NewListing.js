@@ -82,6 +82,7 @@ function NewListing({ currentUser }) {
             currentUser[0].token
         ) //add to rails table ;)
         success('Property successfully created')
+        redirect.push('/my_apartments')
         setLoad((prev) => !prev) //btn loader off
     }
 
@@ -186,9 +187,6 @@ function NewListing({ currentUser }) {
                         <label htmlFor="description">Description</label>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="formFileSm" className="form-label">
-                            Upload your img - max 5 / jpeg or png
-                        </label>
                         <input
                             onChange={handleGetImage}
                             accept="image/png, image/jpeg"

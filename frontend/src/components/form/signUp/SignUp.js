@@ -56,10 +56,10 @@ function SignUp({ createUser, currentUser }) {
         }
         setLoad((prev) => !prev) // bootstrap spinner for btn  turn on
         Swal.fire({
-              icon: 'error',
-              title: 'Just a sec!',
-              text: 'Our admins will be activate your profile ASAP!',
-        })   
+            icon: 'warning',
+            title: 'Just a sec!',
+            text: 'Our admins will be activate your profile ASAP!',
+        })
         setForm((prev) => ({
             firstName: '',
             lastName: '',
@@ -70,8 +70,6 @@ function SignUp({ createUser, currentUser }) {
             rePassword: '',
         }))
     }
-
-   
 
     return (
         <div>

@@ -97,8 +97,23 @@ function uploadImgRails(path, list, id, token) {
     )
 }
 
+function deleteImgRails(path, list, token) {
+    return Promise.all(
+        list.map(({ id }) =>
+            fetch(`${request}${path}/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+        )
+    )
+}
+
 //****************************** */
 export {
+    deleteImgRails,
     reqRed,
     reqDelete,
     reqUpdate,

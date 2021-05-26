@@ -11,7 +11,7 @@ import AdminForm from '../form/adminForm/AdminForm'
 import UsersList from '../usersList/UsersList'
 import MyApartments from '../myapartments/MyApartments'
 import Order from '../order/Order'
-import OrderList from '../orderList/OrderList'
+import OrderList from './../OrderList/OrderList'
 
 export default function Application() {
     return (

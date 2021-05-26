@@ -33,6 +33,12 @@ const HeadersBtn = ({ currentUser, createUser }) => {
     if (currentUser.status[0].user.role === 'host') {
         return (
             <>
+                <Link className="btn btn-light reg" type="submit" to="/results">
+                    <img
+                        width="25"
+                        src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
+                    />
+                </Link>
                 <Link className="btn btn-light reg" type="submit" to="/add_new">
                     Add new
                 </Link>
@@ -53,6 +59,12 @@ const HeadersBtn = ({ currentUser, createUser }) => {
     if (currentUser.status[0].user.role === 'reg') {
         return (
             <>
+                <Link className="btn btn-light reg" type="submit" to="/results">
+                    <img
+                        width="25"
+                        src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
+                    />
+                </Link>
                 <Link
                     className="btn btn-light reg"
                     type="submit"
