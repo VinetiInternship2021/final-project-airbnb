@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "c0b6e9c3-3618-40c7-8959-1e175ac6cb6e",
+		"name": "postman-automated-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { //successful request ",
+									"    pm.response.to.have.status(200);",
+									"pm.globals.get(\"variable_key\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Entered an empty field\", function () { //empty or non-empty field ",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"User is registered\", function () { //email uniqueness ",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//valid data\n{   \n  \"email\": \"wp.saroan@gmail.com\",\n  \"firstName\": \"Emma\",\n  \"lastName\": \"Saroyan\",\n  \"role\": \"host\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_user/userLists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//checking that the user is created",
+									"pm.test(\"Check if user with id50 is Emma\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[51].firstName).to.eql(\"Emma\");",
+									"    });",
+									"pm.test(\"Check if user with id50 is Saroyan\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[51].lastName).to.eql(\"Saroyan\");",
+									"});",
+									"pm.test(\"Check if user with id50 email is yp.saroan@gmail.com\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[51].email).to.eql(\"wp.saroan@gmail.com\");",
+									"});",
+									"pm.test(\"Check if user with id50 is host\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[51].role).to.eql(\"host\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/userLists",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"userLists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The data already exists\", function () { //pre-registered email ",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).eql('eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1Mn0.y_KHsZURosVoEHJcMq5ilbQLclki9mK-BrzEalt8jmg');",
+									"});",
+									"pm.test(\"Entered an empty field\", function () { //empty or non-empty field ",
+									"    pm.response.to.be.json;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"wp.saroan@gmail.com\",\n    \"password\": \"123456\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
