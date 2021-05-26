@@ -8,7 +8,7 @@ class User < ApplicationRecord
                         length: { minimum: 4, maximum: 254 }
     validates :firstName, presence: true, length: { minimum: 2, maximum: 25} 
     validates :lastName,  presence: true, length: { minimum: 2, maximum: 25 }
-    # validates :role,  presence: true, inclusion: { in: %w[host reg], message: "Role should be two types ` host or reg"}
+    validates :role,  presence: true, inclusion: { in: %w[host reg], message: "Role should be two types ` host or reg"}
 
     has_many :property
     has_many :order
