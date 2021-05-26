@@ -15,6 +15,7 @@ const OrderCard = ({ currentUser }) => {
             return info('Pleas login ')
         }
         const url = `userOrders?id=${currentUser?.user.id}`
+        console.log(currentUser, 'currentUser')
         async function getOrders() {
             const orders = await reqGetToken(url, currentUser.token)
             setData(() => orders)
@@ -26,7 +27,7 @@ const OrderCard = ({ currentUser }) => {
         <table className="table">
             <thead>
                 <tr>
-                    <th scope="col">Order number</th>
+                    <th scope="col">Order id</th>
                     <th scope="col">Property Title</th>
                     <th scope="col">Started Date</th>
                     <th scope="col">End Date</th>
@@ -36,7 +37,7 @@ const OrderCard = ({ currentUser }) => {
             </thead>
             <tbody>
                 {!data.length ? (
-                    <p>Have not orders yet</p>
+                    <p className="text-center">Order list empty</p>
                 ) : (
                     data.map((el) => (
                         <tr>

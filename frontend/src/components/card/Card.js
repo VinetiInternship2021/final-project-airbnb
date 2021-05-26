@@ -19,12 +19,11 @@ function Cards({ data, propertyData }) {
                 <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
                     <Card.Text>
-                        <b>{data.id}</b>
                         <b>Guests | </b>
                         <span>{data.guests}</span>
                         <br />
                         <b>Day Price | </b>
-                        <span>{data.price}</span>
+                        <span>$ {data.price}</span>
                     </Card.Text>
                     <Link
                         to="/order"

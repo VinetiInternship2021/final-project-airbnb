@@ -81,7 +81,7 @@ function NewListing({ currentUser }) {
             newProp.id,
             currentUser[0].token
         ) //add to rails table ;)
-        success('Property succes created')
+        success('Property successfully created')
         setLoad((prev) => !prev) //btn loader off
     }
 

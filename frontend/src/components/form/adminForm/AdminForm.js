@@ -31,7 +31,7 @@ function AdminForm({ createUser }) {
         createUser(admin)
         success('Login as Admin')
         setLoad((prev) => !prev)
-        redirect.push('/results')
+        redirect.push('/users')
     }
 
     return (

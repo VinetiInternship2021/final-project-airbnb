@@ -21,7 +21,6 @@ class PropertiesController < ApplicationController
        dateEnd = params[:end]
        guests = params[:guests]
        title = params[:title]
-
        if dateEnd ==nil and  dateStart==nil
           @property = Property.joins(:user).where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
             true,
@@ -30,7 +29,6 @@ class PropertiesController < ApplicationController
            )
           return render json: @property
        end
-        
        @property = Property.joins(:user)
                            .where("users.isActive = ? AND guests >= ? AND title LIKE ?", 
                             true,

@@ -18,9 +18,9 @@ export default function HomePage() {
                         <br />
                         <Link
                             className="btn btn-success getStart"
-                            to="/results"
+                            to="/sign_up"
                         >
-                            Get Start
+                            Get Started
                         </Link>
                     </div>
                 </div>
