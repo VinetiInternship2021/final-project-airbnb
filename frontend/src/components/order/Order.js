@@ -10,15 +10,18 @@ import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import Review from '../review/Review'
 import PropertyReviews from '../review/PropertyReviews'
+
 import moment from 'moment'
 import DateRange from '../datePicker/DateRange'
 import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
+  
 const Order = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [load, setLoad] = useState(false)
     const [orderedDays, setOrderedDAYS] = useState([])
+    const [load, setLoad] = useState(false)
     const {
         datePicker,
         property,

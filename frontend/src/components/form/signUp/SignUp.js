@@ -4,8 +4,8 @@ import { createUser } from './../../redux/actions'
 import { error } from '../../../notification/notification'
 import Spinner from 'react-bootstrap/Spinner'
 import { reqCreate } from './../../../api/api'
-import Swal from 'sweetalert2'
 
+import Swal from 'sweetalert2'
 import './signup.css'
 function SignUp({ createUser, currentUser }) {
     const [load, setLoad] = useState(true)
@@ -14,7 +14,7 @@ function SignUp({ createUser, currentUser }) {
         firstName: '',
         lastName: '',
         email: '',
-        isActive: true,
+        isActive: false,
         role: 'host',
         password: '',
         rePassword: '',
@@ -54,14 +54,12 @@ function SignUp({ createUser, currentUser }) {
             })
             return setLoad((prev) => !prev)
         }
-
         setLoad((prev) => !prev) // bootstrap spinner for btn  turn on
-
-        Swal.fire(
-            'Admin verification pending...',
-            'Waiting for activation',
-            'warning'
-        )
+        Swal.fire({
+              icon: 'error',
+              title: 'Just a sec!',
+              text: 'Our admins will be activate your profile ASAP!',
+        })   
         setForm((prev) => ({
             firstName: '',
             lastName: '',
@@ -73,9 +71,7 @@ function SignUp({ createUser, currentUser }) {
         }))
     }
 
-    // if (!currentUser?.user.isActive) {
-    //     redirect.push('/results')
-    // }
+   
 
     return (
         <div>
