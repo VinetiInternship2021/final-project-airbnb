@@ -6,7 +6,6 @@ class Property < ApplicationRecord
     validates :propType, presence: true, inclusion: { in: %w[room apartment] }
     validates :address, presence: true, length: { minimum: 8, maximum: 128 }
     validates :price, presence: true, numericality: { in: 1..3000 }
-    # validates :currency, presence: true, inclusion: { in: %w[USD] }
     validates :beds, presence: true, numericality: { in: 1..10 }
     validates :rooms, presence: true, numericality: { in: 1..10 }
     validates :guests, presence: true, numericality: { in: 1..10 }
@@ -15,6 +14,7 @@ class Property < ApplicationRecord
     belongs_to :user
     has_many :order
     has_many :img_lists
+    has_many :reviews
 
     @propertiesFilePath = 'app/CSVs/properties.csv'
 

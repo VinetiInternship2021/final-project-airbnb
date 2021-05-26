@@ -30,7 +30,7 @@ function Cards({ data, propertyData }) {
                         onClick={addPropDataToRedux}
                         className="btn btn-danger"
                     >
-                        Show More & Order
+                        See More
                     </Link>
                 </Card.Body>
             </Card>

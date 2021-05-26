@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
     has_many :property
     has_many :order
+    has_many :review
     has_secure_password
 
     @hostUsersFilePath = 'app/CSVs/host_users.csv'

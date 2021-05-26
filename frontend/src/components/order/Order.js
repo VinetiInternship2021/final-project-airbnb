@@ -8,12 +8,16 @@ import {
 import { reqCreateToken, reqGetToken } from '../../api/api'
 import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
+import Review from '../review/Review'
+import PropertyReviews from '../review/PropertyReviews'
 import moment from 'moment'
 import DateRange from '../datePicker/DateRange'
 import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
 const Order = (props) => {
+    const [modalShow, setModalShow] = React.useState(false);
+    const [load, setLoad] = useState(false)
     const [orderedDays, setOrderedDAYS] = useState([])
     const {
         datePicker,
@@ -110,7 +114,9 @@ const Order = (props) => {
         }
         getAllOrderedDates()
     }, [])
+
     return (
+      <>
         <div className="d-flex justify-content-lg-center mt-4">
             <div className="card" style={{ width: '60rem' }}>
                 <Slider imgList={property.img_lists} />
@@ -138,10 +144,10 @@ const Order = (props) => {
                             Rooms : {property.rooms}
                         </li>
                         <li className="list-group-item">
-                            Beds : {property.bads}
+                            Beds : {property.beds}
                         </li>
                         <li className="list-group-item">
-                            Day price : {property.price}$
+                            Day price : ${property.price}
                         </li>
                         <li className="list-group-item">
                             Start date: {datePicker.start_date}
@@ -150,7 +156,10 @@ const Order = (props) => {
                             End date:{datePicker.end_date}
                         </li>
                         <li className="list-group-item">
-                            Total Price: {datePicker.duration * property.price}$
+                            Total Price: ${datePicker.duration * property.price}
+                        </li>
+                        <li className="list-group-item">
+                            {property.description}
                         </li>
                         <li className="list-group-item">
                             Description: {datePicker.description}
@@ -158,14 +167,28 @@ const Order = (props) => {
                     </ul>
                     <button
                         href="/"
-                        className="btn btn-danger w-100"
+                        className="btn btn-danger w-50"
                         onClick={order}
                     >
                         Order
                     </button>
+                    <button 
+                        href="/"
+                        className="btn btn-success w-50"
+                        onClick={() => setModalShow(true)}
+                    >
+                        Review
+                    </button>
+                    <Review
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
                 </div>
             </div>
+
         </div>
+        <PropertyReviews />
+      </>
     )
 }
 

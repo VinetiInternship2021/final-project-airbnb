@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :reviews
+  post '/add-review', to: 'reviews#create'
+  get '/thisPropertyReviews', to: 'reviews#thisPropertyReviews'
+  
   resources :img_lists
   
   resources :orders
