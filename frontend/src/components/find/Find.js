@@ -6,7 +6,7 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css'
 import { clearOrderedDates } from '../redux/actions'
 import React, { useState, useEffect } from 'react'
-import DatePicker from './../datPicker/DateRange'
+import DatePicker from '../datePicker/DateRange'
 import './find.css'
 import { connect } from 'react-redux'
 import { info } from '../../notification/notification'
@@ -25,7 +25,11 @@ function Find({ datePicker, currentUser, clearOrderedDates, orderedDates }) {
         const url = `search?guests=${form.guests}&title=${form.title}&start=${datePicker.start_date}&end=${datePicker.end_date}`
         const property = await reqGetToken(url, currentUser.token)
         setResults(() => property)
+        if (!results.length) {
+            info('Property not found')
+        }
     }
+
     useEffect(() => {
         clearOrderedDates()
     }, [datePicker])
@@ -78,7 +82,7 @@ function Find({ datePicker, currentUser, clearOrderedDates, orderedDates }) {
             <div className="d-flex flex-wrap">
                 {!results.length ? (
                     <div className="w-100">
-                        <h1 className="text-center">No result </h1>
+                        <h1 className="text-center">No results </h1>
                     </div>
                 ) : (
                     results.map((el) => {

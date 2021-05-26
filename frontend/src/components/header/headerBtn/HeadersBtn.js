@@ -17,15 +17,11 @@ const HeadersBtn = ({ currentUser, createUser }) => {
     if (!currentUser.status.length || !currentUser.status[0]) {
         return (
             <>
-                <Link
-                    className="btn btn-success reg"
-                    type="submit"
-                    to="/sign_in"
-                >
+                <Link className="btn btn-light reg" type="submit" to="/sign_in">
                     Sign in
                 </Link>
                 <Link
-                    className="btn btn-warning reg"
+                    className="btn btn-danger reg"
                     type="submit"
                     to="/sign_up"
                 >
@@ -37,21 +33,17 @@ const HeadersBtn = ({ currentUser, createUser }) => {
     if (currentUser.status[0].user.role === 'host') {
         return (
             <>
-                <Link
-                    className="btn btn-success reg"
-                    type="submit"
-                    to="/add_new"
-                >
+                <Link className="btn btn-light reg" type="submit" to="/add_new">
                     Add new
                 </Link>
                 <Link
-                    className="btn btn-success reg"
+                    className="btn btn-light reg"
                     type="submit"
                     to="/my_apartments"
                 >
                     My Apartments
                 </Link>
-                <Link className="btn btn-success reg" to="/" onClick={logOut}>
+                <Link className="btn btn-danger reg" to="/" onClick={logOut}>
                     Log out
                 </Link>
             </>
@@ -62,13 +54,13 @@ const HeadersBtn = ({ currentUser, createUser }) => {
         return (
             <>
                 <Link
-                    className="btn btn-success reg"
+                    className="btn btn-light reg"
                     type="submit"
                     to="/order_list"
                 >
                     My Orders
                 </Link>
-                <Link className="btn btn-success reg" to="/" onClick={logOut}>
+                <Link className="btn btn-danger reg" to="/" onClick={logOut}>
                     Log out
                 </Link>
             </>
@@ -77,10 +69,10 @@ const HeadersBtn = ({ currentUser, createUser }) => {
     if (currentUser.status[0].user.role === 'admin') {
         return (
             <>
-                <Link className="btn btn-success reg" to="/users">
+                <Link className="btn btn-light reg" to="/users">
                     Users
                 </Link>
-                <Link className="btn btn-success reg" to="/" onClick={logOut}>
+                <Link className="btn btn-danger reg" to="/" onClick={logOut}>
                     Log out
                 </Link>
             </>

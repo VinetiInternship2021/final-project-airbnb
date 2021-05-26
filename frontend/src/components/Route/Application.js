@@ -5,12 +5,13 @@ import SignIn from '../form/signIn/SignIn'
 import SignUp from '../form/signUp/SignUp'
 import HomePage from '../HomePage/HomePage'
 import Header from '../header/Header'
-import NewListing from './../hostPage/NewListing'
-import Find from './../find/Find'
+import NewListing from '../hostPage/NewListing'
+import Find from '../find/Find'
 import AdminForm from '../form/adminForm/AdminForm'
 import UsersList from '../usersList/UsersList'
 import MyApartments from '../myapartments/MyApartments'
 import Order from '../order/Order'
+import OrderList from '../orderList/OrderList'
 
 export default function Application() {
     return (
@@ -44,6 +45,10 @@ export default function Application() {
                 </Route>
                 <Route exact path="/order">
                     <Order />
+                </Route>
+
+                <Route exact path="/order_list">
+                    <OrderList />
                 </Route>
             </div>
         </>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { createUser } from './../../redux/actions'
 import Spinner from 'react-bootstrap/Spinner'
 import { connect } from 'react-redux'
-import { success } from '../../../notification/notification'
+import { info, success } from '../../../notification/notification'
 
 function AdminForm({ createUser }) {
     const redirect = useHistory()
@@ -24,10 +24,14 @@ function AdminForm({ createUser }) {
         e.preventDefault()
         setLoad((prev) => !prev)
         const admin = await reqCreate('/login', adminForms)
+        if (admin.user.role !== 'admin') {
+            setLoad((prev) => !prev)
+            return info('Pleas login as admin')
+        }
         createUser(admin)
         success('Login as Admin')
         setLoad((prev) => !prev)
-        redirect.push('/results')
+        redirect.push('/users')
     }
 
     return (
