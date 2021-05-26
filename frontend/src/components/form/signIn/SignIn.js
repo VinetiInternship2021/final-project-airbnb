@@ -41,7 +41,7 @@ function SignIn({ currentUser, createUser }) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Your account deactivated by admins!',
+                text: 'Your account is inactive',
                 footer: `<a href=''>Write a message to support</a>`,
             })
             return setLoad((prev) => !prev)
