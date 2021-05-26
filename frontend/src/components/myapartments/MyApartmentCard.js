@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import ModalPop from './Modal'
 
-const MyApartmentCard = ({ data, currentUser }) => {
+const MyApartmentCard = ({ data, currentUser, setUpdate }) => {
     const [load, setLoad] = useState(true)
     let { title, id, guests, beds, description, rooms, img_lists } = data
 
@@ -23,6 +23,7 @@ const MyApartmentCard = ({ data, currentUser }) => {
                 setLoad((prev) => !prev)
                 await deleteImgRails('img_lists', img_lists, currentUser.token)
                 await reqDelete('properties', id, currentUser.token)
+                setUpdate((prev) => !prev)
                 setLoad((prev) => !prev)
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
             }
@@ -46,7 +47,11 @@ const MyApartmentCard = ({ data, currentUser }) => {
                     </p>
 
                     <div className="d-flex flex-row">
-                        <ModalPop buttonLabel="Edit" data={data} />
+                        <ModalPop
+                            buttonLabel="Edit"
+                            data={data}
+                            setUpdate={setUpdate}
+                        />
                         <button
                             onClick={deleteProperty}
                             style={{ marginLeft: '10px' }}
