@@ -9,7 +9,7 @@ import { reqCreateToken, reqGetToken } from '../../api/api'
 import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import moment from 'moment'
-import DateRange from './../datPicker/DateRange'
+import DateRange from '../datePicker/DateRange'
 import { info } from '../../notification/notification'
 
 const disabled = 'YYYY-MM-DD'
@@ -41,9 +41,7 @@ const Order = (props) => {
                     datePicker.end_date
                 )
                 if (start_date || end_date) {
-                    return info(
-                        'Your selected date is between in already ordered dates'
-                    )
+                    return info('Your selected dates are unavailable')
                 }
             }
         }
