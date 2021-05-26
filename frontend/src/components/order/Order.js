@@ -28,8 +28,14 @@ const Order = (props) => {
         clearOrderedDates,
         clearDatePicker,
     } = props
-
     const order = (e) => {
+        if (currentUser.role !== 'reg') {
+            return Swal.fire(
+                'Ooops!',
+                'You need to be a regular user',
+                'warning'
+            )
+        }
         if (!datePicker.start_date || !datePicker.end_date) {
             return info('Please choose your preferred date for your order')
         }
