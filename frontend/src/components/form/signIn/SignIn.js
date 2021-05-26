@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Spinner from 'react-bootstrap/Spinner'
 import './signin.css'
 import { useHistory } from 'react-router'
-import { error, success } from '../../../notification/notification'
+import { error, info, success } from '../../../notification/notification'
 function SignIn({ currentUser, createUser }) {
     const [load, setLoad] = useState(true)
     const redirect = useHistory()
@@ -23,6 +23,9 @@ function SignIn({ currentUser, createUser }) {
     }
     async function loginUser(e) {
         e.preventDefault()
+        if (!form.email || !form.password) {
+            return info('Inputs Should not be empty')
+        }
         setLoad((prev) => !prev)
         const user = await reqCreate('/login', form) //fetch to login or create user
         if (user.errors) {
@@ -38,7 +41,7 @@ function SignIn({ currentUser, createUser }) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Your account deactivated by admins!',
+                text: 'Your account is inactive',
                 footer: `<a href=''>Write a message to support</a>`,
             })
             return setLoad((prev) => !prev)
@@ -66,7 +69,7 @@ function SignIn({ currentUser, createUser }) {
                     <h1 className="text-center">Sign in </h1>
                     <div className="form-floating mb-3 mt-2">
                         <input
-                            data-cy="email"
+                            data-testId="email"
                             onChange={handleInputChange}
                             value={form.email}
                             type="email"
@@ -79,7 +82,7 @@ function SignIn({ currentUser, createUser }) {
                     </div>
                     <div className="form-floating mb-3">
                         <input
-                            data-cy="password"
+                            data-testId="password"
                             onChange={handleInputChange}
                             value={form.password}
                             minLength="6"
@@ -104,7 +107,7 @@ function SignIn({ currentUser, createUser }) {
                                 <Spinner animation="border" role="status" />
                                 <span className="sr-only">Loading...</span>
                             </>
-                        )}{' '}
+                        )}
                     </button>
                     <br />
                 </form>
@@ -121,4 +124,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     createUser,
 }
+export { SignIn as SignInTest }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

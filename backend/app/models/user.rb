@@ -6,10 +6,12 @@ class User < ApplicationRecord
                         format: { with: /\A(.+)@(.+)\z/ },
                         uniqueness: { case_sensitive: true },
                         length: { minimum: 4, maximum: 254 }
+  
     validates :password, presence: true,
                         length: { minimum: 8, maximum: 16},
                         format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}\z/,
                         message: "must contain lowercases, uppercases and numbers!" }
+  
     validates :firstName, presence: true, length: { minimum: 2, maximum: 25}
     validates :lastName,  presence: true, length: { minimum: 2, maximum: 25 }
     validates :role,  presence: true, inclusion: { in: %w[host reg], message: "Role should be two types ` host or reg"}
@@ -18,6 +20,8 @@ class User < ApplicationRecord
     has_many :property
     has_many :order
     has_many :review
+
+
 
     @hostUsersFilePath = 'app/CSVs/host_users.csv'
     @regUsersFilePath = 'app/CSVs/regular_users.csv'
