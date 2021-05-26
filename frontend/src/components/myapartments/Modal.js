@@ -5,7 +5,14 @@ import { connect } from 'react-redux'
 import { reqUpdate } from '../../api/api'
 import { error } from '../../notification/notification'
 
-const ModalPop = ({ buttonLabel, className, openModal, data, currentUser }) => {
+const ModalPop = ({
+    buttonLabel,
+    className,
+    openModal,
+    data,
+    currentUser,
+    setUpdate,
+}) => {
     const [form, setForm] = useState(data)
     const [modal, setModal] = useState(openModal)
     const toggle = () => setModal(!modal)
@@ -36,6 +43,7 @@ const ModalPop = ({ buttonLabel, className, openModal, data, currentUser }) => {
                         error(msg[0] + msg[1])
                     })
                 }
+                setUpdate((prev) => !prev)
                 toggle()
                 Swal.fire('Saved!', '', 'success')
             } else if (result.isDenied) {

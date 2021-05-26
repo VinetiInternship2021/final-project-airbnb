@@ -5,7 +5,7 @@ import MyApartmentCard from './MyApartmentCard'
 
 const MyApartments = ({ currentUser }) => {
     const [data, setData] = useState([])
-
+    const [update, setUpdate] = useState(false)
     useEffect(() => {
         async function req() {
             const result = await reqGetToken(
@@ -16,7 +16,7 @@ const MyApartments = ({ currentUser }) => {
         }
         req()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [update])
 
     return (
         <div>
@@ -26,7 +26,11 @@ const MyApartments = ({ currentUser }) => {
                 </h1>
             ) : (
                 data.map((property) => (
-                    <MyApartmentCard data={property} key={property.id} />
+                    <MyApartmentCard
+                        data={property}
+                        key={property.id}
+                        setUpdate={setUpdate}
+                    />
                 ))
             )}
         </div>

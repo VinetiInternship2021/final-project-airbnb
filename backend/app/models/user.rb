@@ -15,6 +15,7 @@ class User < ApplicationRecord
     validates :firstName, presence: true, length: { minimum: 2, maximum: 25}
     validates :lastName,  presence: true, length: { minimum: 2, maximum: 25 }
     # validates :role,  presence: true, inclusion: { in: %w[host reg], message: "Role should be two types ` host or reg"}
+    
     has_secure_password
 
     has_many :property
