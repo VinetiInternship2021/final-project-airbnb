@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createUser } from './../../redux/actions'
-import { error, success } from '../../../notification/notification'
+import { error } from '../../../notification/notification'
 import Spinner from 'react-bootstrap/Spinner'
 import { reqCreate } from './../../../api/api'
-import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 import './signup.css'
 function SignUp({ createUser, currentUser }) {
-    const redirect = useHistory()
     const [load, setLoad] = useState(true)
 
     const [form, setForm] = useState({

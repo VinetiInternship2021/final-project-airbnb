@@ -30,7 +30,6 @@ const Order = (props) => {
         }
 
         if (orderedDays.length) {
-            console.log('fori mej mtav')
             for (let [start, end] of orderedDays) {
                 const start_date = moment(start).isBetween(
                     datePicker.start_date,
