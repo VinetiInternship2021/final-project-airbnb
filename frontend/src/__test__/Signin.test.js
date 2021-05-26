@@ -4,7 +4,7 @@ import SignIn, { SignInTest } from './../components/form/signIn/SignIn'
 import enzymeConfig from './enzymeConfig'
 
 describe('User forms', () => {
-    it('Should valid email', () => {
+    it('Should change email', () => {
         const component = mount(<SignInTest />)
         const email = component.find('[data-testId="email"]')
 
@@ -15,15 +15,15 @@ describe('User forms', () => {
             component.find('[data-testId="email"]').get(0).props.value
         ).toEqual('hi@hotmail.com')
     })
-    it('Should valid password', () => {
+    it('Should change password password', () => {
         const component = mount(<SignInTest />)
         const password = component.find('[data-testId="password"]')
 
-        password.instance().value = 'hi@hotmail.com'
+        password.instance().value = '12346'
         password.simulate('change')
 
         expect(
             component.find('[data-testId="password"]').get(0).props.value
-        ).toEqual('hi@hotmail.com')
+        ).toEqual('12346')
     })
 })
