@@ -5,7 +5,7 @@ import {
     clearOrderedDates,
     clearDatePicker,
 } from './../redux/actions'
-import { reqCreateToken, reqRed } from '../../api/api'
+import { reqCreateToken, reqGetToken } from '../../api/api'
 import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import moment from 'moment'
@@ -29,19 +29,22 @@ const Order = (props) => {
             return info('Please choose your preferred date for your order')
         }
 
-        for (let [start, end] of orderedDays) {
-            const start_date = moment(start).isBetween(
-                datePicker.start_date,
-                datePicker.end_date
-            )
-            const end_date = moment(end).isBetween(
-                datePicker.start_date,
-                datePicker.end_date
-            )
-            if (start_date || end_date) {
-                return info(
-                    'Your selected date is between in already ordered dates'
+        if (orderedDays.length) {
+            console.log('fori mej mtav')
+            for (let [start, end] of orderedDays) {
+                const start_date = moment(start).isBetween(
+                    datePicker.start_date,
+                    datePicker.end_date
                 )
+                const end_date = moment(end).isBetween(
+                    datePicker.start_date,
+                    datePicker.end_date
+                )
+                if (start_date || end_date) {
+                    return info(
+                        'Your selected date is between in already ordered dates'
+                    )
+                }
             }
         }
 
@@ -95,13 +98,17 @@ const Order = (props) => {
         async function getAllOrderedDates() {
             const deActiveDates = []
 
-            let datesList = await reqRed(`/currentDatesList?id=${property.id}`)
+            let datesList = await reqGetToken(
+                `/currentDatesList?id=${property.id}`,
+                currentUser.token
+            )
             setOrderedDAYS(() => datesList)
-            datesList.forEach(([start_date, end_date]) => {
-                if (start_date || end_date) {
-                    deActiveDates.push(disableDates(start_date, end_date))
-                }
-            })
+            datesList.length &&
+                datesList.forEach(([start_date, end_date]) => {
+                    if (start_date || end_date) {
+                        deActiveDates.push(disableDates(start_date, end_date))
+                    }
+                })
             addOrderedDates(deActiveDates) //redux
         }
         getAllOrderedDates()

@@ -15,6 +15,7 @@ const OrderCard = ({ currentUser }) => {
             return info('Pleas login ')
         }
         const url = `userOrders?id=${currentUser?.user.id}`
+        console.log(currentUser, 'currentUser')
         async function getOrders() {
             const orders = await reqGetToken(url, currentUser.token)
             setData(() => orders)
