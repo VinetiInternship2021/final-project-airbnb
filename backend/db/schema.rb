@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2021_05_25_235425) do
-
-
-
 
   create_table "img_lists", force: :cascade do |t|
     t.string "imgUrl"
@@ -56,9 +52,9 @@ ActiveRecord::Schema.define(version: 2021_05_25_235425) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "description"
-    t.integer "rate"
+    t.integer "rate", null: false
     t.integer "property_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

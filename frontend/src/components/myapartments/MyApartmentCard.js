@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { reqDelete } from './../../api/api'
+import { reqDelete, deleteImgRails } from './../../api/api'
 import Swal from 'sweetalert2'
 import Slider from '../slider/Slider'
 import ModalPop from './Modal'
@@ -21,18 +21,16 @@ const MyApartmentCard = ({ data, currentUser }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 setLoad((prev) => !prev)
-                img_lists.forEach(async ({ id }) => {
-                    await reqDelete('img_lists', id, currentUser.token)
-                })
-                setLoad((prev) => !prev)
+                await deleteImgRails('img_lists', img_lists, currentUser.token)
                 await reqDelete('properties', id, currentUser.token)
+                setLoad((prev) => !prev)
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
             }
         })
     }
     return (
-        <div className="card">
-            <h5 className="card-title"> {title} </h5>
+        <div className="card mt-3 pb-4">
+            <h2 className="card-title container"> {title} </h2>
             <div className="card-body d-flex flex-row">
                 <div className="w-25">
                     <Slider imgList={img_lists} />
@@ -51,6 +49,7 @@ const MyApartmentCard = ({ data, currentUser }) => {
                         <ModalPop buttonLabel="Edit" data={data} />
                         <button
                             onClick={deleteProperty}
+                            style={{ marginLeft: '10px' }}
                             className="btn btn-danger"
                         >
                             Delete
