@@ -5,6 +5,7 @@ import { error, success } from '../../../notification/notification'
 import Spinner from 'react-bootstrap/Spinner'
 import { reqCreate } from './../../../api/api'
 import { useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import './signup.css'
 function SignUp({ createUser, currentUser }) {
@@ -15,7 +16,7 @@ function SignUp({ createUser, currentUser }) {
         firstName: '',
         lastName: '',
         email: '',
-        isActive: true,
+        isActive: false,
         role: 'host',
         password: '',
         rePassword: '',
@@ -58,7 +59,16 @@ function SignUp({ createUser, currentUser }) {
         createUser(user) //react dispatch CREATE_USER
         setLoad((prev) => !prev) // bootstrap spinner for btn  turn on
         success('Account successfully created ') //alert
-        redirect.push('/results')
+
+        if (!user.user.isActive) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Just a sec!',
+              text: 'Our admins will be activate your profile ASAP!',
+          })
+        } else {
+          redirect.push('/results')
+        }
     }
 
     if (currentUser) {
