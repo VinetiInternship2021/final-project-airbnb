@@ -71,6 +71,7 @@ const PropertyReviews = ({ currentUser, property }) => {
                                                 }}
                                             />
                                         </div>
+
                                         <span>
                                             <h5 className="card-title">
                                                 {users.length !== 0 &&
