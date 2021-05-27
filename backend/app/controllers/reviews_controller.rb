@@ -30,9 +30,6 @@ class ReviewsController < ApplicationController
       raise '>Trying to rate your own property? What a shame!'
     elsif Review.exists?(user_id: user_id)
       raise ">You've already rated this property."
-    else
-      review.save
-    end
 
     if review.save
       render json: review, status: :created, location: review
